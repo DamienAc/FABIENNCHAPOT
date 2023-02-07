@@ -1,0 +1,50 @@
+<section class="sell-steps">
+    <div class="wrapper">
+        <h2 class="h3">{{ section.settings.title_steps }}</h2>
+        <ul>
+            {% for block in section.blocks %}
+                <li>
+                    {% render 'lazy-img' with src: block.settings.sell_steps_image, nocrop: true %}
+                    <h3 class="h4">{{ block.settings.sell_steps_title }}</h3>
+                    <p>{{ block.settings.sell_steps_text }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% schema %}
+{
+    "name": "Sell Steps",
+    "settings": [
+      {
+        "id": "title_steps",
+        "type": "text",
+        "label": "Title Steps",
+        "default": "How does it work ?"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Steps",
+        "type": "text",
+        "settings": [
+          {
+            "id": "sell_steps_image",
+            "type": "image_picker",
+            "label": "Sell Steps Images"
+          },
+          {
+            "id": "sell_steps_title",
+            "label": "Sell Steps Title",
+            "type": "text"
+          },
+          {
+            "id": "sell_steps_text",
+            "label": "Sell Steps Text",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+}
+{% endschema %}

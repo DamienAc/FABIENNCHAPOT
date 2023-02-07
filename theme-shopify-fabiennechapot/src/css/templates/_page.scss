@@ -1,0 +1,122 @@
+.page {
+  margin-bottom: 200px;
+  padding: 0 var(--page-margin);
+
+  @include down(md) {
+    margin-bottom: 100px;
+  }
+
+  h1 {
+    margin: 50px auto;
+    text-align: center;
+
+    @include down(lg) {
+      margin-top: 40px;
+    }
+
+    @include down(md) {
+      margin-top: 20px;
+    }
+  }
+
+  @include down(lg) {
+    .breadcrumb {
+      display: none;
+    }
+  }
+
+  &__content {
+    h2, h3, h4, h5, h6 {
+      text-align: left;
+      display: inline;
+      font-weight: 400;
+      text-transform: uppercase;
+
+      strong {
+        font-weight: inherit;
+      }
+    }
+
+    h3, h4, h5, h6 {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      display: block;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    h4 {
+      font-size: 1.6rem;
+    }
+
+    h5 {
+      font-size: 1.4rem;
+    }
+
+    h6 {
+      font-size: 1.2rem;
+    }
+
+    hr {
+      border: 0;
+      border-top: $border-1;
+      margin: 60px 0;
+    }
+
+    p, ul, ol {
+      margin: 13px 0;
+    }
+
+    ul {
+      list-style-type: disc;
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
+
+    ul, ol {
+      list-style-position: inside;
+    }
+
+    img {
+      margin: 60px auto;
+      max-width: 100%;
+      height: auto;
+      width: 100%;
+    }
+
+    a {
+      text-decoration: underline;
+      transition: color $transition-1;
+
+      @include up(lg) {
+        &:hover {
+          color: $grey;
+        }
+      }
+    }
+  }
+
+  &.wrapper {
+    .breadcrumb {
+      padding: 0;
+    }
+
+    h1 {
+      margin: 90px 0 60px;
+
+      @include down(md) {
+        margin-top: 20px;
+      }
+    }
+  }
+}

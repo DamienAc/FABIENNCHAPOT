@@ -1,0 +1,39 @@
+<section class="wrapper">
+    <div class="home-categories">
+        <div class="home-categories__slider" data-slide="{{ section.blocks.size }}">
+            {% for block in section.blocks %}
+                <a href="{{ block.settings.collection.url }}" class="home-categories__slide">
+                    <div>
+                        {% render 'lazy-img' with src: block.settings.collection.featured_image %}
+                        <p>{{ block.settings.title }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections",
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collections",
+      "settings": [
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Titre"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection",
+          "info": "Attention à bien ajouter une image directement dans l'admin shopify de la collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

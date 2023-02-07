@@ -1,0 +1,136 @@
+.size-guide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity ease-out .3s;
+
+  &:not(.open) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__inner {
+    width: calc(100% - 30px);
+    max-width: 720px;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+
+    @include down(sm) {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
+  &__header {
+    height: 50px;
+    display: flex;
+
+    button {
+      width: calc(50% - 25px);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 0;
+      transition: color $transition-1;
+
+      &:not(:last-of-type):not(.open) {
+        background-color: #F5F5F5;
+        cursor: pointer;
+        border: 1px solid #eee;
+        color: #9A9A9A;
+      }
+
+      &:last-of-type {
+        width: 50px;
+        border: 1px solid #eee;
+        background-color: #fff;
+        border-right: 0;
+      }
+
+      &:first-of-type {
+        border-left: 0;
+      }
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  &__content {
+    max-height: calc(100vh - 50px - 30px);
+    overflow-y: auto;
+    padding: 20px 20px 50px;
+    display: flex;
+    justify-content: center;
+
+    @include down(sm) {
+      max-height: fit-content;
+      overflow: inherit;
+      height: auto;
+    }
+
+    &:not(.open) {
+      display: none;
+    }
+
+    & > div {
+      max-width: 540px;
+      width: 100%;
+    }
+  }
+
+  p {
+    margin: 15px 0;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+  }
+
+  table {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    table-layout: fixed;
+  }
+
+  td, th {
+    border: 1px solid #eee;
+    padding: 6px 2px;
+    text-align: center;
+
+    &:first-of-type {
+      color: #9A9A9A;
+    }
+  }
+
+  &__submenu {
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+
+    button {
+      border: 1px solid #eee;
+      width: 35%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      font-size: 1.2rem;
+      color: #000;
+
+      &:not(.open) {
+        color: #9A9A9A;
+        background-color: #F5F5F5;
+      }
+    }
+  }
+}

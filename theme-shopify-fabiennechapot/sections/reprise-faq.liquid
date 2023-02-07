@@ -1,0 +1,55 @@
+<script>
+    window.theme = window.theme || {};
+    window.theme = {
+        ...window.theme,
+        repriseFaq: {
+            url: "{{ pages.faq.url }}",
+            title:{
+                text: '{{ section.settings.text }}'
+            },
+            questions: [
+                {% for block in section.blocks %}
+                {
+                    title: `{{ block.settings.question }}`,
+                    answer: `{{ block.settings.answer }}`
+                },
+                {% endfor %}
+            ]
+        }
+    }
+</script>
+
+{% schema %}
+{
+ "name": "Title faq",
+  "settings": [
+    {
+      "id": "text",
+      "type": "text",
+      "label": "Titre FAQ",
+      "default": "Des questions ?"
+    }
+    ],
+  "name": "Faq",
+  "blocks": [
+    {
+      "name": "Question",
+      "type": "text",
+      "settings": [
+        {
+          "id": "question",
+          "type": "text",
+          "label": "Question",
+          "default": "Puis-je revendre n'importe quel type d'article ?"
+        },
+        {
+          "id": "answer",
+          "type": "richtext",
+          "label": "Réponse",
+          "default": "<p>Nous reprenons les vêtements, sacs, chaussures et ceintures de toutes les collections.<br><br>En revanche, les bijoux, cravates, écharpes, foulards, gants, chaussettes, maillots de bain, sous-vêtements, portefeuille, porte carte, fouta ou totebag ne sont pas repris. Les pièces de la collection capsule issues de collaboration ne font également pas partie des pièces reprises.</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

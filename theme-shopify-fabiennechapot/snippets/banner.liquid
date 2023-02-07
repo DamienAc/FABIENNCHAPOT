@@ -1,0 +1,46 @@
+{% if h1 == "" %}{% assign h1 = nil %}{% endif %}
+{% if h2 == "" %}{% assign h2 = nil %}{% endif %}
+{% if subtitle == "" %}{% assign subtitle = nil %}{% endif %}
+{% unless size %}{% assign size = 2 %}{% endunless %}
+
+<section class="banner">
+    <div class="banner__image">
+        {% render 'lazy-img' with
+            src: image,
+            alt: title
+        %}
+        {% render 'lazy-img' with
+            src: image_2,
+            alt: title
+        %}
+    </div>
+    <div class="banner__text">
+        {% if h1 %}
+            <h1 class="h{{ size }}">{{ h1 }}</h1>
+            {% elsif h2 %}
+            <h2 class="h{{ size }}">{{ h2 }}</h2>
+        {% endif %}
+
+        {% if subtitle %}
+            {% if h1 %}
+                <h2 class="subtitle">{{ subtitle }}</h2>
+            {% else %}
+                <h3 class="subtitle">{{ subtitle }}</h3>
+            {% endif %}
+        {% endif %}
+
+        {% if text %}
+            <div class="banner__description">{{ text }}</div>
+        {% endif %}
+
+
+        {% if btn_1_url %}
+            <ul>
+                <li><a class="btn {{ btn_1_color }}" href="{{ btn_1_url }}"><span>{{ btn_1_text }}</span></a></li>
+                {% if btn_2_url %}
+                    <li><a class="btn {{ btn_2_color }}" href="{{ btn_2_url }}"><span>{{ btn_2_text }}</span></a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+</section>

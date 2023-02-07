@@ -1,0 +1,30 @@
+{% render 'carousel' with
+    title: section.settings.title,
+    collection: section.settings.collection,
+    btn: section.settings.btn
+%}
+
+{% schema %}
+{
+  "name": "Produits en avant",
+  "settings": [
+    {
+      "id": "title",
+      "label": "Titre",
+      "type": "text",
+      "default": "Nouveautés"
+    },
+    {
+      "id": "btn",
+      "label": "Bouton",
+      "type": "text",
+      "default": "Découvrir la sélection"
+    },
+    {
+      "id": "collection",
+      "label": "Collection",
+      "type": "collection"
+    }
+  ]
+}
+{% endschema %}

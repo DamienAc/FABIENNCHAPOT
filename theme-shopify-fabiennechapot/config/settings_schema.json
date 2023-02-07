@@ -1,0 +1,20 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Faume",
+    "theme_author": "Faume",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "http:\/\/support.weareunderground.com\/customer\/en\/portal\/topics\/435935-vantage-shopify-theme\/articles",
+    "theme_support_url": "http:\/\/support.undergroundmedia.co.uk\/"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  }
+]

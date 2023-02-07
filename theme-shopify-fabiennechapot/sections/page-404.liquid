@@ -1,0 +1,38 @@
+<div class="page wrapper page-404">
+    <h1 class="h1">{{ section.settings.title }}</h1>
+    <p class="h3">{{ section.settings.subtitle }}</p>
+    <a href="{{ section.settings.url }}" class="btn">
+        <span>{{ section.settings.btn }}</span>
+    </a>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": [
+    {
+      "id": "title",
+      "label": "Titre",
+      "type": "text",
+      "default": "404"
+    },
+    {
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "type": "text",
+      "default": "Cette page ne semble plus exister"
+    },
+    {
+      "id": "btn",
+      "label": "Bouton",
+      "type": "text",
+      "default": "Continuer mon shopping"
+    },
+    {
+      "id": "url",
+      "type": "url",
+      "label": "Lien"
+    }
+  ]
+}
+{% endschema %}

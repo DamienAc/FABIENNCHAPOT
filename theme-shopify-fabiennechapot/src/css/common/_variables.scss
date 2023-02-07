@@ -1,0 +1,111 @@
+$font-text: 'Avenir', Helvetica, Arial, sans-serif;
+$font-title: 'Playfair', Helvetica, Arial, sans-serif;
+
+$white: #ffffff;
+$light-grey: #F3F5F8;
+$grey: #ccc;
+$red: #8B161E;
+$green: #1A6224;
+$black: #000;
+$beige: #E5DED0;
+
+$blue: #000;
+$yellow: #ECEEA7;
+
+$transition-1: ease-out .3s;
+$transition-2: cubic-bezier(0.51, 0.05, 0, 0.9) .7s;
+
+$border-1: solid 1px #ccc;
+$border-2: solid 1px #c1cdd7;
+
+$colors: (
+        "Rouge": #ff0000,
+        "Bordeaux": #540e1f,
+        "Noir": #000,
+        "Jaune": #ffec11,
+        "Camel": #e3a34f,
+        "Blanc": #eee,
+        "Baltique": #8EA2C6,
+        "Ecru": #fff3da,
+        "Nude": #ffe4bc,
+        "Blush": #ffe0cc,
+        "Beige": #c0a184,
+        "Marron": #7B685F,
+        "Bleu": #7293a8,
+        "Bleu céruléen": #2d8fcb,
+        "Bleu foncé": #1e3063,
+        "Bleu clair": #8dcdff,
+        "Marine": #183c58,
+        "Vert": #008000,
+        "Vert clair": #5fd669,
+        "Vert foncé": #00310b,
+        "Kaki": #51693a,
+        "Rose": #ffa1c5,
+        "Orange": #ffa400,
+        "Violet": #792480,
+        "Corail": #f4be8f,
+        "Gris": #808080,
+        "Bleu/Marine": #000080,
+        "Bleu marine": #000a41
+);
+
+$color-multi: (
+        "color": rgb(19, 222, 18),
+        "gradient": linear-gradient(90deg, rgba(19, 222, 18, 1) 0%, rgba(40, 221, 255, 1) 25%, rgba(114, 21, 236, 1) 50%, rgba(247, 44, 4, 1) 75%, rgba(252, 222, 69, 1) 100%)
+);
+
+$color-gold: (
+        "color": rgb(250, 250, 0),
+        "gradient": linear-gradient(90deg, rgba(255, 205, 0, 1) 0%, rgba(255, 243, 182, 1) 50%, rgba(255, 209, 0, 1) 100%)
+);
+
+$color-silver: (
+        "color": rgb(164, 164, 164),
+        "gradient": linear-gradient(90deg, rgba(164, 164, 164, 1) 0%, rgba(194, 194, 194, 1) 50%, rgba(140, 140, 140, 1) 100%)
+);
+
+$color-marine-white: (
+        "color": rgb(30, 39, 96),
+        "gradient": linear-gradient(47deg, rgba(30, 39, 96, 1) 38%, rgba(238, 238, 238, 1) 55%)
+);
+
+$color-blue-white: (
+        "color": rgb(47, 155, 218),
+        "gradient": linear-gradient(47deg, rgba(47, 155, 218, 1) 38%, rgba(238, 238, 238, 1) 55%)
+);
+
+$gradients: (
+        "Multicolore": $color-multi,
+        "Imprimé": $color-multi,
+        "imprim": $color-multi,
+        "Argenté": $color-silver,
+        "Argentée": $color-silver,
+        "Argent": $color-silver,
+        "Doré": $color-gold,
+        "Or": $color-gold,
+        "Doréé": $color-gold,
+        "Marine/Blanc": $color-marine-white,
+        "Blue/Vintage/Denim": $color-marine-white,
+        "Blanc/Bleu": $color-blue-white
+);
+
+body {
+        --page-margin: 20px;
+        --announcement-height: 40px;
+        --header-height: 81px;
+        --header-menu-height: 45px;
+        --section-margin: 70px;
+
+        @media screen and (max-width: 799px) {
+                --header-height: 70px;
+                --page-margin: 15px;
+                --section-margin: 50px;
+                --announcement-height: 30px;
+        }
+
+
+        &.has-sticky-header {
+                --header-height: 50px;
+        }
+
+}

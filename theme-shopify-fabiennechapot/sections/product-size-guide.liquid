@@ -1,0 +1,51 @@
+{% assign univers = "Vêtements" %}
+{% for tag in product.tags %}
+    {% if tag contains 'Catégorie_Accessoires' %}
+        {% assign univers = "Accessoires" %}
+    {% endif %}
+{% endfor %}
+
+<section class="size-guide">
+    <div class="size-guide__inner">
+        <div class="size-guide__header">
+            <button data-content=".size-guide__content--women" class="size-guide__btn {% if univers != 'Accessoires' %}open{% endif %}">{{ section.settings.btn_switch1 }}</button>
+            <button data-content=".size-guide__content--men" class="size-guide__btn {% if univers == 'Accessoires' %}open{% endif %}">{{ section.settings.btn_switch2 }}</button>
+            <button class="js-close"><span>✕</span></button>
+        </div>
+        <div class="size-guide__content size-guide__content--women {% if univers != 'Accessoires' %}open{% endif %}">
+            <div>
+                <div class="size-guide__text">
+                    {{ pages['guide-des-tailles-vetements'].content }}
+                </div>
+            </div>
+        </div>
+        <div class="size-guide__content size-guide__content--men {% if univers == 'Accessoires' %}open{% endif %}">
+            <div>
+                <div class="size-guide__text">
+                    {{ pages['guide-des-tailles-accessoires'].content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product size guide",
+  "settings": [
+    {
+      "id": "btn_switch1",
+      "type": "text",
+      "label": "Bouton 1",
+      "default": "Vêtements"
+    },
+    {
+      "id": "btn_switch2",
+      "type": "text",
+      "label": "Bouton 1",
+      "default": "Accessoires"
+    }
+ 
+  ]
+}
+{% endschema %}

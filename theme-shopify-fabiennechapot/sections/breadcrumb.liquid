@@ -1,0 +1,95 @@
+{% assign t = template | split: '.' | first %}
+{% assign lang = shop.locale | prepend: "/" | remove: '/fr' %}
+
+<ul class="breadcrumb">
+
+    <li><a href="{{ lang }}/">{{ section.settings.home }}</a></li>
+
+    {% case t %}
+
+    {% when 'search' %}
+        <li><a href="{{ lang }}/collections/all" class="js-open-search">{{ section.settings.search }}</a></li>
+        <li><p>{{ search.terms | capitalize }}</p></li>
+
+    {% when 'page' %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+
+    {% when 'product' %}
+
+    {% assign gender = false %}
+
+        <li><a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/collections/nouveautes">{{ section.settings.news }}</a></li>
+
+        {% if gender != false %}
+            {% for collection in product.collections %}
+                {% if collection.title contains gender %}
+                    <li class="breadcrumb-collection" data-collection="{{ collection.handle }}"><a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/collections/{{ collection.handle }}">{{ collection.title | remove: gender }}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <li><a href="{{ product.url }}">{{ product.title }}</a></li>
+
+
+    {% when 'collection' and collection.handle %}
+
+        {% assign list = 'accessoires vetements nouveautes all' | split: ' ' %}
+        {% unless list contains collection.handle %}
+            {% assign is_accessoires = false %}
+            {% if collection.products and collection.products[0] %}
+                {% if collection.products[0].tags contains 'Catégorie_Accessoires' %}
+                {% assign is_accessoires = true %}
+                {% endif %}
+            {% endif %}
+            {% if is_accessoires == true %}
+                <li><a href="{{ lang }}/collections/accessoires">{{ section.settings.accessories }}</a></li>
+            {% else %}
+                <li><a href="{{ lang }}/collections/vetements">{{ section.settings.clothes }}</a></li>
+            {% endif %}
+        {% endunless %}
+        <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+
+    {% endcase %}
+
+</ul>
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+     {
+      "type": "header",
+      "content": "Breadcrumb"
+    },
+    {
+        "id": "home",
+        "type": "text",
+        "label": "Text accueil",
+        "default": "Accueil"
+    },
+    {
+        "id": "search",
+        "type": "text",
+        "label": "Text recherche",
+        "default": "Recherche"
+    },
+    {
+        "id": "news",
+        "type": "text",
+        "label": "Text nouveautés",
+        "default": "Nouveautés"
+    },
+    {
+        "id": "accessories",
+        "type": "text",
+        "label": "Text accessoires",
+        "default": "Accessoires"
+    },
+    {
+        "id": "clothes",
+        "type": "text",
+        "label": "Text vétements",
+        "default": "Vétements"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,57 @@
+.sell-steps{
+    padding: 75px 0 125px 0;
+
+    @include down(lg) {
+        padding: 75px 0 25px 0;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 80%;
+        margin: 75px auto 0 auto;
+
+        @include down(lg) {
+            flex-wrap: wrap;
+        }
+
+        li{
+            width: 22.5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            @include down(lg) {
+                width: 47.5%;
+                margin-bottom: 75px;
+            }
+
+            .lazy-img{
+                width: 40%;
+                padding-bottom: 90px;
+
+                @include down(lg) {
+                    width: 60%;
+                    padding-bottom: 80px; 
+                }
+            }
+
+            h3 {
+                margin: 25px 0;
+            }
+
+            p {
+                text-align: center;
+                font-weight: 300;
+                line-height: 1.2em;
+            }
+        }
+    }
+}

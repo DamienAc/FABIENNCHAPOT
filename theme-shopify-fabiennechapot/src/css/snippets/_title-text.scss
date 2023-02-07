@@ -1,0 +1,30 @@
+.snp-title-text {
+  text-align: center;
+  padding: var(--section-margin) var(--page-margin);
+  margin: 10px 0;
+
+  &.is-black {
+    background-color: #000;
+    color: #fff;
+  }
+
+  &.is-yellow {
+    background-color: $yellow;
+    color: #000;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  .link,
+  .btn {
+    margin: 40px auto 0;
+  }
+
+  &__inner {
+    max-width: 700px;
+    margin: auto;
+  }
+}

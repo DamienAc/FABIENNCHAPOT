@@ -1,0 +1,271 @@
+{% assign title = search.terms %}
+
+<section class="collection">
+
+    {% paginate search.results by 100 %}
+
+    {% assign products = search.results | where: 'object_type', 'product' %}
+    {% assign products = products | where: 'available' %}
+    {% assign count = products.size %}
+    {% unless count %}{% assign count = 0 %}{% endunless %}
+
+    <div class="wrapper">
+        <div class="collection__header">
+            <h1 class="{% if collection_title.size > 18 %}h2{% else %}h1{% endif %}">{{ title }}</h1>
+             {% if count > 0 %}
+                <div class="collection__description">{{ count }} résultats ont  été trouvés.</div>
+                
+            {% endif %}
+            {% assign description_text = collection.description | strip_html %}
+            {% if description_text and description_text != "" and description_text != blank %}
+                <div class="collection__description">{{ collection.description }}</div>
+            {% endif %}
+        </div>
+    </div>
+     <div class="collection__sticky">
+                <div class="wrapper">
+                    <div class="collection__sticky__content-left">
+                         <div class="collection__switch">
+                            <button>
+                                {% render 'icon' with icon: 'grid-1', box: '0 0 512 512' %}
+                            </button>
+                            <button class="is-active">
+                                {% render 'icon' with icon: 'grid-2', box: '0 0 24 24' %}
+                            </button>
+                        </div>
+                        {% render 'breadcrumb' 
+                            home: section.settings.home
+                            searchTerms: section.settings.searchTerms
+                            news: section.settings.news
+                            accessories: section.settings.accessories
+                            clothes: section.settings:clothes
+                        %}
+                    </div>
+                    {% if count > 0 %}
+                        <div class="collection__btns">
+                            <button class="js-filter-open"><span>Filtre</span></button>
+                            <div>
+                                <button class="js-sort-open"><span>Trier:</span></button>
+                                <div class="order">
+                                    <p>Trier par :</p>
+                                    <label>
+                                        <input type="radio" name="order" value="default" checked>
+                                        <span>Le plus populaire</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="order" value="nouveautes">
+                                        <span>Nouveautés</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="order" value="croissant">
+                                        <span>Prix (croissant)</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="order" value="decroissant">
+                                        <span>Prix (décroissant)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% render 'filters-search' 
+                title: block.settings.title
+                tag: block.settings.tag
+                filterBy: section.settings.filterBy
+                price: section.settings.price
+                btnRemove: section.settings.btnRemove
+                BtnResult1: section.settings.BtnResult1
+                BtnResult2: section.settings.BtnResult2
+            %}
+
+        <div class="collection__container">
+            <div class="collection__right">
+                {% if count > 0 %}
+                    <div class="collection__products" style="display:none;">
+                        {% for product in products %}
+                            {% if product.available and product.price > 0 %}
+                                {% assign ref = '' %}
+                                {% assign color = '' %}
+                                {% for tag in product.tags %}
+                                    {% if tag contains 'Reference_' %}
+                                        {% assign ref = tag | remove: 'Reference_' %}
+                                        {% elsif tag contains 'Couleur_' %}
+                                        {% assign color = tag | remove: 'Couleur_' %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="collection__product {% if template contains 'collection' and collection.url == '/collections/vente-artistique-solidaire'%}p-sculpture{% endif %}"
+                                     data-price="{{ product.price }}"
+                                     data-product-id="{{ product.id }}"
+                                     data-tags="{{ product.tags | join: '#' }}"
+                                     data-type="{{ product.type }}"
+                                     data-date="{{ product.published_at }}"
+                                     data-ref="{{ ref }}"
+                                     data-color="{{ color }}"
+                                >
+                                    {% render 'product-card' with product: product %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <ul class="collection__placeholder">
+                        {% for i in (1..8) %}
+                            <li>
+                                <div></div>
+                                <span></span>
+                                <span></span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>{{ noresult }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {% endpaginate %}
+
+</section>
+{% schema %}
+{
+  "name": "Resultats recherche",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Breadcrumb"
+    },
+    {
+        "id": "home",
+        "type": "text",
+        "label": "Text accueil",
+        "default": "Accueil"
+    },
+    {
+        "id": "searchTerms",
+        "type": "text",
+        "label": "Text recherche",
+        "default": "Recherche"
+    },
+    {
+        "id": "news",
+        "type": "text",
+        "label": "Text nouveautés",
+        "default": "Nouveautés"
+    },
+    {
+        "id": "accessories",
+        "type": "text",
+        "label": "Text accessoires",
+        "default": "Accessoires"
+    },
+    {
+        "id": "clothes",
+        "type": "text",
+        "label": "Text vétements",
+        "default": "Vétements"
+    },
+    {
+      "type": "header",
+      "content": "Filters"
+    },
+    {
+    "id": "btnFilter",
+    "type": "text",
+    "label": "Bouton filtre",
+    "default": "Filtre"
+    },
+    {
+    "id": "btnFilterBy",
+    "type": "text",
+    "label": "Bouton trier",
+    "default": "Trier:"
+    },
+    {
+    "id": "filterBy",
+    "type": "text",
+    "label": "Text trier par",
+    "default": "Trier par :"
+    },
+    {
+    "id": "order",
+    "type": "text",
+    "label": "Nom de l'ordre par défaut",
+    "default": "Le plus populaire"
+    },
+    {
+    "id": "newsfilter", 
+    "type": "text",
+    "label": "Trier par nouveautés",
+    "default": "Nouveautés"
+    },
+    {
+    "id": "priceUp",
+    "type": "text",
+    "label": "Trier par prix croissant",
+    "default": "Prix (croissant)"
+    },
+    {
+    "id": "priceDown",
+    "type": "text",
+    "label": "Trier par prix décroissant",
+    "default": "Prix (décroissant)"
+    },
+    {
+    "id": "price",
+    "type": "text",
+    "label": "Text range prix",
+    "default": "Prix"
+    },
+    {
+    "id": "btnRemove",
+    "type": "text",
+    "label": "Bouton tout décocher",
+    "default": "Tout décocher"
+    },
+    {
+    "id": "BtnResult1",
+    "type": "text",
+    "label": "Bouton part 1",
+    "default": "Afficher"
+    },
+    {
+    "id": "BtnResult2",
+    "type": "text",
+    "label": "Bouton part 2",
+    "default": "résultats"
+    },
+    {
+    "type": "header",
+    "content": "Collection"
+    },
+    {
+    "id": "noresult",
+    "type": "text",
+    "label": "Text recherche vide",
+    "default": "Aucun résultat ne correspond à votre recherche."
+    }
+    ],
+    "blocks": [
+    {
+    "name": "Filtre",
+    "type": "text",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Nom de la catégorie de filtre",
+    "default": "Tailles"
+    },
+    {
+    "id": "tag",
+    "type": "text",
+    "label": "Quel doit être le préfix du tag ?",
+    "default": "Taille_"
+    }
+    ]
+    }
+    ]
+    
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+<section class="quickview" 
+    data-text-originprice="{{ section.settings.originprice }}"
+    data-text-economie="{{ section.settings.economie }}"
+    data-text-color="{{ section.settings.color }}"
+    data-text-size="{{ section.settings.size }}"
+    data-text-state="{{ section.settings.state }}"
+    data-text-addcart="{{ section.settings.addcart }}"
+    data-text-moreproduct="{{ section.settings.moreproduct }}">
+    <div class="quickview__inner">
+        <div class="quickview__content">
+
+        </div> 
+        <button class="js-close">
+            {% render 'icon' with icon: 'cross', box: '0 0 22.6 22.6' %}
+        </button>
+    </div>
+</section>
+{% schema %}
+{
+  "name": "Quick view",
+  "settings": [
+    {
+      "id": "originprice",
+      "type": "text",
+      "label": "Text prix d'origine",
+      "default": "Prix d'origine :"
+    },
+    {
+      "id": "economie",
+      "type": "text",
+      "label": "Text économie",
+      "default": "Vous économisez"
+    },
+    {
+      "id": "color",
+      "type": "text",
+      "label": "Titre couleurs",
+      "default": "Couleur :"
+    },
+    {
+      "id": "size",
+      "type": "text",
+      "label": "Titre tailles",
+      "default": "Taille :"
+    },
+    {
+      "id": "state",
+      "type": "text",
+      "label": "Titre Etats",
+      "default": "État :"
+    },
+    {
+      "id": "addcart",
+      "type": "text",
+      "label": "boutton ajouter au panier",
+      "default": "Ajouter au panier"
+    },
+    {
+      "id": "moreproduct",
+      "type": "text",
+      "label": "boutton voir plus en détail",
+      "default": "Voir plus en détail"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,362 @@
+.stores {
+
+  @include down(md) {
+    h1 {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .field {
+    max-width: 400px;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    border-color: #ccc;
+
+    input {
+      flex-grow: 1;
+      max-width: 100%;
+    }
+
+    img {
+      flex-shrink: 0;
+      width: 30px;
+      height: auto;
+      margin: 0 10px;
+    }
+
+    @include down(md) {
+      max-width: 100%;
+      border-radius: 20px;
+      padding: 0 15px;
+      border: solid 1px #ccc;
+
+      img {
+        width: 20px;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+
+  &__container {
+    display: flex;
+    border-top: solid 1px #ccc;
+  }
+
+  &__col {
+
+    @include down(md) {
+      &:not(.active) {
+        display: none;
+      }
+    }
+
+    &:first-of-type {
+      flex-shrink: 0;
+      overflow-y: auto;
+
+      @include up(md) {
+        width: 340px;
+      }
+    }
+
+    &:last-of-type {
+      flex-grow: 1;
+    }
+
+    @include down(md) {
+      width: 100%;
+
+      &:first-of-type {
+        height: auto;
+      }
+    }
+  }
+
+  .js-stores-map {
+    overflow: hidden;
+  }
+
+  &__col,
+  #map {
+    height: 600px;
+  }
+
+  .js-stores-map {
+    position: relative;
+  }
+
+  .mapboxgl-popup-content {
+    border-radius: 8px;
+    padding: 25px 0 0;
+    box-shadow: 0 2px 7px 1px rgba(0,0,0,.3);
+
+    a {
+      outline: none !important;
+      border: 0 !important;
+      text-decoration: none;
+      font-family: $font-text;
+      font-size: 1.3rem;
+      font-weight: 300;
+      padding: 0 25px;
+      max-height: 134px;
+      display: block;
+      overflow-y: auto;
+      line-height: 1.4;
+
+      &:last-of-type {
+        text-decoration: underline;
+        padding-top: 15px;
+        padding-bottom: 25px;
+        font-weight: 400;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .mapboxgl-popup-close-button {
+    height: 15px;
+    font-size: 22px;
+    width: 22px;
+    font-family: $font-text;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mapboxgl-ctrl-bottom-left,
+  .mapboxgl-ctrl-bottom-right {
+    display: none;
+  }
+
+
+  .marker {
+    cursor: pointer;
+    display: block;
+    width: 33px;
+    height: 33px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url('//cdn.shopify.com/s/files/1/0567/4244/5113/t/2/assets/icon-marker.png');
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  &__description {
+    @include up(lg) {
+      max-width: 220px;
+    }
+
+    @include down(lg) {
+      margin-bottom: 15px;
+    }
+  }
+
+  .mapboxgl-canvas-container {
+    height: 100%;
+  }
+
+  .store {
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: background-color $transition-1;
+    line-height: 1.6;
+    font-size: 1.2rem;
+    position: relative;
+
+    &:after {
+      content: '';
+      display: block;
+      width: calc(100% - 20px);
+      left: 10px;
+      bottom: 0;
+      height: 1px;
+      background-color: $grey;
+      position: absolute;
+
+      @include down(md) {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    @include down(md) {
+      &.is-hidden {
+        display: none;
+      }
+    }
+
+    &:not(.active) {
+      background-color: #fff;
+    }
+
+    h2 {
+      @extend .h2;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    button {
+      font-size: 1.2rem;
+      width: 100%;
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      padding-right: 20px;
+      letter-spacing: 1.2px;
+      min-height: 20px;
+
+      @include down(md) {
+        margin-top: 15px;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-right: solid 2px #000;
+        border-bottom: solid 2px #000;
+        transform: rotate(45deg);
+        margin-left: 5px;
+        transform-origin: right;
+      }
+
+      &.open:after {
+        border-right: 0;
+        border-bottom: 0;
+        border-top: solid 2px #000;
+        border-left: solid 2px #000;
+        transform-origin: bottom;
+      }
+
+      span:first-of-type {
+        margin-right: auto;
+      }
+    }
+
+    table {
+      width: 100%;
+
+      td {
+        padding-top: 10px;
+      }
+
+      td:nth-of-type(2) {
+        text-align: right;
+      }
+    }
+
+    &__schedule {
+      padding-right: 37px;
+    }
+
+    .link-2 {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+
+      @include up(md) {
+        display: none;
+      }
+    }
+  }
+
+  .cluster-popin {
+    p {
+      @extend .h4;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__list {
+
+    @include up(md) {
+      background-color: $light-grey;
+      padding-right: 10px;
+    }
+  }
+
+  &__links {
+    display: none;
+  }
+}
+
+.stores-popin {
+  position: fixed;
+  z-index: 999;
+  background-color: rgba(0,0,0,.33);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: opacity $transition-1;
+
+  &:not(.visible) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__inner {
+    background-color: #fff;
+    width: 100%;
+    max-width: 500px;
+    max-height: 100%;
+    color: #000;
+    padding: 60px 20px;
+    text-align: center;
+
+    @include down(sm) {
+      max-height: calc(100% - 60px);
+      width: calc(100% - 60px);
+      padding: 40px 15px;
+    }
+
+    div {
+      max-width: 310px;
+      margin: auto;
+    }
+  }
+
+  img {
+    margin-top: 13px;
+    max-height: calc(100vh - 400px);
+    object-fit: contain;
+
+    @include down(sm) {
+      width: 200px;
+    }
+  }
+
+  h2 {
+    margin-bottom: 24px;
+  }
+
+  button {
+    margin: 40px auto 0;
+
+    @include down(sm) {
+      margin-top: 24px;
+    }
+  }
+
+  p {
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+}

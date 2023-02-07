@@ -1,0 +1,45 @@
+ {% if section.settings.announcement_infos.size > 0 %}
+    <div class="announcement_infos" style="background:{{section.settings.announcement_bg}}; color:{{section.settings.announcement_text}}">
+      <div>{{ section.settings.announcement_infos }}</div>
+      <span>X</span>
+    </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Annoucement",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Bandeau"
+      },
+      {
+        "id": "top_bg",
+        "type": "color",
+        "label": "Couleur du fond",
+        "default": "#000"
+      },
+      {
+        "id": "top_color",
+        "type": "color",
+        "label": "Couleur du texte",
+        "default": "#fff"
+      },
+      {
+        "type": "richtext",
+        "id": "announcement_infos",
+        "label": "Annonce"
+      }, {
+        "type": "color",
+        "id": "announcement_text",
+        "label": "Annonce : Couleur du texte",
+        "default": "#fff"
+      }, {
+        "type": "color",
+        "id": "announcement_bg",
+        "label": "Annonce : Couleur de l'arrière plan",
+        "default": "#000"
+      }
+    ]
+  }
+{% endschema %}

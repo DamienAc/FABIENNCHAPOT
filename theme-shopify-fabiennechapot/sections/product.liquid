@@ -1,0 +1,423 @@
+{% assign is_shoes = false %}
+{% for tag in product.tags %}
+    {% if tag contains 'Etat_' %}
+        {% assign etat = tag | remove: 'Etat_' %}
+    {% endif %}
+    {% if tag contains 'Taille_' %}
+        {% assign taille = tag | remove: 'Taille_' %}
+        {% assign size = tag | remove: 'Taille_' %}
+    {% endif %}
+    {% if tag contains 'Couleur_' %}
+        {% assign color = tag | remove: 'Couleur_' %}
+    {% endif %}
+    {% if tag contains 'Pointure_' %}
+        {% assign is_shoes = true %}
+        {% assign size = tag | remove: 'Pointure_' %}
+    {% endif %}
+    {% if tag contains 'Univers_' %}
+        {% assign univers = tag | remove: 'Univers_' %}
+    {% endif %}
+    {% if tag contains 'Reference_' %}
+        {% assign reference = tag | remove: 'Reference_' %}
+    {% endif %}
+{% endfor %}
+
+{% assign sizeVariant = product.options_by_name['Taille'].values | first %}
+{% unless sizeVariant %}
+{% assign sizeVariant = product.options_by_name['Pointure'].values | first %}
+{% endunless %}
+{% if sizeVariant %}
+    {% assign size = sizeVariant %}
+{% endif %}
+
+{% assign colorVariant = product.options_by_name['Couleur'].values | first %}
+{% if colorVariant %}
+    {% assign color = colorVariant %}
+{% endif %}
+
+{% unless reference %}
+{% assign product_type_words = product.type | split: " " %}
+    {% for word in product_type_words %}
+        {% for i in (0..9) %}
+            {% if word contains i %}
+                {% assign reference = word %}
+                {% break %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endunless %}
+
+<script>
+    window.theme = window.theme || {};
+    window.theme = {
+        ...window.theme,
+        product: {
+            title: "{{ product.title }}",
+            handle: "{{ product.handle }}",
+            reference: "{{ reference }}",
+            size: "{{ size }}",
+            condition: "{{ etat }}",
+            color: "{{ color }}",
+            price: "{{ product.price | divided_by: 100 }}",
+        },
+        productConditions: {
+            "État neuf": "{{ section.settings.state1 }}",
+            "Excellent état": "{{ section.settings.state2 }}",
+            "Très bon état": "{{ section.settings.state3 }}",
+            "Bon état": "{{ section.settings.state4 }}"
+        }
+    }
+</script>
+
+{% capture condition_popin %}
+    <span class="js-product-state-popin">
+        {% case etat %}
+        {% when 'État neuf' %}
+            {{ section.settings.state1 }}
+        {% when 'Excellent état' %}
+            {{ section.settings.state2 }}
+        {% when 'Très bon état' %}
+            {{ section.settings.state3 }}
+        {% when 'Bon état' %}
+            {{ section.settings.state4 }}
+        {% endcase %}
+    </span>
+{% endcapture %}
+
+<section class="product">
+    <div class="wrapper">
+        {% render 'back' 
+            back: section.settings.btn_back,
+        %}
+        {% render 'breadcrumb' 
+            home: section.settings.home
+            search: section.settings.search
+            news: section.settings.news
+            accessories: section.settings.accessories
+            clothes: section.settings:clothes
+        %}
+        <div class="product__container">
+            <div class="product__images">
+                {% render 'product-images' %}
+            </div>
+            <div class="product__description">
+                {% form "product", product, class: 'js-form-add product__description__inner' %}
+                    <div class="product__title">
+                        <h1 class="h3">{{ product.title }}</h1>
+                        <button data-add-favorite="{{ product.id }}" data-ref="{{ reference }}">
+                            <svg viewbox="-10 0 532.001 512.001"><use xlink:href="#svg-heart"/></svg>
+                        </button>
+                    </div>
+                    <div class="product__price__container">
+                        <p class="product__price js-price">{{ product.price | round | divided_by: 100 }} €</p>
+                        {% if product.compare_at_price %}
+                            <p class="product__price--old_price js-price">{{section.settings.origin_price_text}} {{ product.compare_at_price | round | divided_by: 100 }} €</p>
+                        {% endif %}
+                    </div>
+                    <ul class="product__infos">
+                        <li class="product__infos--color">
+                            <p>{{ section.settings.info_color }}</p>
+                            <ul>
+                                {% if color %}
+                                <li class="is-selected">
+                                    <a href="{{ product.url }}">
+                                        <span data-color="{{ color }}"></span>
+                                        <span>{{ color }}</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% if size and size != 'Taille unique' and size != 'TU' and size != "Taille Unique" %}
+                            <li class="product__infos--size">
+                                <p>{{ section.settings.info_size }}</p>
+                                <ul>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="size" required checked value="{{ size }}">
+                                            <span>{{ size }}</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <a href="https://www.dadasport.com/fr/pages/38-guide-des-tailles" target="_blank">{{ section.settings.guide_size }}</a>
+                                {% comment %}<button class="js-open-size">Guide des tailles</button>{% endcomment %}
+                            </li>
+                        {% endif %}
+                        {% if etat %}
+                            <li class="product__infos--etat">
+                                <p>
+                                    <span>{{ section.settings.info_condition }}</span>
+                                    <i>?</i>
+                                    {{ condition_popin }}
+                                </p>
+                                <ul>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="condition" required checked value="{{ etat }}">
+                                            <span>{{ etat }}</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <div class="form">
+                        <input class="js-product-variant" type="hidden" name="id" value="{{ product.variants[0].id }}">
+                        {% if product.available %}
+                            <button class="btn" type="submit"><span>{{ section.settings.btn_add_cart }}</span></button>
+                        {% else %}
+                            <button class="btn" disabled><span>{{ section.settings.btn_not_available }}</span></button>
+                        {% endif %}
+                    </div>
+                    <ul class="product__reassurance">
+                        {% for block in section.blocks %}
+                            <li>
+                                {% if block.settings.url %}<a>{% else %}<div>{% endif %}
+                                    {% render 'lazy-img' with src: block.settings.icon, nocrop: true %}
+                                    <p>{{ block.settings.text }}</p>
+                                {% unless block.settings.url %}</div>{% else %}</a>{% endunless %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <ul class="product__tabs">
+                        <li>
+                            <p>{{ section.settings.tabs_title_description }}</p>
+                            <div class="product__tab--content"><div>{{ product.description }}</div></div>
+                        </li>
+                        {% if product.metafields.global.composition_text and product.metafields.global.composition_text != blank %}
+                            <li>
+                                <p>{{ section.settings.tabs_title_composition }}</p>
+                                <div class="product__tab--content"><div>{{ product.metafields.global.composition_text | newline_to_br }}</div></div>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <p>{{ section.settings.tabs_title_deliveries }}</p>
+                            <div class="product__tab--content"><div>{{ section.settings.shipping | replace: '<p></p>', '<br>' }}</div></div>
+                        </li>
+                    </ul>
+                {% endform %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="product__sticky-btn">
+    {% form "product", product, class: 'js-form-add' %}
+        <input type="hidden" name="id" value="{{ product.variants[0].id }}">
+        {% if product.available %}
+            <button class="btn" type="submit"><span>{{ section.settings.btn_add_cart }}</span></button>
+        {% else %}
+            <button class="btn" disabled><span>{{ section.settings.btn_not_available }}</span></button>
+        {% endif %}
+    {% endform %}
+</div>
+<div class="cart__suggestion__cta">
+    <h2 class="cart__suggestion__cta__btn is-active" id="is-suggestion-cta">{{ section.settings.cross_sell_like }}</h2>
+    <h2 class="cart__suggestion__cta__btn" id="is-recently-cta">{{ section.settings.cross_sell_recently }}</h2>
+</div>
+<section class="cart-suggestion">
+    <div class="wrapper">
+        <div class="cart-suggestion__products">
+            {% assign i = 0 %}
+            {% assign data_sizes = '' %}
+            {% assign univer = '' %}
+            {% for tag in product.tags %}
+                {% if tag contains 'Univers_' %}
+                    {% assign univer = tag %}
+                {% elsif tag contains 'Taille_' %}
+                    {% assign data_sizes = tag %}
+                {% endif %}
+            {% endfor %}
+                {% for collection in product.collections %}
+                    {% for item in collection.products %}
+                        {% assign i = i | plus: 1 %}
+                        {% if item.available and item.price > 0 and item.tags contains univer and item.tags contains data_sizes %}
+                            <div class="cart-suggestion__product">
+                                {% render 'product-card' with product: item %}
+                            </div>
+                        {% endif %} 
+                    {% endfor %}
+                {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "settings": [
+     {
+      "type": "header",
+      "content": "Breadcrumb"
+    },
+    {
+        "id": "home",
+        "type": "text",
+        "label": "Text accueil",
+        "default": "Accueil"
+    },
+    {
+        "id": "search",
+        "type": "text",
+        "label": "Text recherche",
+        "default": "Recherche"
+    },
+    {
+        "id": "news",
+        "type": "text",
+        "label": "Text nouveautés",
+        "default": "Nouveautés"
+    },
+    {
+        "id": "accessories",
+        "type": "text",
+        "label": "Text accessoires",
+        "default": "Accessoires"
+    },
+    {
+        "id": "clothes",
+        "type": "text",
+        "label": "Text vétements",
+        "default": "Vétements"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+     {
+      "id": "btn_back",
+      "type": "text",
+      "label": "Bouton retour mobile",
+      "default": "Retour "
+    },
+    {
+      "id": "origin_price_text",
+      "type": "text",
+      "label": "Prix d'origine",
+      "default": "Prix d'origine : "
+    },
+    {
+      "id": "info_color",
+      "type": "text",
+      "label": "Text info couleur",
+      "default": "Couleur "
+    },
+    {
+      "id": "info_size",
+      "type": "text",
+      "label": "Text info taille",
+      "default": "Taille "
+    },
+    {
+      "id": "guide_size",
+      "type": "text",
+      "label": "Text guide taille",
+      "default": "Guide des tailles "
+    },
+    {
+      "id": "info_condition",
+      "type": "text",
+      "label": "Text info condition",
+      "default": "État "
+    },
+    {
+      "id": "shipping",
+      "type": "richtext",
+      "label": "Livraisons & retours",
+      "default": "<p>Les retours sont offerts sous 30 jours, soit par voie postale via une étiquette prépayée dans votre colis, soit en boutique.</p>"
+    },
+    {
+      "id": "state1",
+      "type": "text",
+      "label": "Etat neuf",
+      "default": "Ces articles n'ont jamais été portés. Ils peuvent provenir de retours clients suite à des échanges ou de showroom, retours presse ou tests qualité"
+    },
+    {
+      "id": "state2",
+      "type": "text",
+      "label": "Excellent état",
+      "default": "Pratiquement neufs sans traces d'usure ni défauts visibles"
+    },
+    {
+      "id": "state3",
+      "type": "text",
+      "label": "Très bon état",
+      "default": "Ne présentent que des traces d' mineures"
+    },
+    {
+      "id": "state4",
+      "type": "text",
+      "label": "Bon état",
+      "default": "Présentent des signes d'usure modérés. Le produit peut présenter de légères égratignures, traces de réparations ou d'usure normale du vêtement"
+    },
+    {
+      "id": "btn_add_cart",
+      "type": "text",
+      "label": "Bouton ajouter au panier",
+      "default": "Ajouter au panier"
+    },
+    {
+      "id": "btn_not_available",
+      "type": "text",
+      "label": "Bouton plus disponible",
+      "default": "Plus disponible"
+    },
+    {
+      "id": "tabs_title_description",
+      "type": "text",
+      "label": "Titre description",
+      "default": "Description"
+    },
+    {
+      "id": "tabs_title_composition",
+      "type": "text",
+      "label": "Titre composition",
+      "default": "Composition"
+    },
+    {
+      "id": "tabs_title_deliveries",
+      "type": "text",
+      "label": "Titre livraisons & retours",
+      "default": "Livraisons & retours"
+    },
+    {
+        "id": "cross_sell_recently",
+        "label": "Titre Cross-Sell Récement consultées",
+        "type": "text",
+        "default": "Vos pièces récement consultées"
+    },
+    {
+        "id": "cross_sell_like",
+        "label": "Titre Cross-Sell Vous aimerez aussi",
+        "type": "text",
+        "default": "Vous aimerez aussi"
+    }
+
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Réassurance",
+      "settings": [
+        {
+          "id": "text",
+          "label": "Texte",
+          "type": "text",
+          "default": "Article authentifié"
+        },
+        {
+          "id": "icon",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "url",
+          "type": "url",
+          "label": "Lien",
+          "info": "Optionnel"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

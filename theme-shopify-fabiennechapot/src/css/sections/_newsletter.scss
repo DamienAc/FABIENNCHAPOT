@@ -1,0 +1,108 @@
+.newsletter {
+  margin: var(--section-margin) auto;
+  padding: 0 var(--page-margin);
+
+  &.initview {
+    margin-top: 183px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin: 10px auto 20px;
+    text-align: center;
+
+    strong,
+    em {
+      font-weight: 500;
+    }
+  }
+
+  &__error,
+  &__success {
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 10px auto 20px;
+    text-align: center;
+  }
+
+  &__error {
+    color: $red;
+  }
+
+  &__success {
+    color: $green;
+  }
+
+  form {
+    display: flex;
+    margin-top: 40px;
+    //max-width: 380px;
+    //margin: auto;
+
+    &.loading button {
+      opacity: 0;
+    }
+  }
+
+  label,
+  button {
+    height: 40px;
+    min-height: 40px;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding: 0 6px;
+    border: 1px solid #ABB0B2;
+    border-radius: 3px;
+    color: #343434;
+    font-size: 1.5rem;
+    text-transform: none;
+    background-color: #fff;
+    transition: border-color $transition-1;
+
+    &:focus {
+      border-color: #000;
+    }
+
+    &::placeholder {
+      color: #bbb;
+    }
+
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+
+  label {
+    flex-grow: 1;
+  }
+
+  button {
+    flex-shrink: 0;
+    margin-left: 10px;
+    font-size: 1.4rem;
+    padding: 0 40px;
+    text-transform: none;
+    border-radius: 3px;
+    overflow: hidden;
+
+    @include down(md) {
+      padding: 0 10px;
+    }
+  }
+
+  &__infos {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+
+  a:not(:hover) {
+    text-decoration: underline;
+  }
+}

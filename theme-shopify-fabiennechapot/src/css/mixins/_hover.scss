@@ -1,0 +1,7 @@
+@mixin hover {
+  @include up(lg) {
+    &:hover {
+      @content;
+    }
+  }
+}

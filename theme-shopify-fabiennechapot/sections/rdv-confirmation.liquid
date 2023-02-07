@@ -1,0 +1,65 @@
+{% comment %}
+    Voir bonpoint pour le fonctionnement
+{% endcomment %}
+
+<section class="rdv-confirm" style="display:none;">
+    <h2 class="h2">{{ section.settings.title }}</h2>
+    <p>{{ section.settings.subtitle }}</p>
+    <ul>
+        <li>
+            <div>
+                <img src="https://cdn.shopify.com/s/files/1/0567/4244/5113/files/PEBDA3703CA_102_b23fc_55f5c78e-03c4-4a20-9465-5f9a4cf9df4e.png?v=1643998113" alt="Bonpoint vintage">
+            </div>
+            <p class="h4">{{ section.settings.title2 }}</p>
+        </li>
+        <li></li>
+        <li>
+            <div>
+                <img src="https://cdn.shopify.com/s/files/1/0567/4244/5113/files/PEBDA3703CA_102_b23fc_55f5c78e-03c4-4a20-9465-5f9a4cf9df4e.png?v=1643998113" alt="Bonpoint vintage">
+            </div>
+            <p class="h4">{{ section.settings.title3 }}</p>
+        </li>
+    </ul>
+    <div class="rdv-confirm__infos">
+        <p>{{ section.settings.rappel }}</p>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "RDV confirmation",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Titre confirmation rdv",
+      "default": "Votre rendez-vous est presque confirmé !"
+    },
+    {
+      "id": "subtitle",
+      "type": "richtext",
+      "label": "Text soustitre",
+      "default": "<p>Nos équipes vous contacteront dès que possible par email ou téléphone afin de confirmer votre rendez-vous.<br>En période de forte activité, si le rendez-vous ne peut pas être honoré par la boutique, un nouveau créneau horaire vous sera proposé.</p>"
+    },
+    {
+      "id": "title2",
+      "type": "text",
+      "label": "Titre rendez-vous demandé",
+      "default": "Rendez-vous demandé"
+    },
+    {
+      "id": "title3",
+      "type": "text",
+      "label": "Titre rendez-vous confirmé",
+      "default": "Rendez-vous confirmé"
+    },
+    {
+      "id": "rappel",
+      "type": "text",
+      "label": "Text rappel",
+      "default": "Pour rappel : nous n’acceptons pas les articles sans numéro d’identification. Merci de ne pas confirmer votre rendez-vous si votre article ne comporte pas de numéro d’identification, car votre article ne sera pas repris et aucun bon d’achat ne vous sera accordé."
+    }
+ 
+  ]
+}
+{% endschema %}

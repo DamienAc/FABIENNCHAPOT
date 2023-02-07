@@ -1,0 +1,92 @@
+    <div class="search-popin__inner">
+        <div class="search-popin__header">
+            <form action="/search" autocomplete="off">
+                <label>
+                    <input type="text" name="q" required="required" placeholder="Rechercher" autocomplete="off" autofocus>
+                </label>
+                <input type="hidden" name="type" value="product">
+                <input type="hidden" name="options[prefix]" value="last"/>
+                <button type="submit">
+                    {% render 'icon' with 'search' %}
+                </button>
+            </form>
+            <button class="js-close">{% render 'icon' with 'cross' %}</button>
+        </div>
+        <p class="search-popin__empty" style="display: none">{{ section.settings.no_result }}</p>
+        <div class="search-popin__container">
+            <div class="search-popin__col">
+                <div class="search-popin__suggestions">
+                    <p>{{ section.settings.suggestions }}</p>
+                    <ul>
+                        {% for link in linklists.search.links %}
+                            <li>
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="search-popin__collections" style="display: none">
+                    <p>{{ section.settings.categories }}</p>
+                    <ul></ul>
+                </div>
+
+                <div class="search-popin__pages" style="display: none">
+                    <p>{{ section.settings.pages }}</p>
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="search-popin__col">
+                <div class="search-popin__products" style="display: none">
+                    <p>{{ section.settings.products }}</p>
+                    <ul></ul>
+                    <a href="/" class="btn js-search-submit"><span>{{ section.settings.btn_all_products }}</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% schema %}
+    {
+    "name": "Popin recherche",
+    "tag": "section",
+    "class": "search-popin",
+    "settings": [
+        {
+        "id": "no_result",
+        "type": "text",
+        "label": "Text no result",
+        "default":"Aucun article ne correspond à votre recherche"
+        },
+        {
+        "id": "suggestions",
+        "type": "text",
+        "label": "Suggestions",
+        "default":"Suggestions"
+        },
+        {
+        "id": "categories",
+        "type": "text",
+        "label": "Catégories",
+        "default":"Catégories"
+        },
+        {
+        "id": "pages",
+        "type": "text",
+        "label": "Pages",
+        "default":"Pages"
+        },
+        {
+        "id": "products",
+        "type": "text",
+        "label": "Produits",
+        "default":"Produits"
+        },
+        {
+        "id": "btn_all_products",
+        "type": "text",
+        "label": "Afficher tous les articles",
+        "default":"Afficher tous les articles"
+        }
+    ]
+    }
+{% endschema %}

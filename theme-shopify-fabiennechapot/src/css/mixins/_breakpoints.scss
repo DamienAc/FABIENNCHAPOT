@@ -1,0 +1,67 @@
+$breakpoints: (
+        'sm': 520px, // Mobile
+        'md': 800px, // Tablet
+        'lg': 1024px, // Desktop
+        'xlg': 1200px, // Large desktop
+        'xxlg': 1440px, // Extra large Desktop
+        'xxxlg': 1800px // Ultra large Desktop (Full HD / 4K...)
+) !default;
+
+
+@mixin up($breakpoint) {
+
+  @if $breakpoint {
+
+    @if map-has-key($breakpoints, $breakpoint) {
+
+      @media (min-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      }
+
+    } @else {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin down($breakpoint) {
+
+  @if $breakpoint {
+
+    @if map-has-key($breakpoints, $breakpoint) {
+
+      @media (max-width: #{map-get($breakpoints, $breakpoint) - 1}) {
+        @content;
+      }
+
+    } @else {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin between($min, $max) {
+  @if($min) {
+    @if($max) {
+      @if map_has_key($breakpoints, $min) {
+        @if map_has_key($breakpoints, $max) {
+          @media (min-width: #{map_get($breakpoints,$min)}) and (max-width: #{map_get($breakpoints,$max) - 1}) {
+            @content;
+          }
+        } @else {
+          @content;
+        }
+      } @else {
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

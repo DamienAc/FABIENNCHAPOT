@@ -1,0 +1,151 @@
+.register {
+  padding: 50px var(--page-margin);
+  min-height: calc(100vh - var(--header-height) - var(--announcement-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 100px;
+
+  form {
+    width: 100%;
+  }
+
+  h1 {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  @include up(md) {
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__col {
+      width: 45%;
+    }
+  }
+
+  &__col {
+    @include up(xlg) {
+      max-width: 500px;
+    }
+
+    @include down(lg) {
+      &:first-of-type {
+        display: none;
+      }
+    }
+
+    @include down(lg) {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  &__container {
+    @include up(xlg) {
+      justify-content: space-around;
+    }
+  }
+
+  &__image {
+    max-width: 500px;
+    position: relative;
+    margin: auto;
+
+    a {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      margin-top: 0 !important;
+    }
+  }
+
+  .lazy-img {
+    padding-bottom: 0;
+    height: 700px;
+  }
+
+  @include down(md) {
+
+    &__col {
+      &:last-of-type {
+        margin-top: 40px;
+      }
+    }
+  }
+
+  .field {
+    margin-top: 20px;
+  }
+
+  .checkbox {
+    margin-top: 40px;
+
+    & + .checkbox {
+      margin-top: 20px;
+    }
+  }
+
+  .field:not(.checkbox) {
+    border-bottom: 0;
+
+    &:last-of-type {
+      margin-bottom: 30px;
+    }
+  }
+
+  .btn {
+    max-width: 100%;
+    width: fit-content;
+    margin: 40px auto 0;
+  }
+
+  &__login {
+    text-decoration: underline;
+    margin-top: 30px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: .4px;
+    font-size: 1.4rem;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    @include up(lg) {
+      display: none;
+    }
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+
+    .field {
+      margin-top: 20px;
+      align-items: center;
+
+      &:first-of-type {
+        margin-right: 30px;
+      }
+
+      span {
+        align-items: center;
+      }
+
+      span:after,
+      span:before {
+        border-radius: 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,137 @@
+<section class="home-banner" data-count="{{ section.blocks.size }}">
+
+  <div class="wrapper">
+    <div class="home-banner__slider">
+      {% for block in section.blocks %}
+        <div class="home-banner__slide">
+          {% render 'banner' with
+            h2: block.settings.title,
+            size: 1,
+            subtitle: block.settings.subtitle,
+            text: block.settings.text,
+            image: block.settings.image,
+            image_2: block.settings.image_2,
+            btn_1_text: block.settings.btn_1_text,
+            btn_1_url: block.settings.btn_1_url,
+            btn_1_color: block.settings.btn_1_color,
+            btn_2_text: block.settings.btn_2_text,
+            btn_2_url: block.settings.btn_2_url,
+            btn_2_color: block.settings.btn_2_color
+          %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Bannière",
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "image",
+      "settings": [
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Titre"
+        },
+        {
+          "id": "subtitle",
+          "type": "text",
+          "label": "Sous-titre"
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Texte"
+        },
+        {
+          "type": "header",
+          "content": "Bouton 1"
+        },
+        {
+          "id": "btn_1_text",
+          "type": "text",
+          "label": "Nom du bouton"
+        },
+        {
+          "id": "btn_1_url",
+          "type": "url",
+          "label": "Url du bouton"
+        },
+        {
+          "type": "select",
+          "id": "btn_1_color",
+          "label": "Couleur du bouton",
+          "options": [
+            {
+              "value": "black",
+              "label": "Noir"
+            },
+            {
+              "value": "white",
+              "label": "Blanc"
+            },
+            {
+              "value": "yellow",
+              "label": "Jaune"
+            }
+          ],
+          "default": "white"
+        },
+        {
+          "type": "header",
+          "content": "Bouton 2"
+        },
+        {
+          "id": "btn_2_text",
+          "type": "text",
+          "label": "Nom du bouton"
+        },
+        {
+          "id": "btn_2_url",
+          "type": "url",
+          "label": "Url du bouton"
+        },
+        {
+          "type": "select",
+          "id": "btn_2_color",
+          "label": "Couleur du bouton",
+          "options": [
+            {
+              "value": "black",
+              "label": "Noir"
+            },
+            {
+              "value": "white",
+              "label": "Blanc"
+            },
+            {
+              "value": "yellow",
+              "label": "Jaune"
+            }
+          ],
+          "default": "white"
+        },
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image pour grands écrans"
+        },
+        {
+          "id": "image_2",
+          "type": "image_picker",
+          "label": "Image pour petits écrans"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

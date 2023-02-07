@@ -1,0 +1,60 @@
+<div class="page">
+    <section class="sell-faq wrapper medium page-faq">
+        <h1 class="h1">{{ section.settings.title }}</h1>
+        <ul>
+            {% for block in section.blocks %}
+                <li>
+                    <h3 class="h5">{{ block.settings.question }}</h3>
+                    <div class="sell-faq__answer">
+                        <div>{{ block.settings.answer }}</div>
+                    </div>
+                </li>
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Question",
+                    "name": "{{ block.settings.question }}",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "{{ block.settings.answer | strip_html }}"
+                    }
+                }
+            </script>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+
+{% schema %}
+    {
+    "name": "Faq",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "FAQ"
+    }
+    ],
+    "blocks": [
+    {
+    "type": "text",
+    "name": "Question",
+    "settings": [
+    {
+    "id": "question",
+    "type": "text",
+    "label": "Question",
+    "default": "Puis-je revendre n'importe quel type d'article ?"
+    },
+    {
+    "id": "answer",
+    "type": "richtext",
+    "label": "Réponse",
+    "default": "<p>Nous reprenons les vêtements, sacs, chaussures et ceintures de toutes les collections.<br><br>En revanche, les bijoux, cravates, écharpes, foulards, gants, chaussettes, maillots de bain, sous-vêtements, portefeuille, porte carte, fouta ou totebag ne sont pas repris. Les pièces de la collection capsule issues de collaboration ne font également pas partie des pièces reprises.</p>"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

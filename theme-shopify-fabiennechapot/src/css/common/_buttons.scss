@@ -1,0 +1,113 @@
+.btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 0.4px;
+  background-color: $yellow;
+  transition: color $transition-1;
+  font-size: 1.4rem;
+  min-height: 48px;
+  font-weight: 500;
+  padding: 8px 30px;
+
+  @include down(md) {
+    padding: 10px 20px;
+    min-height: 42px;
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    padding: 5px 10px;
+    line-height: 1;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $blue;
+    z-index: 0;
+    transform-origin: bottom;
+    transition: transform $transition-1;
+  }
+
+  @include up(lg) {
+    &:not(:disabled):hover {
+      color: $blue;
+
+      &:before {
+        transform: scale(1, 0);
+      }
+    }
+  }
+
+  &.yellow {
+    color: $blue;
+    background-color: #fff;
+
+    &:before {
+      background-color: $yellow;
+    }
+  }
+
+  &.white {
+    background-color: $blue;
+    color: $blue;
+
+    &:before {
+      background-color: #fff;
+    }
+
+    @include up(lg) {
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .3;
+  }
+
+  @keyframes animBtn {
+    from {
+      opacity: .2;
+    }
+    to {
+      opacity: .5;
+    }
+  }
+
+  &.is-loading {
+    pointer-events: none;
+
+    span {
+      animation: animBtn ease-in-out alternate-reverse .5s infinite;
+    }
+  }
+}
+
+
+.link {
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-align: center;
+  display: block;
+  font-weight: 400;
+  letter-spacing: .4px;
+  font-size: 1.4rem;
+
+  @include hover {
+    text-decoration: none;
+  }
+}

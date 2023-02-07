@@ -1,0 +1,39 @@
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  font-weight: 100;
+  color: #888;
+
+  li {
+    display: flex;
+    align-items: center;
+
+    &:last-of-type {
+      pointer-events: none;
+
+      p, a {
+        color: #000;
+      }
+    }
+  }
+
+  a {
+    transition: color $transition-1;
+
+    @include hover {
+      color: #000;
+    }
+  }
+
+  li:not(:last-of-type) {
+
+    &:after {
+      content: '>';
+      font-size: .8rem;
+      margin: 0 5px;
+    }
+  }
+}

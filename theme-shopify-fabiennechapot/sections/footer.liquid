@@ -1,0 +1,75 @@
+<footer class="footer">
+    <div class="wrapper">
+        <div class="footer__top">
+            <div class="footer__left">
+                <div class="footer__logo">
+                    {% render 'icon' with icon: 'logo', box: "0 0 820 264" %}
+                </div>
+                <div class="footer__social">
+                    <ul>
+                        <li class="instagram">
+                            <a href="https://www.instagram.com/dadasport/" title="Instagram" target="_blank">
+                                {% render 'icon' with icon: 'instagram', box: '0 0 512 512' %}
+                            </a>
+                        </li>
+                        <li class="linkedin">
+                            <a href="https://www.linkedin.com/company/dada-sport/" title="Linkedin" target="_blank">
+                                {% render 'icon' with icon: 'linkedin', box: '0 0 512 512' %}
+                            </a>
+                        </li>
+                        <li class="tiktok">
+                            <a href="https://www.tiktok.com/@dadasport.official/" title="Tiktok" target="_blank">
+                                {% render 'icon' with icon: 'tiktok', box: '0 0 512 512' %}
+                            </a>
+                        </li>
+                        <li class="facebook">
+                            <a href="https://www.facebook.com/pg/DadaSportCavalier/" title="Facebook" target="_blank">
+                                {% render 'icon' with icon: 'facebook', box: '0 0 266 512' %}
+                            </a>
+                        </li>
+                        <li class="youtube">
+                            <a href="https://www.youtube.com/channel/UC7OwbNh8Ds6lAV5_nO3FGeg/featured" title="YouTube" target="_blank">
+                                {% render 'icon' with icon: 'youtube', box: '0 0 480 332' %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <nav>
+                <ul class="footer__nav">
+                    {% for link in linklists['footer'].links %}
+                        <li>
+                            <p class="h5">{{ link.title }}</p>
+                            <div>
+                                <ul>
+                                    {% for sub_link in link.links %}
+                                        <li>
+                                            <a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="footer__bottom">
+            <p>Powered by <a href="https://www.faume.co/" target="_blank">Faume</a></p>
+        </div>
+    </div>
+</footer>
+
+{% schema %}
+    {
+    "name": "Footer",
+    "settings": [
+    {
+    "id": "copy",
+    "label": "Copyright",
+    "type": "text",
+    "default": "© 2022 Dada sport All rights reserved."
+    }
+    ]
+    }
+{% endschema %}

@@ -1,0 +1,175 @@
+.minicart {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,.4);
+  height: 100%;
+  transition: opacity $transition-1;
+  font-size: 1.4rem;
+
+  &:not(.is-open) {
+    pointer-events: none;
+    opacity: 0;
+
+    .minicart__inner {
+      transform: translateX(102%);
+    }
+  }
+
+  &[data-count="0"] {
+    .minicart__bottom,
+    table,
+    .minicart__items,
+    .btn {
+      display: none;
+    }
+
+    .minicart__details div {
+      margin-bottom: 0;
+    }
+  }
+
+  &:not([data-count="0"]) {
+    .minicart__empty {
+      display: none;
+    }
+  }
+
+  @include up(xlg) {
+    font-size: 1.4rem;
+  }
+
+  .js-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px 20px;
+
+    svg {
+      width: 17px;
+      height: auto;
+    }
+  }
+
+  &__header {
+    padding: 15px 20px;
+    z-index: 2;
+    background-color: #fff;
+    //border-bottom: $border-2;
+    position: relative;
+
+    div {
+      display: flex;
+      align-items: baseline;
+    }
+
+    span {
+      font-weight: 100;
+      font-family: $font-text;
+      font-size: 1.6rem;
+    }
+
+    h2 {
+      margin-right: 10px;
+    }
+  }
+
+  &__inner {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: #fff;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform $transition-1;
+
+    @include up(md) {
+      width: 42%;
+    }
+
+    @include up(xlg) {
+      width: 33%;
+    }
+  }
+
+  &__items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+  }
+
+  table {
+    width: 100%;
+
+    span {
+      color: #5e7993;
+      font-weight: 400;
+      font-size: 1.2rem;
+    }
+  }
+
+  td, th {
+    padding-bottom: 16px;
+    text-align: right;
+
+    &:first-of-type {
+      text-align: left;
+    }
+  }
+
+  tr {
+
+    &:last-of-type {
+      td, th {
+        padding-top: 20px;
+        border-top: $border-2;
+      }
+    }
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  &__bottom {
+    //border-top: $border-2;
+    padding: 20px;
+    background-color: #F3F5F8;
+
+    .lazy-img {
+      width: 100%;
+      height: 26px;
+      margin-top: 25px;
+      padding-bottom: 0;
+    }
+  }
+
+  &__empty {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #F3F5F8;
+  }
+
+  .js-cart-count {
+    position: relative;
+    right: auto;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .product__reassurance {
+    margin: 30px 0;
+    font-size: 1.3rem;
+
+    .lazy-img {
+      padding-bottom: 25px;
+    }
+  }
+}

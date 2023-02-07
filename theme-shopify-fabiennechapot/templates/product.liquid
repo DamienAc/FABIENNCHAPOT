@@ -1,0 +1,13 @@
+<script>
+    let products = window.localStorage.getItem('recently_viewed') || '';
+    products = products.split('#');
+    const handle = '{{ product.handle }}';
+    products = products.filter(p => p !== handle && p !== '');
+    products.push(handle);
+    window.localStorage.setItem('recently_viewed', products.join('#'));
+</script>
+
+{% section 'product' %}
+{% section 'lightbox' %}
+{% section 'recently-viewed' %}
+{% section 'product-size-guide' %}

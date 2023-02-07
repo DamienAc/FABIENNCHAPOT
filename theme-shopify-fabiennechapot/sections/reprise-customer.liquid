@@ -1,0 +1,700 @@
+<script>
+    window.theme = window.theme || {};
+    window.theme = {
+        ...window.theme,
+        repriseCustomer: {
+            linksNav:{
+              links:[
+                {% for block in section.blocks %}
+                   {% if block.type == 'text' %}
+                      {
+                          navLinks: `{{ block.settings.navLinks }}`,
+                          navLinkName: `{{ block.settings.navLinkName }}`,
+                      },
+                   {% endif %}
+                {% endfor %}
+              ]
+            },
+            btn:{
+              continue: "{{ section.settings.btn_continue }}",
+              btnRestart:  "{{ section.settings.btn_btnRestart }}",
+            },
+            step1: {
+                condition: {
+                    title: "{{ section.settings.step_1_condition_title }}",
+                    text: `{{ section.settings.step_1_condition_text }}`,
+                    btn: "{{ section.settings.step_1_condition_btn }}",
+                },
+                ref: {
+                    title: "{{ section.settings.step_1_ref_title }}",
+                    help: "{{ section.settings.step_1_ref_help | strip_html }}",
+                    text: "{{ section.settings.step_1_ref_text }}",
+                    image1: "{{ section.settings.step_1_ref_image_1 | img_url: '800x' }}",
+                    error:  "{{ section.settings.step_1_ref_error }}",
+                },
+                size: {
+                    title: "{{ section.settings.step_1_size_title }}",
+                },
+                color: {
+                    title: "{{ section.settings.step_1_color_title }}",
+                    error: "{{ section.settings.step_1_color_error }}",
+                },
+                etat: {
+                    title: "{{ section.settings.step_1_etat_title }}",
+                    neuf: "{{ section.settings.step_1_etat_neuf | strip_html }}",
+                    excellent: "{{ section.settings.step_1_etat_excellent | strip_html }}",
+                    tresbon: "{{ section.settings.step_1_etat_tresbon | strip_html }}",
+                }
+            },
+            cart: {
+                title: "{{ section.settings.step_2_cart_title }}",
+                empty_text: "{{ section.settings.step_2_cart_empty_text }}",
+                articles_text: "{{ section.settings.step_2_cart_articles_text }}",
+                no_articles_text: "{{ section.settings.step_2_cart_no_articles_text }}",
+                more_articles_text: "{{ section.settings.step_2_cart_more_articles_text }}",
+                less_article_text:  "{{ section.settings.step_2_cart_less_article_text }}",
+                btn_add_article_text: "{{ section.settings.step_2_cart_btn_add_article_text }}",
+                cartTitleAmount: "{{ section.settings.step_2_cart_cartTitleAmount }}",
+                cartTotalArticlesText: "{{ section.settings.step_2_cart_cartTotalArticlesText }}",
+                cartNumberArticlesText:  "{{ section.settings.step_2_cart_cartNumberArticlesText }}",
+                cartTotalOfferText:  "{{ section.settings.step_2_cart_cartTotalOfferText }}",
+                cartConfirmationText:  `{{ section.settings.step_2_cart_cartConfirmationText }}`,
+                cartConfirmationCertifText1:  `{{ section.settings.step_2_cart_cartConfirmationCertifText1 }}`,
+                cartConfirmationCertifText2:  `{{ section.settings.step_2_cart_cartConfirmationCertifText2 }}`,
+                cartBtnValidation1: "{{ section.settings.step_2_cart_cartBtnValidation1 }}",
+                cartBtnValidation2: "{{ section.settings.step_2_cart_cartBtnValidation2 }}",
+                cartItemSize: "{{ section.settings.step_2_cart_cartItemSize }}",
+                cartItemRef: "{{ section.settings.step_2_cart_cartItemRef }}",
+                cartItemPrice: "{{ section.settings.step_2_cart_cartItemPrice }}",
+            },
+            log_register:{
+                logRegistertabs1: "{{ section.settings.step_3_logRegistertabs1 }}",
+                logRegistertabs2: "{{ section.settings.step_3_logRegistertabs2 }}",
+                logSubtitle: "{{ section.settings.step_3_logSubtitle }}",
+                logErrorText: "{{ section.settings.step_3_logErrorText }}",
+                logPlaceholderEmail: "{{ section.settings.step_3_logPlaceholderEmail }}",
+                logPlaceholderPassword: "{{ section.settings.step_3_logPlaceholderPassword }}",
+                logPlaceholderPasswordConfirm:  "{{ section.settings.step_3_logPlaceholderPasswordConfirm }}",
+                logBtn1:  "{{ section.settings.step_3_logBtn1 }}",
+                logBtn2:  "{{ section.settings.step_3_logBtn2 }}",
+                logBtn3:  "{{ section.settings.step_3_logBtn3 }}",
+                registerSubtitle:  "{{ section.settings.step_3_registerSubtitle }}",
+                registerFirstname:  "{{ section.settings.step_3_registerFirstname }}",
+                registerLastname:  "{{ section.settings.step_3_registerLastname }}",
+                registerPhone:  "{{ section.settings.step_3_registerPhone }}",
+                registerConfirmationCertifText1:  `{{ section.settings.step_3_registerConfirmationCertifText1 }}`,
+                registerLabelOffer1: "{{ section.settings.step_3_registerLabelOffer1 }}",
+                registerLabelOffer2: "{{ section.settings.step_3_registerLabelOffer2 }}",
+                registerBtn1: "{{ section.settings.step_3_registerBtn1 }}",
+                registerBtn2: "{{ section.settings.step_3_registerBtn1}}",
+
+                
+            },
+            address: {
+              title: "{{ section.settings.address_add_title }}",
+              subtitle1: "{{ section.settings.address_add_subtitle1 }}",
+              subtitle2_1: "{{ section.settings.address_add_subtitle2_1 }}",
+              subtitle2_2: "{{ section.settings.address_add_subtitle2_2 }}",
+              add: "{{ section.settings.address_add_btn }}",
+              btn1: "{{ section.settings.address_add_btn1 }}",
+              btn2: "{{ section.settings.address_add_btn2 }}",
+              success: "{{ section.settings.address_add_success }}",
+              empty: "{{ section.settings.address_empty }}",
+              addressPlaceholder1: "{{ section.settings.addressPlaceholder1 }}",
+              addressPlaceholder2: "{{ section.settings.addressPlaceholder2 }}",
+              addressPlaceholder3: "{{ section.settings.addressPlaceholder3 }}",
+              addressPlaceholder4: "{{ section.settings.addressPlaceholder4 }}",
+              addressPlaceholder5: "{{ section.settings.addressPlaceholder5 }}",
+          },
+          final: {
+            title : "{{ section.settings.final_title }}",
+            subtitle : "{{ section.settings.final_subtitle }}",
+            finalBtnPrint1 : "{{ section.settings.final_finalBtnPrint1 }}",
+            finalBtnPrint2 : "{{ section.settings.final_finalBtnPrint2 }}",
+            finalSteps:[
+               {% for block in section.blocks %}
+                   {% if block.type == 'image' %}
+                      {
+                          img: `{{ block.settings.stepImage | img_url: 'master'}}`,
+                          text: `{{ block.settings.stepText }}`
+                      },
+                    {% endif %}
+                {% endfor %}
+            ],
+            finalTitleTicket:  "{{ section.settings.final_finalTitleTicket }}",
+            finalTextTicket:  "{{ section.settings.final_finalTextTicket }}",
+            finalTitleCollis:  "{{ section.settings.final_finalTitleCollis }}",
+            finalText1Collis:  `{{ section.settings.final_finalText1Collis }}`,
+            finalText2Collis:  `{{ section.settings.final_finalText2Collis }}`,
+            finalText3Collis:  `{{ section.settings.final_finalText3Collis }}`,
+            finalBtnBack : "{{ section.settings.final_finalBtnBack }}",
+          }
+        }
+    }
+</script>
+
+{% schema %} 
+{
+  "name": "Le parcours client",
+  "settings": [
+     {
+      "type": "header",
+      "content": "Boutons - généraux"
+    },
+    {
+      "id": "btn_btnRestart",
+      "type": "text",
+      "label": "Bouton recommencer",
+      "default": "Recommencer"
+    },
+     {
+      "id": "btn_continue",
+      "type": "text",
+      "label": "Bouton continuer pour toute les étapes",
+      "default": "Continuer"
+    },
+    {
+      "type": "header",
+      "content": "Etape 0 - conditions"
+    },
+    {
+      "id": "step_1_condition_title",
+      "type": "text",
+      "label": "Titre conditions",
+      "default": "Critères d'acceptation"
+    },
+    {
+      "id": "step_1_condition_text",
+      "type": "richtext",
+      "label": "Les critères d'acceptation",
+      "default": "<p>Lorem Ipsum is simply dummy <a href='#'>text</a> of the printing and typesetting industry.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>"
+    },
+    {
+      "id": "step_1_condition_btn",
+      "type": "text",
+      "label": "Bouton",
+      "default": "J'accepte"
+    },
+    {
+      "type": "header",
+      "content": "Etape 1 - ajouter une référence"
+    },
+    {
+      "id": "step_1_ref_title",
+      "type": "text",
+      "label": "Titre référence",
+      "default": "Quel est le numéro de série de votre pièce ?"
+    },
+    {
+      "id": "step_1_ref_help",
+      "type": "text",
+      "label": "Texte où trouver référence",
+      "default": "Où trouver mon identifiant ?"
+    },
+    {
+      "id": "step_1_ref_text",
+      "type": "richtext",
+      "label": "Texte référence",
+     "default": "<p>Le numéro d'identification est un numéro de référence qui nous permet d'identifier votre article. Il est imprimé sur l'étiquette cousue à l'intérieur de votre article.<br><br><strong>Deux types d'identifiant possible :</strong><p>"
+    },
+    {
+      "id": "step_1_ref_image_1",
+      "type": "image_picker",
+      "label": "Image où trouver référence"
+    },
+    {
+      "id": "step_1_ref_error",
+      "type": "text",
+      "label": "Aucun article ne correspond à ce numéro",
+      "default": "Aucun article ne correspond à ce numéro"
+    },
+    {
+      "type": "header",
+      "content": "Etape 1 - choix de la couleur"
+    },
+    {
+      "id": "step_1_color_title",
+      "type": "text",
+      "label": "Titre choix couleur",
+      "default": "Sélectionnez la couleur de votre pièce"
+    },
+    {
+      "id": "step_1_color_error",
+      "type": "text",
+      "label": "Text erreur couleur",
+      "default": "Une erreur est survenue, merci d'essayer à nouveau"
+    },
+    {
+      "type": "header",
+      "content": "Etape 1 - choix de la taille"
+    },
+    {
+      "id": "step_1_size_title",
+      "type": "text",
+      "label": "Titre choix taille",
+      "default": "Sélectionnez la taille de votre pièce"
+    },
+    {
+      "type": "header",
+      "content": "Etape 1 - choix de l'état"
+    },
+    {
+      "id": "step_1_etat_title",
+      "type": "text",
+      "label": "Titre choix état",
+      "default": "Sélectionnez l'état de votre pièce"
+    },
+    {
+      "id": "step_1_etat_neuf",
+      "type": "richtext",
+      "label": "Etat neuf",
+      "default": "<p>Votre article n’a jamais été porté et contient toutes ses étiquettes d’origine</p>"
+    },
+    {
+      "id": "step_1_etat_excellent",
+      "type": "richtext",
+      "label": "Excellent état",
+      "default": "<p>Votre article est quasiment neuf sans traces d'usure ni défauts visibles</p>"
+    },
+    {
+      "id": "step_1_etat_tresbon",
+      "type": "richtext",
+      "label": "Très bon état",
+      "default": "<p>Votre article ne présente que des traces d'usure mineures</p>"
+    },
+    {
+      "type": "header",
+      "content": "Etape 2 - cart récapitulatif"
+    },
+     {
+      "id": "step_2_cart_title",
+      "type": "text",
+      "label": "Titre cart",
+      "default": "Récapitulatif"
+    },
+    {
+      "id": "step_2_cart_empty_text",
+      "type": "text",
+      "label": "Text cart vide",
+      "default": "Ajoutez une pièce pour bénéficier de notre programme de reprise."
+    },
+    {
+      "id": "step_2_cart_articles_text",
+      "type": "text",
+      "label": "Text vos articles",
+      "default": "Vos articles seconde main"
+    },
+    {
+      "id": "step_2_cart_no_articles_text",
+      "type": "text",
+      "label": "Text vous n'avez pas articles",
+      "default": "Vous n'avez aucun article"
+    },
+    {
+      "id": "step_2_cart_more_articles_text",
+      "type": "text",
+      "label": "Text si plus d'un d'article",
+      "default": "Articles"
+    },
+    {
+      "id": "step_2_cart_less_article_text",
+      "type": "text",
+      "label": "Text si un seul article",
+      "default": "Article"
+    },
+    {
+      "id": "step_2_cart_btn_add_article_text",
+      "type": "text",
+      "label": "Bouton ajouter un article",
+      "default": "+ Ajouter une pièce"
+    },
+    {
+      "id": "step_2_cart_cartTitleAmount",
+      "type": "text",
+      "label": "Titre montant  de la reprise",
+      "default": "Montant de la reprise"
+    },
+    {
+      "id": "step_2_cart_cartTotalArticlesText",
+      "type": "text",
+      "label": "Text total des articles enregistrés",
+      "default": "Total des articles enregistrés"
+    },
+    {
+      "id": "step_2_cart_cartNumberArticlesText",
+      "type": "text",
+      "label": "Text nombre d'articles renseigné",
+      "default": "Nombre d'articles renseigné"
+    },
+    {
+      "id": "step_2_cart_cartTotalOfferText",
+      "type": "text",
+      "label": "Text notre offre totale",
+      "default": "Notre offre totale"
+    },
+    {
+      "id": "step_2_cart_cartConfirmationText",
+      "type": "richtext",
+      "label": "Text CGV",
+      "default": "<p>J’accepte les <a target='_blank' href='/pages/cgv'>conditions générales de vente</a></p>"
+    },
+    {
+      "id": "step_2_cart_cartConfirmationCertifText1",
+      "type": "text",
+      "label": "Text 1 certifie mes article état",
+      "default": "Je certifie que mes articles sont en bon état, n’ont pas été retouché ni personnalisé"
+    },
+    {
+      "id": "step_2_cart_cartConfirmationCertifText2",
+      "type": "text",
+      "label": "Text 2 certifie mon articles état",
+      "default": "Je certifie que mon article est en bon état, n’a pas été retouché ni personnalisé"
+    },
+    {
+      "id": "step_2_cart_cartBtnValidation1",
+      "type": "text",
+      "label": "Bouton part 1 recevoir",
+      "default": "Recevoir"
+    },
+    {
+      "id": "step_2_cart_cartBtnValidation2",
+      "type": "text",
+      "label": "Bouton part 2  en bon d'achat",
+      "default": "en bon d'achat"
+    },
+    {
+      "id": "step_2_cart_cartItemSize",
+      "type": "text",
+      "label": "text item taille",
+      "default": "Taille :"
+    },
+    {
+      "id": "step_2_cart_cartItemRef",
+      "type": "text",
+      "label": "text item référence",
+      "default": "Référence :"
+    },
+    {
+      "id": "step_2_cart_cartItemPrice",
+      "type": "text",
+      "label": "text item prix de la reprise",
+      "default": "Prix de la reprise :"
+    },
+    {
+      "type": "header",
+      "content": "Etape 3 - login & register"
+    },
+    {
+      "id": "step_3_logRegistertabs1",
+      "type": "text",
+      "label": "Text tabs connexion",
+      "default": "Connexion"
+    },
+    {
+      "id": "step_3_logRegistertabs2",
+      "type": "text",
+      "label": "Text tabs inscription",
+      "default": "Inscription"
+    },
+    {
+      "id": "step_3_logSubtitle",
+      "type": "text",
+      "label": "Text soustitre login",
+      "default": "Attention, ces identifiants sont différents de ceux de dadasport.com"
+    },
+    {
+      "id": "step_3_logErrorText",
+      "type": "text",
+      "label": "Text erreur login",
+      "default": "Identifiants incorrects"
+    },
+    {
+      "id": "step_3_logPlaceholderEmail",
+      "type": "text",
+      "label": "Placeholder email login",
+      "default": "Adresse email *"
+    },
+    {
+      "id": "step_3_logPlaceholderPassword",
+      "type": "text",
+      "label": "Placeholder passeword",
+      "default": "Mot de passe *"
+    },
+    {
+      "id": "step_3_logPlaceholderPasswordConfirm",
+      "type": "text",
+      "label": "Placeholder passeword confirmation",
+      "default": "Confirmation du mot de passe *"
+    },
+    {
+      "id": "step_3_logBtn1",
+      "type": "text",
+      "label": "Bouton continuer",
+      "default": "Continuer"
+    },
+    {
+      "id": "step_3_logBtn2",
+      "type": "text",
+      "label": "Bouton connexion",
+      "default": "Connexion"
+    }, 
+    {
+      "id": "step_3_logBtn3",
+      "type": "text",
+      "label": "Bouton Mot de passe oublié",
+      "default": "Mot de passe oublié ?"
+    }, 
+    {
+      "id": "step_3_registerSubtitle",
+      "type": "text",
+      "label": "Text soustitre register",
+      "default": "En créant un compte Dada sport preloved vous pourrez suivre le statut de vos ventes et vos achats mais aussi générez vos bon d’achat et consulter votre wishlist."
+    },
+    {
+      "id": "step_3_registerFirstname",
+      "type": "text",
+      "label": "Placeholder prénom",
+      "default": "Prénom *"
+    },
+    {
+      "id": "step_3_registerLastname",
+      "type": "text",
+      "label": "Placeholder nom de famille",
+      "default": "Nom de famille *"
+    },
+    {
+      "id": "step_3_registerPhone",
+      "type": "text",
+      "label": "Placeholder num téléphone",
+      "default": "Numéro de téléphone *"
+    },
+    {
+      "id": "step_3_registerConfirmationCertifText1",
+      "type": "richtext",
+      "label": "Text CGU",
+      "default": "<p>J'accepte <a href='/pages/cgv' target='_blank'>les conditions générales d'utilisation</a> de Dada sport preloved.</p>"
+    },
+    {
+      "id": "step_3_registerLabelOffer1",
+      "type": "text",
+      "label": "Text recevoir les offres mails",
+      "default": "Je souhaite recevoir les offres et toute l’actualité de la maison Dada sport par email."
+    },
+    {
+      "id": "step_3_registerLabelOffer2",
+      "type": "text",
+      "label": "Text recevoir les offres sms",
+      "default": "Je souhaite recevoir les offres et toute l’actualité de la maison Dada sport par sms."
+    },
+    {
+      "id": "step_3_registerBtn1",
+      "type": "text",
+      "label": "Bouton créer un compte",
+      "default": "Créer un compte"
+    },
+    {
+      "id": "step_3_registerBtn2",
+      "type": "text",
+      "label": "Bouton Vous avez déjà un compte",
+      "default": "Vous avez déjà un compte ?"
+    },
+    {
+      "type": "header",
+      "content": "Etape 3 - Adresses"
+    },
+    {
+      "id": "address_add_title",
+      "type": "text",
+      "label": "Titre vos adresse",
+      "default": "Vos adresses"
+    },
+    {
+      "id": "address_add_subtitle1",
+      "type": "text",
+      "label": "Text ajouter une adresse",
+      "default": "Ajouter une adresse"
+    },
+    {
+      "id": "address_add_subtitle2_1",
+      "type": "text",
+      "label": "Text adresse sélectionnée",
+      "default": "Adresse sélectionnée"
+    },
+    {
+      "id": "address_add_subtitle2_2",
+      "type": "text",
+      "label": "Text sélectionner une adresse",
+      "default": "Séléctionner une adresse"
+    },
+    {
+      "id": "address_add_success",
+      "type": "text",
+      "label": "L'adresse a bien été ajouté",
+      "default": "L'adresse a bien été ajouté"
+    },
+     {
+      "id": "address_add_btn1",
+      "type": "text",
+      "label": "bouton suivant",
+      "default": "Suivant"
+    },
+     {
+      "id": "address_add_btn2",
+      "type": "text",
+      "label": "Bouton utiliser l'adresse selectionnée",
+      "default": "Utiliser l'adresse selectionnée"
+    },
+    {
+      "id": "address_empty",
+      "type": "text",
+      "label": "Vous devez renseigner une addresse pour continuer",
+      "default": "Vous devez renseigner une addresse pour continuer"
+    },
+    {
+      "id": "addressPlaceholder1",
+      "type": "text",
+      "label": "Placeholder adress",
+      "default": "Adresse *"
+    },
+    {
+      "id": "addressPlaceholder2",
+      "type": "text",
+      "label": "Placeholder complément adress",
+      "default": "Complément d'address"
+    },
+    {
+      "id": "addressPlaceholder3",
+      "type": "text",
+      "label": "Placeholder code postal",
+      "default": "Code postal *"
+    },
+    {
+      "id": "addressPlaceholder4",
+      "type": "text",
+      "label": "Placeholder ville",
+      "default": "Ville *"
+    },
+    {
+      "id": "addressPlaceholder5",
+      "type": "text",
+      "label": "Placeholder pays",
+      "default": "Pays *"
+    },
+    {
+      "id": "address_add_btn",
+      "type": "text",
+      "label": "Bouton ajouter l'adresse",
+      "default": "Ajouter l'adresse"
+    },
+    {
+      "type": "header",
+      "content": "Etape 4 - Expédition"
+    },
+    {
+      "id": "final_title",
+      "type": "text",
+      "label": "Titre expédition",
+      "default": "Expédier votre article"
+    },
+    {
+      "id": "final_subtitle",
+      "type": "richtext",
+      "label": "Soustitre expédition",
+      "default": "<p> Merci ! Votre demande de reprise a bien été prise en compte.<br>Pour bénéficiez de votre bon d’achat, veuillez suivre les étapes suivantes pour nous envoyer votre/vos article(s)</p>"
+    },
+    {
+      "id": "final_finalBtnPrint1",
+      "type": "text",
+      "label": "Bouton imprimer le bon de cession",
+      "default": "Imprimer le bon de cession"
+    },
+    {
+      "id": "final_finalBtnPrint2",
+      "type": "text",
+      "label": "Bouton imprimer le bon colissimo",
+      "default": "Imprimer le bon colissimo"
+    },
+    {
+      "id": "final_finalTitleTicket",
+      "type": "text",
+      "label": "Titre et mon bon d'achat ?",
+      "default": "Et mon bon d'achat ?"
+    },
+     {
+      "id": "final_finalTextTicket",
+      "type": "text",
+      "label": "Text bon d'achat",
+      "default": "Un peu de patience, une fois que votre colis aura été réceptionné dans notre centre de tri, nos experts valideront l'éligibilité de votre pièce. Vous recevrez alors par email d'ici 5 à 10 jours, votre bon d'achat à dépenser sur Dada sport ou Dada sport preloved."
+    },
+    {
+      "id": "final_finalTitleCollis",
+      "type": "text",
+      "label": "Titre comment envoyer mon colis ?",
+      "default": "Comment envoyer mon colis ?"
+    },
+    {
+      "id": "final_finalText1Collis",
+      "type": "richtext",
+      "label": "Text step 1",
+      "default": "<p>Déposez votre colis dans votre boîte aux lettres avant 8h00 du matin et faite une demande de pick-up <a target='_blank' href='https://www.laposte.fr/particulier/retourbal/formulaire'>ici</a></p>"
+    },
+    {
+      "id": "final_finalText2Collis",
+      "type": "richtext",
+      "label": "Text step 2",
+      "default": "<p>En bureau de Poste (max 30kg)</p>"
+    },
+    {
+      "id": "final_finalText3Collis",
+      "type": "richtext",
+      "label": "Text step 3",
+      "default": "<p>Chez un commerçant du réseau La Poste (max 20kg). Liste des points de dépôt <a target='_blank' href='https://localiser.laposte.fr/'>ici</a></p>"
+    },
+    {
+      "id": "final_finalBtnBack",
+      "type": "text",
+      "label": "Bouton retour au site",
+      "default": "Retour sur"
+    }
+  ],
+  "name": "Le parcours client",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Step final",
+      "settings": [
+        {
+          "id": "stepImage",
+          "type": "image_picker",
+          "label": "Image step"
+        },
+        {
+          "id": "stepText",
+          "type": "text",
+          "label": "Text step",
+          "default": "Etapes 1"
+        }
+      ]
+    },
+    { 
+      "type": "text",
+      "name": "Navigation",
+      "settings": [
+        {
+          "id": "navLinks",
+          "type": "text",
+          "label": "Lien de navigation",
+          "default": "Article"
+        },
+        {
+          "id": "navLinkName",
+          "type": "text",
+          "label": "Root Navigation",
+          "default": "customer-step-1"
+        }
+      ]
+    }
+    
+  ]
+}
+{% endschema %}

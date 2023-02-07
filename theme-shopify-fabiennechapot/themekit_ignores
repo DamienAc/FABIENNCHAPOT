@@ -1,0 +1,4 @@
+config/settings_data.json
+locales/*.json
+node_modules
+src/node_modules

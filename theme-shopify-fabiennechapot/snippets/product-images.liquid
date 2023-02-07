@@ -1,0 +1,22 @@
+<div class="product__nav-slider">
+    <ul class="product__nav-slider__inner">
+        {% for image in product.images %}
+            <li class="{% if forloop.first %}active{% endif %}">
+                {% render 'lazy-img' with
+                    src: image,
+                    alt: product.title
+                %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="product__main-slider">
+    {% for image in product.images %}
+        <div class="product__main-slider__slide">
+            {% render 'lazy-img' with
+                src: image,
+                alt: product.title
+            %}
+        </div>
+    {% endfor %}
+</div>

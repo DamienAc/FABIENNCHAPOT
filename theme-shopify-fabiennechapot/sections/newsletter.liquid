@@ -1,0 +1,65 @@
+<section class="newsletter">
+    <div class="wrapper small">
+        <h2 class="h4">{{ section.settings.title }}</h2>
+        <div class="newsletter__subtitle">{{ section.settings.text }}</div>
+        <p class="newsletter__error" style="display: none">{{ section.settings.error }}</p>
+        <p class="newsletter__success" style="display: none;">{{ section.settings.success }}</p>
+        <form>
+            <label>
+                <input type="email" required placeholder="{{ section.settings.placeholder }}">
+            </label>
+            <button type="submit" class="btn black"><span>{{ section.settings.btn }}</span></button>
+        </form>
+        <div class="newsletter__infos">{{ section.settings.infos }}</div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Newsletter",
+        "settings": [
+             {
+                "id": "title",
+                "label": "titre",
+                "type": "text",
+                "default": "Newsletter"
+            },
+            {
+                "id": "text",
+                "label": "Sous-titre",
+                "type": "richtext",
+                "default": "<p>Inscrivez-vous à notre newsletter pour recevoir les actualités, les offres commerciales et invitations aux ventes privées.<br>Recevez <strong>un bon de 10%</strong> sur votre 1ère commande en vous inscrivant.</p>"
+            },
+            {
+                "id": "placeholder",
+                "label": "Text placeholder",
+                "type": "text",
+                "default": "Adresse email"
+            },
+             {
+                "id": "btn",
+                "label": "Text bouton",
+                "type": "text",
+                "default": "Je m'inscris"
+            },
+            {
+                "id": "infos",
+                "label": "Infos",
+                "type": "richtext",
+                "default": "<p>En vous inscrivant, vous acceptez notre <a href='/pages/politique-de-confidentialite'>politique de confidentialité</a>.</p>"
+            },
+            {
+                "id": "success",
+                "label": "Message de réussite",
+                "type": "text",
+                "default": "Nous avons bien reçu votre inscription, à très bientôt !"
+            },
+            {
+                "id": "error",
+                "label": "Message de réussite",
+                "type": "text",
+                "default": "Une erreur s'est produite, veuillez réessayer"
+            }
+        ]
+    }
+{% endschema %}

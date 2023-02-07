@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ shop.locale }}">
+<head>
+    <meta charset="utf-8">
+    {% render 'layout-head' %}
+    {{ content_for_header }}
+</head>
+
+<body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.suffix }}{% endif %}">
+
+ <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W3HZKP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><!-- End Google Tag Manager (noscript) -->
+
+{% section 'top-bar' %}
+{% section 'header' %}
+{% section 'menu' %}
+{% section 'annoucement' %}
+
+<main class="main">
+
+    {{ content_for_layout }}
+
+</main>
+
+{% section 'newsletter' %}
+{% section 'reassurance' %}
+{% section 'footer' %}
+
+{% section 'minicart' %}
+{% section 'search' %}
+
+{% render 'json-ld' %}
+{% render 'symbols' %}
+{% section 'product-view' %}
+
+
+</body>
+</html>

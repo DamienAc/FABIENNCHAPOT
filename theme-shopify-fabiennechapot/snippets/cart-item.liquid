@@ -1,0 +1,13 @@
+<div class="cart-item">
+    {% render 'lazy-img' wuth src: item.image %}
+    <a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/products/{{ item.product.handle }}" class="cart-item__infos">
+        <h3>{{ item.product.title }}</h3>
+        <ul>
+            {% for option in item.product.options_with_values %}
+                <li>{{ option.name }}: {{ option.values | first }}</li>
+            {% endfor %}
+        </ul>
+        <p class="cart-item__price">{{ item.price | money }}</p>
+    </a>
+    <a class="js-delete" data-id="{{ item.id }}" href="{{ item.url_to_remove }}">{% render 'icon' with icon: 'delete', box: '0 0 438 500' %}</a>
+</div>

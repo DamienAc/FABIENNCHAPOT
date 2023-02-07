@@ -1,0 +1,23 @@
+.home-banner {
+
+  &[data-count="1"] {
+    .flickity-page-dots {
+      display: none;
+    }
+  }
+
+  &__slider {
+    display: flex;
+    overflow: hidden;
+  }
+
+  &__slide {
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .btn {
+    min-width: 300px;
+  }
+
+}

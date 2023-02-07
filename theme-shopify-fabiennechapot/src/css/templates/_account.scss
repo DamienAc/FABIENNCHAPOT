@@ -1,0 +1,253 @@
+.template-account .ac-layout {
+    --ac-text-font: 'Avenir', Helvetica, Arial, sans-serif;
+    --ac-title-weight: 400;
+    --ac-title-font: 'Playfair', Helvetica, Arial, sans-serif;
+    --ac-color-background: #f3f5f8;
+    --ac-title-transform: none;
+    --ac-title-1-desktop: 3rem;
+    --ac-title-1-mobile: 2.5rem;
+    --ac-color-border: #efefef;
+
+    --ac-title-2-desktop: 2.5rem;
+    --ac-title-2-mobile: 2rem;
+
+    --ac-title-3-desktop: 2rem;
+    --ac-title-3-mobile: 2rem;
+
+    --ac-title-4-desktop: 1.6rem;
+    --ac-title-4-mobile: 1.6rem;
+
+    width: 100%;
+    padding: 40px var(--page-margin);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1400px;
+    min-height: calc(100vh - var(--header-height) - var(--announcement-height));
+    transition: min-height ease-out .3s;
+
+    @include down(lg) {
+        padding: 0;
+
+        &--account {
+            .ac-account,
+            .ac-menu {
+                margin: 0 !important;
+                width: 100%;
+            }
+        }
+    }
+
+    .ac-credits-available {
+        background-color: #000;
+    }
+
+    .ac-credits__description a {
+        text-decoration: underline;
+        
+        @include hover {
+            text-decoration: none;
+        }
+    }
+
+    label[for="field-real"] {
+        display: none;
+    }
+
+    .ac-account {
+        &__header,
+        &__section {
+            display: none;
+        }
+
+        & > .ac-credits-available {
+            display: none;
+        }
+
+        &__image {
+            min-height: calc(100vh - var(--header-height) - var(--announcement-height) - var(--page-margin) - 40px);
+
+            a:last-of-type {
+                background-color: $blue;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            &__text p {
+                font-size: 1.6rem;
+                text-transform: uppercase;
+                letter-spacing: .3px;
+            }
+
+            @include down(lg) {
+                padding-top: 40px;
+                min-height: calc(100vh - var(--header-height) - var(--announcement-height) - 38px);
+            }
+
+            @include up(lg) {
+                h1 {
+                    font-size: 5rem;
+                }
+
+                &__text p {
+                    font-size: 1.8rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+            }
+        }
+    }
+
+    .ac-menu {
+        font-family: $font-text;
+
+        @include up(lg) {
+            width: 300px;
+            padding-right: 40px;
+        }
+
+        &__title {
+            @include down(lg) {
+                font-size: 1.3rem;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .ac-btn {
+        font-family: $font-text;
+        border-radius: 3px;
+
+        &:not(.small) {
+            font-weight: 500;
+            font-size: 1.4rem;
+            letter-spacing: .4px;
+        }
+    }
+
+    .ac-field {
+        label {
+            font-size: 1.4rem;
+            letter-spacing: .03em;
+            font-weight: 400;
+        }
+
+        &--checkbox span {
+            font-weight: 100;
+
+            &:before {
+                color: #000;
+                background-color: #fff !important;
+                border-color: var(--ac-color-border);
+            }
+        }
+    }
+
+    .ac-field--select select,
+    .ac-field input:not([type="radio"]):not([type="checkbox"]) {
+        height: 40px;
+    }
+}
+
+.ac-menu ul {
+    li {
+        margin-bottom: 0;
+
+        a {
+            position: relative;
+            border-top: 1px solid var(--ac-color-border);
+            justify-content: flex-start;
+            font-size: 1.2rem;
+            color: #878787;
+
+            @include down(lg) {
+                text-transform: uppercase;
+            }
+
+            @include up(lg) {
+                padding: 20px 0 20px 15px;
+            }
+
+            &.router-link-active{
+                color: #000;
+
+                @include up(lg) {
+                    background-color: var(--ac-color-background);
+                }
+            }
+        }
+
+        &:last-of-type a {
+            border-bottom: 1px solid var(--ac-color-border);
+        }
+
+        &:not(:last-of-type) {
+            a {
+
+                &:before {
+                    content: "";
+                    display: block;
+                    position: relative;
+                    margin-right: 10px;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    height: 20px;
+                    width: 20px;
+                    margin-top: -4px;
+
+                    @include down(lg) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &.ac-menu--account a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-eye.svg");
+        }
+
+        &.ac-menu--orders a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-order.svg");
+        }
+
+        &.ac-menu--informations a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-user.svg");
+        }
+
+        &.ac-menu--addresses a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-marker.svg");
+        }
+
+        &.ac-menu--reprises a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-resale.svg");
+        }
+
+        &.ac-menu--credits a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-tag.svg");
+        }
+
+        &.ac-menu--wishlist a:before {
+            background-image: url("//cdn.shopify.com/s/files/1/0553/9246/9094/t/4/assets/icon-heart.svg");
+        }
+
+        &:last-of-type{
+            text-transform: capitalize;
+            text-decoration: underline;
+
+            @include up(lg) {
+                font-weight: 300;
+                margin-top: 25px;
+            }
+
+            a {
+                opacity: 1;
+                border-top: none;
+            }
+        }
+    }
+}
+
+.ac-voucher-create .ac-voucher-reprises input, .ac-voucher-create .ac-field input {
+    flex-shrink: 0;
+}

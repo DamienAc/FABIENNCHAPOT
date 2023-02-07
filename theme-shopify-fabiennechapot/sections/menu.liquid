@@ -1,0 +1,108 @@
+<section class="menu">
+    <div class="menu__popin">
+        <div class="menu__header">
+            <span></span>
+            <button class="menu__back">
+                {% render 'icon' with icon: 'left', box: '0 0 481 225' %}
+            </button>
+            <button class="menu__close">
+                {% render 'icon' with icon: 'cross', box: '0 0 22.6 22.6' %}
+            </button>
+        </div>
+        <div class="menu__list">
+            <div class="menu__item">
+                <nav>
+                    <ul class="menu__first">
+                        {% for link in linklists['main-menu'].links %}
+                            <li>
+                                {% if link.links and link.links.size > 0 %}
+                                    <p>{{ link.title }} {% render 'icon' with icon: 'right', box: '0 0 300 512' %}</p>
+                                    <div class="menu__second">
+                                        {% for sublink in link.links %}
+                                            <p>{{ sublink.title }}</p>
+                                            <ul>
+                                                {% for sub_sublink in sublink.links %}
+                                                    <li>
+                                                        <a href="{{ sub_sublink.url }}">{{ sub_sublink.title }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {% if forloop.last %}
+                                        <a class="btn yellow" href="{{ link.url }}"><span>{{ link.title }}</span></a>
+                                    {% else %}
+                                        <a href="{{ link.url }}">{{ link.title }}</a>
+                                    {% endif %}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+                <ul class="menu__reassurance">
+                    {% for block in section.blocks %}
+                        <li>
+                            {% assign url = block.settings.url %}
+                            {% assign title = block.settings.title | downcase | lstrip  %}
+                            {% if title == 'mon compte' %}
+                                {% if customer %}
+                                    {% assign url = '/account' %}
+                                {% else %}
+                                    {% assign url = '/account/register' %}
+                                {% endif %}
+                            {% endif %}
+                            <a href="{{ url }}">
+                                {% render 'lazy-img' with src: block.settings.icon %}
+                                <span>{{ block.settings.title }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+    "name": "Menu",
+    "settings": [
+    {
+    "id": "account",
+    "type": "text",
+    "label": "Mon compte second life",
+    "default": "Mon compte second life"
+    },
+    {
+    "id": "sandro_url",
+    "type": "url",
+    "label": "Revenir sur sandro-paris.fr"
+    }
+    ],
+    "blocks": [
+    {
+    "name": "Reassurance",
+    "type": "text",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Nom du lien",
+    "default": "Mon compte"
+    },
+    {
+    "id": "url",
+    "type": "url",
+    "label": "Url du lien"
+    },
+    {
+    "id": "icon",
+    "type": "image_picker",
+    "label": "Icon"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

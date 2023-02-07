@@ -1,0 +1,144 @@
+<section class="login wrapper">
+    <div class="login__col">
+        <div class="login__register">
+            <h2 class="h3">{{ section.settings.register_title }}</h2>
+            {{ section.settings.register_subtitle }}
+            <a class="btn white" href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/account/register"><span> {{ section.settings.register_btn }}</span></a>
+        </div>
+    </div>
+    <div class="login__col login__col--login">
+        <h1 class="h3">{{ section.settings.title }}</h1>
+        {{ section.settings.subtitle }}
+        {% form 'customer_login' %}
+            <label class="field">
+                <input type="email" required name="customer[email]" placeholder="{{ section.settings.input_placeholder_mail }}*">
+            </label>
+            <label class="field">
+                <input type="password" required name="customer[password]" placeholder="{{ section.settings.input_placeholder_password }}*">
+            </label>
+            <div class="form__error">{{ form.errors | default_errors }}</div>
+            <button class="btn" type="submit"><span>{{ section.settings.login_btn }}</span></button>
+            <a class="js-password-forget" href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/account/login#recover">{{ section.settings.password_forgot }}</a>
+        {% endform %}
+    </div>
+    <div class="login__col login__col--password" style="display: none">
+        <h2 class="h3">{{ section.settings.password_title }}</h2>
+        {{ section.settings.password_subtitle }}
+        {% form 'recover_customer_password' %}
+            <label class="field">
+                <input type="email" required name="[email]" placeholder="{{ section.settings.input_placeholder_mail }}">
+            </label>
+            <div class="form__error">{{ form.errors | default_errors }}</div>
+            {%- if form.posted_successfully? -%}
+                <p class="form__success">{{ section.settings.password_recover_success }}</p>
+            {%- endif -%}
+            <button class="btn" type="submit"><span>{{ section.settings.password_recover_btn }}</span></button>
+            <a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/account/login" class="js-back">{{ section.settings.back_login_btn }}</a>
+        {% endform %}
+    </div>
+</section>
+
+{% schema %}
+    {
+    "name": "Connexion",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Connexion"
+    },
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "S'identifier"
+    },
+    {
+    "id": "login_btn",
+    "type": "text",
+    "label": "Bouton se connecter",
+    "default": "Se connecter"
+    },
+    {
+    "id": "password_forgot",
+    "type": "text",
+    "label": "Bouton mot de passe oublié",
+    "default": "Mot de passe oublié ?"
+    },
+    {
+    "id": "subtitle",
+    "type": "richtext",
+    "label": "Sous-titre",
+    "default": "<p>Attention, ces identifiants sont différents de ceux de dadasport.com</p>"
+    },
+    {
+    "type": "header",
+    "content": "Inscription"
+    },
+    {
+    "id": "register_title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Pas encore de compte ?"
+    },
+    {
+    "id": "register_subtitle",
+    "type": "richtext",
+    "label": "Sous-titre",
+    "default": "<p>Pour suivre vos commandes, créez votre compte personnel sur Dada sport Preloved. <br><br>Si vous le souhaitez, vous serez tenue informée de nos offres exclusives.</p>"
+    },
+     {
+    "id": "register_btn",
+    "type": "text",
+    "label": "Bouton créer un compte",
+    "default": "Créer un compte"
+    },
+    {
+    "type": "header",
+    "content": "Mot de passe oublié"
+    },
+    {
+    "id": "password_title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Mot de passe oublié"
+    },
+    {
+    "id": "password_subtitle",
+    "type": "richtext",
+    "label": "Sous-titre",
+    "default": "<p>Veuillez saisir votre adresse e-mail ci-dessous.<br>Nous vous enverrons les instructions pour créer un nouveau mot de passe.</p>"
+    },
+    {
+    "id": "password_recover_success",
+    "type": "text",
+    "label": "Text success réinitialisation password ",
+    "default": "Un lien de réinitialisation du mot de passe a été envoyé"
+    },
+    {
+    "id": "password_recover_btn",
+    "type": "text",
+    "label": "Bouton réinitialisation password ",
+    "default": "Valider"
+    },
+    {
+    "id": "back_login_btn",
+    "type": "text",
+    "label": "Bouton retour page connexion ",
+    "default": "Retour à la page de connexion"
+    },
+    {
+    "id": "input_placeholder_mail",
+    "type": "text",
+    "label": "Text placeholder e-mail",
+    "default": "Adresse e-mail"
+    },
+    {
+    "id": "input_placeholder_password",
+    "type": "text",
+    "label": "Text placeholder password",
+    "default": "Mot de passe"
+    }
+   
+    ]
+    }
+{% endschema %}

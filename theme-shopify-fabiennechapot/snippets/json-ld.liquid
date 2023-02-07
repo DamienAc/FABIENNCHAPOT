@@ -1,0 +1,140 @@
+{% assign logo = "logo.svg" | asset_url %}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "url": "{{ shop.url }}",
+    "logo": "{{ logo }}",
+    "sameAs": [
+        "https://www.facebook.com/pg/DadaSportCavalier/" ,
+        "https://twitter.com/Dada_Sport",
+        "https://www.youtube.com/channel/UC7OwbNh8Ds6lAV5_nO3FGeg/featured",
+        "https://www.instagram.com/dadasport/"
+    ]
+  }
+</script>
+
+<script type="application/ld+json">
+{
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "{{ shop.name }}",
+        "url": "{{ shop.url }}",
+        "sameAs": ["{{ settings.official_site }}"],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ shop.url }}/search?q={search_term}&type=product&options%5Bprefix%5D=last",
+            "query-input": "required name=search_term"
+        }
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id": "{{ shop.url }}",
+                    "name": "{{ shop.name }}"
+                }
+            }
+            {% if page %}{% assign page_position = 2 %}
+                {% if page.title contains 'FAQ - ' %}{% assign page_position = 3 %}
+                ,{
+                "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "{{ shop.url }}/pages/faq",
+                        "name": "{{ pages["faq"].title }}"
+                    }
+                }
+                {% endif %}
+                ,{
+                    "@type": "ListItem",
+                    "position": {{ page_position }},
+                    "item":
+                    {
+                        "@id": "{{ shop.url }}/pages/{{ page.handle }}",
+                        "name": "{{ page.title }}"
+                    }
+                }
+            {% elsif collection %}
+                {% assign collection_position = 2 %}
+                ,{
+                    "@type": "ListItem",
+                    "position": {{ collection_position }},
+                    "item":
+                    {
+                        "@id": "{{ shop.url }}/collections/{{ collection.handle }}",
+                        "name": "{{ collection.title }}"
+                    }
+                }
+            {% elsif product %}{% assign product_position = 2 %}
+             ,{
+                "@type": "ListItem",
+                "position": {{ product_position }},
+                "item":
+                {
+                    "@id": "{{ shop.url }}/products/{{ product.handle }}",
+                    "name": "{{ product.title | strip_html | escape }}"
+                }
+            }
+            {% endif %}
+        ]
+    }
+</script>
+
+{% if product %}
+    {% for tag in product.tags %}
+        {% if tag contains 'Couleur_' %}{% assign color = tag | split: '_' | last %}{% endif %}
+        {% if tag contains 'Taille_' or tag contains 'Pointure_' %}{% assign size = tag | split: '_' | last %}{% endif %}
+    {% endfor %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://www.schema.org",
+            "@type": "product",
+            "brand": {
+                "@type":"Brand",
+                "name":"Dada sport Preloved"
+            },
+            "logo": "{{ logo }}",
+            "name": "{{ product.title | strip_html | escape }}",
+            "category": "Product",
+            {% if color %}"color": "{{ color }}",{% endif %}
+            {% if size %}"size": "{{ size }}",{% endif %}
+            "image": [{% for image in product.images %}"https:{{ image | img_url: "master" }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+            "description": "{{ product.description | strip_html | escape }}",
+            "sku": "{% if product.variants.first.sku != blank %}{{ product.variants.first.sku }}{% else %}{{ product.variants.first.id }}{% endif %}",
+            "productID": "{{ product.id }}",
+            "keywords": ["{{ shop.name }}", "seconde main", "vintage", "occasion", {% for t in product.tags %}"{{ t | split: '_' | last }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+            {% if product.variants.first.barcode.size == 12 %}"gtin12": {{ product.variants.first.barcode }},{% endif %}
+            {% if product.variants.first.barcode.size == 13 %}"gtin13": {{ product.variants.first.barcode }},{% endif %}
+            {% if product.variants.first.barcode.size == 14 %}"gtin14": {{ product.variants.first.barcode }},{% endif %}
+            "offers": [
+               {% for variant in product.variants %}
+                    {
+                        "@type" : "Offer",
+                        "priceCurrency": "{{ cart.currency.iso_code }}",
+                        "price": "{{ variant.price | divided_by: 100 }}",
+                        "itemCondition" : "http://schema.org/NewCondition",
+                        "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+                        "url" : "{{ shop.url }}{{ variant.url }}",
+                        "sku": "{% if variant.sku != blank %}{{ variant.sku }}{% else %}{{ variant.id }}{% endif %}",
+                        {% if variant.barcode.size == 12 %}"gtin12": {{ variant.barcode }},{% endif %}
+                        {% if variant.barcode.size == 13 %}"gtin13": {{ variant.barcode }},{% endif %}
+                        {% if variant.barcode.size == 14 %}"gtin14": {{ variant.barcode }},{% endif %}
+                        "image": "{% if variant.image %}{{ variant.image | img_url: 'master' }}{% else %}{{ product.images[0] | img_url: 'master' }}{% endif %}"
+                    }{% unless forloop.last %},{% endunless %}
+               {% endfor %}
+            ]
+         }
+    </script>
+{% endif %}

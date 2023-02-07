@@ -1,0 +1,47 @@
+<section class="reassurance">
+    <div class="wrapper">
+        <ul>
+            {% for block in section.blocks %}
+                <li>
+                    {% if block.settings.url %}
+                    <a href="{{ block.settings.url }}">
+                    {% endif %}
+                        {% render 'lazy-img' with src: block.settings.icon %}
+                        <p>{{ block.settings.text }}</p>
+                    {% if block.settings.url %}
+                    </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Réassurance",
+    "blocks": [
+    {
+    "name": "element",
+    "type": "text",
+    "settings": [
+    {
+    "id": "text",
+    "type": "text",
+    "label": "Texte"
+    },
+    {
+    "id": "url",
+    "type": "url",
+    "label": "Url"
+    },
+    {
+    "id": "icon",
+    "type": "image_picker",
+    "label": "Icon"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

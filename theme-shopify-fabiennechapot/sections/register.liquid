@@ -1,0 +1,137 @@
+<section class="register wrapper">
+    {% form 'create_customer' %}
+        <div class="register__container">
+            <div class="register__col">
+                <div class="register__image">
+                    {% render 'lazy-img' with src: section.settings.image, alt: section.settings.title %}
+                    <a class="btn black" href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/account/login"><span>{{ section.settings.btn }}</span></a>
+                </div>
+            </div>
+            <div class="register__col">
+                <h1 class="h3">{{ section.settings.title }}</h1>
+                <label class="field">
+                    <input type="text" required name="customer[last_name]" placeholder="{{ section.settings.register_placeholder_lastname }}*">
+                </label>
+                <label class="field">
+                    <input type="text" required name="customer[first_name]" placeholder="{{ section.settings.register_placeholder_firstname }}*">
+                </label>
+                <label class="field">
+                    <input type="email" required name="customer[email]" placeholder="{{ section.settings.register_placeholder_mail }}*">
+                </label>
+                <label class="field">
+                    <input type="password" required name="customer[password]" placeholder="{{ section.settings.register_placeholder_password }}*">
+                </label>
+                <label class="field js-input-phone">
+                    <input type="text" name="customer[phone]" placeholder="{{ section.settings.register_placeholder_phone }}">
+                </label>
+                <label class="field checkbox">
+                    <input type="checkbox" name="customer[accepts_marketing]">
+                    <span>{{ section.settings.newsletter | remove: '<p>' | remove: '</p>' }}</span>
+                </label>
+                <label class="field checkbox">
+                    <input type="checkbox" name="sms_marketing_consent">
+                    <span>{{ section.settings.sms | remove: '<p>' | remove: '</p>' }}</span>
+                </label>
+                <label class="field checkbox">
+                    <input type="checkbox" name="cgv" required>
+                    <span>{{ section.settings.cgv | remove: '<p>' | remove: '</p>' }}</span>
+                </label>
+                <input type="hidden" name="customer[tags]" value="">
+                <div class="form__error">
+                    {{ form.errors | default_errors }}
+                </div>
+                <button type="submit" class="btn"><span>{{ section.settings.btn_create_account }}</span></button>
+                <a class="register__login" href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/account/login">{{ section.settings.btn_go_login }}</a>
+            </div>
+        </div>
+    {% endform %}
+</section>
+
+{% schema %}
+    {
+    "name": "Inscription",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Créer un nouveau compte"
+    },
+    {
+    "id": "newsletter",
+    "type": "richtext",
+    "label": "Newsletter",
+    "default": "<p>Je souhaite recevoir les offres et toute l’actualité de la maison Dada sport par email</p>"
+    },
+    {
+    "id": "sms",
+    "type": "richtext",
+    "label": "SMS",
+    "default": "<p>Je souhaite recevoir les offres et toute l’actualité de la maison Dada sport par sms</p>"
+    },
+    {
+    "id": "cgv",
+    "type": "richtext",
+    "label": "CGV",
+    "default": "<p>J'accepte les conditions générales ainsi que la Politique de confidentialité.</p>"
+    },
+    {
+    "type": "header",
+    "content": "Connexion"
+    },
+    {
+    "id": "btn",
+    "type": "text",
+    "label": "btn",
+    "default": "J'ai déjà un compte"
+    },
+    {
+    "id": "image",
+    "type": "image_picker",
+    "label": "Image"
+    },
+    {
+    "id": "btn_create_account",
+    "type": "text",
+    "label": "Bouton créer un compte",
+    "default": "Créer un compte"
+    },
+    {
+    "id": "btn_go_login",
+    "type": "text",
+    "label": "Bouton j'ai déjà un compte",
+    "default": "J'ai déjà un compte"
+    },
+    {
+     "id": "register_placeholder_lastname",
+    "type": "text",
+    "label": "Placeholder lastname",
+    "default": "Nom de famille"
+    },
+    {
+     "id": "register_placeholder_firstname",
+    "type": "text",
+    "label": "Placeholder firstname",
+    "default": "Prénom"
+    },
+    {
+     "id": "register_placeholder_mail",
+    "type": "text",
+    "label": "Placeholder mail",
+    "default": "E-mail"
+    },
+    {
+     "id": "register_placeholder_password",
+    "type": "text",
+    "label": "Placeholder password",
+    "default": "Mot de passe"
+    },
+    {
+     "id": "register_placeholder_phone",
+    "type": "text",
+    "label": "Placeholder phone",
+    "default": "Téléphone (facultatif)"
+    }
+    ]
+    }
+{% endschema %}

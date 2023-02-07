@@ -1,0 +1,85 @@
+<section class="wrapper">
+    {% render 'banner' with
+        h1: section.settings.title,
+        size: 1,
+        subtitle: section.settings.subtitle,
+        text: section.settings.text,
+        image: section.settings.image,
+        image_2: section.settings.image_2,
+        btn_1_text: section.settings.btn_1_text,
+        btn_1_url: section.settings.btn_1_url,
+        btn_1_color: section.settings.btn_1_color
+    %}
+</section>
+
+{% schema %}
+    {
+    "name": "Bannière",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Acheter"
+    },
+    {
+    "id": "subtitle",
+    "type": "text",
+    "label": "Sous-titre"
+    },
+    {
+    "id": "text",
+    "type": "richtext",
+    "label": "Texte"
+    },
+    {
+    "type": "header",
+    "content": "Image"
+    },
+    {
+    "id": "image",
+    "type": "image_picker",
+    "label": "Image pour grands écrans"
+    },
+    {
+    "id": "image_2",
+    "type": "image_picker",
+    "label": "Image pour petits écrans"
+    },
+    {
+    "type": "header",
+    "content": "Bouton 1"
+    },
+    {
+    "id": "btn_1_text",
+    "type": "text",
+    "label": "Nom du bouton"
+    },
+    {
+    "id": "btn_1_url",
+    "type": "url",
+    "label": "Url du bouton"
+    },
+    {
+    "type": "select",
+    "id": "btn_1_color",
+    "label": "Couleur du bouton",
+    "options": [
+    {
+    "value": "black",
+    "label": "Noir"
+    },
+    {
+    "value": "white",
+    "label": "Blanc"
+    },
+    {
+    "value": "yellow",
+    "label": "Jaune"
+    }
+    ],
+    "default": "white"
+    }
+    ]
+    }
+{% endschema %}

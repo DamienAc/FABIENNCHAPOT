@@ -1,0 +1,99 @@
+{% capture logo %}
+    {% render 'icon' with icon: 'logo', box: "0 0 820 264" %}
+{% endcapture %}
+
+{% assign lang = shop.locale | prepend: "/" | remove: '/fr' %}
+
+<div class="wrapper">
+    <div class="header__inner">
+        <div class="header__left">
+            <button class="header__menu">☰</button>
+            <a class="js-open-search" href="{{ lang }}/collections/all">{% render 'icon' with icon: 'search', box: "0 0 37 36.9" %}</a>
+            <a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/" class="header__logo">
+                {% if template == "index" %}
+                    <h1>{{ logo }}</h1>
+                {% else %}
+                    <p>{{ logo }}</p>
+                {% endif %}
+            </a>
+        </div>
+        <nav class="header__links">
+            <ul>
+                {% for link in linklists['main-menu'].links %}
+                    <li class="header__links--open-submenu">
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                        {% if link.links and link.links.size > 0 %}
+                            <div class="header__submenu">
+                                <div class="header__submenu__inner">
+                                    {% for sublink in link.links %}
+                                        <div>
+                                            <p>{{ sublink.title }}</p>
+                                            <ul>
+                                                {% for sub_sub_link in sublink.links %}
+                                                <li><a href="{{ sub_sub_link.url }}"><span>{{ sub_sub_link.title }}</span></a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endfor %}
+                                    {% for block in section.blocks %}
+                                        {% if block.settings.menu_url == link.url %}
+                                            <a href="{{ block.settings.url }}" class="header__submenu__img">
+                                                {% render 'lazy-img' with src: block.settings.image %}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <ul class="header__right">
+            <li>
+                <a class="js-open-search" href="{{ lang }}/collections/all">{% render 'icon' with icon: 'search', box: "0 0 37 36.9" %}</a>
+            </li>
+            <li>
+                <a href="{{ lang }}/account">{% render 'icon' with icon: 'user', box: '0 0 485.211 485.21' %}</a>
+            </li>
+            <li>
+                <a class="js-open-minicart" href="{{ lang }}/cart">
+                    {% render 'icon' with icon: 'cart', box: '0 0 279 279' %}
+                    <span class="js-cart-count" {% unless cart.item_count > 0 %}style="display: none"{% endunless %}>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "header",
+  "blocks": [
+    {
+      "name": "image",
+      "type": "image",
+      "settings": [
+        {
+          "id": "menu_url",
+          "type": "url",
+          "label": "Lien du menu associé"
+        },
+        {
+          "id": "url",
+          "type": "url",
+          "label": "Lien de l'image"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

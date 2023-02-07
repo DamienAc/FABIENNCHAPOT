@@ -1,0 +1,109 @@
+{% render 'title-text' with
+    h2: section.settings.title,
+    text: section.settings.text,
+    color: section.settings.color,
+    button: section.settings.button
+    button_color: section.settings.button_color
+    button_color: section.settings.button_color
+    url: section.settings.url,
+    btn_type: section.settings.btn_type
+%}
+
+{% schema %}
+    {
+    "name": "Texte",
+    "templates": [
+    "index"
+    ],
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Eco-friendly"
+    },
+    {
+    "id": "text",
+    "type": "richtext",
+    "label": "Description",
+    "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aspernatur dignissimos dolorum inventore modi mollitia non possimus quis saepe veritatis. At dolores eius exercitationem, laboriosam maiores neque non quo vitae.</p>"
+    },
+    {
+    "type": "select",
+    "id": "color",
+    "label": "Couleur du fond",
+    "options": [
+    {
+    "value": "black",
+    "label": "Noir"
+    },
+    {
+    "value": "white",
+    "label": "Blanc"
+    },
+    {
+    "value": "yellow",
+    "label": "Jaune"
+    }
+    ],
+    "default": "white"
+    },
+    {
+    "type": "header",
+    "content": "Lien"
+    },
+    {
+    "id": "button",
+    "type": "text",
+    "label": "Nom du lien",
+    "default": "Découvrir le fonctionnement"
+    },
+    {
+    "id": "url",
+    "type": "url",
+    "label": "Url du lien"
+    },
+    {
+    "type": "select",
+    "id": "btn_type",
+    "label": "Apparence du lien",
+    "options": [
+    {
+    "value": "link",
+    "label": "Lien souligné"
+    },
+    {
+    "value": "btn",
+    "label": "Bouton"
+    }
+    ],
+    "default": "link"
+    },
+    {
+    "type": "select",
+    "id": "button_color",
+    "label": "Couleur du bouton",
+    "options": [
+    {
+    "value": "black",
+    "label": "Noir"
+    },
+    {
+    "value": "white",
+    "label": "Blanc"
+    },
+    {
+    "value": "yellow",
+    "label": "Jaune"
+    }
+    ],
+    "default": "black"
+    }
+    ],
+    "presets": [
+    {
+    "name": "Texte"
+    }
+    ]
+    }
+{% endschema %}

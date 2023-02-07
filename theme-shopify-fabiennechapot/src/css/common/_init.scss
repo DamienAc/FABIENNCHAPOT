@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  padding-bottom: 0 !important;
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+input, select, textarea, button, a, div {
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, i, input, select, textarea, button, a {
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  background-color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+select:focus,
+input:focus,
+button:focus {
+  outline:0 !important;
+}
+
+input {
+  border: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input[type="submit"]:focus {
+  outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow:0 0 0 50px white inset;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  user-select: text;
+  scroll-behavior: smooth;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #000;
+  line-height: 1.4;
+  position: relative;
+  top: 0;
+  font-family: $font-text;
+}
+
+button, input, textarea, select {
+  font-family: $font-text;
+  //user-select: none;
+}
+
+main {
+  position: relative;
+  width: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1400px;
+
+  &.medium {
+    max-width: 1000px;
+  }
+
+  &.small {
+    max-width: 700px;
+  }
+}
+
+.flickity-viewport {
+  width: 100%;
+}
+
+.flickity-enabled {
+  outline: none;
+}
+
+@include down(lg) {
+  .display-desktop {
+    display: none !important;
+  }
+}
+@include up(md) {
+  .display-tablet {
+    display: none !important;
+  }
+}
+@include down(md) {
+  .hide-tablet {
+    display: none !important;
+  }
+}
+@include up(sm) {
+  .display-mobile {
+    display: none !important;
+  }
+}
+@include down(sm) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+.flickity-page-dots {
+  bottom: 0;
+}
+
+.flickity-page-dot {
+  background-color: transparent;;
+  padding: 20px 0;
+  height: auto;
+  width: auto;
+  border-radius: 0;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  outline: 0;
+  cursor: pointer;
+  box-shadow: none !important;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: rgba(0,0,0,.3);
+    transition: background-color $transition-1;
+  }
+
+  @include hover {
+    &:before {
+      background-color: #000;
+    }
+  }
+
+  &.is-selected {
+    background-color: transparent;;
+
+    &:before {
+      background-color: #000;
+    }
+  }
+}

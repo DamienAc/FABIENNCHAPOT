@@ -1,0 +1,32 @@
+.back {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  position: absolute;
+  z-index: 4;
+  background: #fff;
+  top: 1.6rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  box-shadow: 0 0 10px 1px #96969624;
+
+  svg {
+    width: 15px;
+    height: auto;
+    display: block;
+    margin-right: 5px;
+  }
+
+  &__text {
+    transition: transform $transition-1;
+    display: block;
+  }
+
+  @include up(lg) {
+    &:hover .back__text {
+      transform: translateX(3px);
+    }
+  }
+}

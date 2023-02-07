@@ -1,0 +1,120 @@
+.recently-viewed,
+.cart-suggestion,
+.carousel {
+  margin: var(--section-margin) auto;
+  overflow: hidden;
+
+  .flickity-viewport.is-pointer-down {
+    .product-card__slider {
+      pointer-events: none;
+    }
+  }
+
+  &__header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: var(--page-margin);
+  }
+
+  &__products {
+    display: flex;
+
+    &>.flickity-button {
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f3f3;
+      border-radius: 0;
+      box-shadow: none;
+      outline: none !important;
+      top: -40px;
+      transform: none;
+      padding: 0;
+
+      &.previous {
+        left: initial;
+        right: calc(var(--page-margin) + 10px + 25px);
+      }
+
+      &.next {
+        right: var(--page-margin);
+      }
+
+      svg {
+        width: 10px;
+        height: auto;
+        left: auto;
+        top: auto;
+        position: relative;
+      }
+    }
+  }
+
+  .btn {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+
+  &__product {
+    padding-left: var(--page-margin);
+    width: 30%;
+    max-width: 330px;
+    display: inline-block;
+    flex-shrink: 0;
+
+    &:last-of-type {
+      padding-right: 20px;
+      width: calc(30% + 20px);
+      max-width: calc(330px + 20px);
+    }
+
+    @include up(xlg) {
+      width: calc((100% - 20px) / 4);
+      max-width: none;
+
+      &:last-of-type {
+        width: calc(((100% - 20px) / 4) + 20px);
+        max-width: none;
+      }
+    }
+
+    @include between(sm, md) {
+      width: 43%;
+
+      &:last-of-type {
+        width: calc(43% + 20px);
+      }
+    }
+
+    @include down(sm) {
+      width: 55%;
+
+      &:last-of-type {
+        width: calc(55% + 20px);
+      }
+    }
+  }
+
+  &__products>.flickity-viewport {
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .h3 {
+    @include down(sm) {
+      font-size: 2rem;
+    }
+  }
+
+  .product-card .flickity-viewport {
+    pointer-events: none;
+  }
+}

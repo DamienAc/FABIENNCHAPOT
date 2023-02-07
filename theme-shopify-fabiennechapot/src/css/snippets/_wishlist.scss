@@ -1,0 +1,153 @@
+.wishlist-popin {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparentize(#000, .8);
+  pointer-events: all;
+  transition: opacity $transition-1;
+
+  &:not(.is-open) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__inner {
+    background-color: #fff;
+    max-width: calc(100% - 20px);
+    max-height: calc(100% - 20px);
+    padding: 50px 15px;
+    position: relative;
+
+    @include up(md) {
+      padding: 70px;
+      max-width: 500px;
+    }
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    margin: auto;
+  }
+
+  .js-close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    img {
+      width: 17px;
+      height: auto;
+    }
+  }
+}
+
+button[data-add-favorite] {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity $transition-1;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    stroke: black;
+    fill: transparent;
+    stroke-width: 30px;
+    transition: stroke $transition-1, fill $transition-1;
+  }
+
+  &:hover svg {
+    stroke: var(--wishlist-color);
+    fill: #fff;
+  }
+
+  &.is-active svg {
+    stroke: var(--wishlist-color);
+    fill: var(--wishlist-color);
+  }
+
+  @keyframes animBtn {
+    from {
+      opacity: .2;
+    }
+    to {
+      opacity: .5;
+    }
+  }
+
+  &[disabled] {
+    opacity: .2;
+    cursor: auto;
+    animation: animBtn alternate-reverse linear infinite .5s;
+
+    svg {
+      stroke: rgba(0, 0, 0, .5);
+      fill: rgba(0, 0, 0, .5);
+    }
+  }
+}
+
+body:not(.wishlist-ready) {
+  button[data-add-favorite] {
+    opacity: 0;
+  }
+}
+
+.wishlist-alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+  background-color: #fff;
+  padding: 15px;
+  color: #5eb980 !important;
+  max-width: calc(100% - 40px);
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 10px 50px 1px rgba(0, 0, 0, .15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-image: url('//cdn.shopify.com/s/files/1/0550/2635/2364/t/2/assets/icon-close.svg?v=89715003652383916561642612529');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 15px;
+  }
+
+  @include down(md) {
+    right: 15px;
+    bottom: 15px;
+    max-width: calc(100% - 30px);
+  }
+
+  &.is-delete {
+    color: #000 !important;
+  }
+}

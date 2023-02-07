@@ -1,0 +1,125 @@
+.login {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 200px;
+  display: flex;
+  padding: 0 var(--page-margin);
+
+  @include down(lg) {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+
+  @include down(md) {
+    margin-top: 50px;
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+
+  @include up(md) {
+    &__col {
+      width: calc((100% - 40px) / 2);;
+    }
+  }
+
+  @include up(lg) {
+    &__col {
+      width: 45%;
+    }
+  }
+
+  @include up(md) {
+    justify-content: space-between;
+    padding-bottom: 50px;
+    align-items: center;
+
+    &__col {
+      position: relative;
+
+      .js-back,
+      .js-password-forget {
+        position: absolute;
+        left: 0;
+        bottom: -50px;
+
+        &:not(:hover) {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  h2, h1 {
+    margin-bottom: 30px;
+    margin-top: 0;
+  }
+
+  .btn {
+    width: fit-content;
+    max-width: 100%;
+    margin: 40px auto 0;
+  }
+
+  .field {
+    border-bottom: 0;
+    margin-top: 20px;
+
+    &:last-of-type {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__col {
+    &:first-of-type {
+      background-color: $light-grey;
+
+      @include down(md) {
+        margin-top: 50px;
+      }
+    }
+
+    &:last-of-type {
+      position: relative;
+    }
+
+    @include down(md) {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  .lazy-img {
+    padding-bottom: 130%;
+  }
+
+  &__register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 30px;
+    min-height: 60vh;
+
+    @include down(lg) {
+      padding: 50px 15px;
+      min-height: auto;
+    }
+  }
+
+  .js-back,
+  .js-password-forget {
+    margin: 30px auto 0;
+    text-decoration: underline;
+    text-align: center;
+    display: block;
+    width: 100%;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  h1 + p {
+    margin-bottom: 40px;
+  }
+}

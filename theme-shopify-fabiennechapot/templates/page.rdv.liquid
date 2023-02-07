@@ -1,0 +1,26 @@
+<div class="page wrapper">
+
+    <div class="rdv">
+        <div class="rdv__header">
+            <h1 class="h-2">{{ page.title }}</h1>
+        </div>
+
+        {% section 'rdv' %}
+    </div>
+
+    {% section 'rdv-confirmation' %}
+
+</div>
+
+{% section 'reassurance' %}
+
+<p>{{ product.tags }}</p>
+
+<ul>
+    {% for tag in product.tags %}
+        <li>{{ tag | split: '_' | last }}</li>
+    {% endfor %}
+</ul>
+
+<p>{{ collection.products | size }}</p>
+<p>{{ collection.products.size }}</p>

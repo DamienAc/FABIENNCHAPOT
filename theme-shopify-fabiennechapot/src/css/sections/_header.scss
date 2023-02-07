@@ -1,0 +1,267 @@
+.announcement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--announcement-height);
+  background-color: $yellow;
+  text-align: center;
+  padding: 0 var(--page-margin);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .6px;
+
+  @include down(md) {
+    font-size: 1.2rem;
+    letter-spacing: .2px;
+  }
+}
+
+.header {
+  position: sticky;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  transition: transform 0.2s;
+
+  &.nav--hidden {
+    transform: translateY(calc(-1 * var(--header-height)));
+    box-shadow: none;
+  }
+
+  &__left {
+    display: flex;
+
+    .js-open-search {
+      @include up(lg) {
+        display: none;
+      }
+    }
+
+    @include down(lg) {
+
+      .js-open-search,
+      .header__menu {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .header__menu {
+        padding-right: 12px;
+        font-size: 3rem;
+      }
+
+      .js-open-search {
+        padding: 0 12px;
+      }
+    }
+  }
+
+  svg {
+    height: 17px;
+    width: auto;
+  }
+
+  &__inner {
+    height: var(--header-height);
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 var(--page-margin);
+    transition: height $transition-1;
+  }
+
+  @include up(lg) {
+
+    &__left,
+    &__right {
+      flex: 1 1 0;
+    }
+  }
+
+  &__menu {
+    @include up(lg) {
+      display: none;
+    }
+  }
+
+  &__logo {
+
+    h1,
+    p {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    svg {
+      height: calc(100% - 20px);
+      max-height: 50px;
+      width: auto;
+
+      @include down(md) {
+        max-height: 35px;
+        height: calc(100% - 15px);
+      }
+    }
+
+    @include down(lg) {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+    }
+  }
+
+  &__right,
+  &__links>ul {
+    display: flex;
+  }
+
+  &__right {
+    justify-content: flex-end;
+
+    .js-open-search {
+      @include down(lg) {
+        display: none;
+      }
+    }
+
+    a {
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    li:last-of-type a {
+      padding-right: 0;
+    }
+  }
+
+  &__links {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+
+    &>ul,
+    &>ul>li,
+    &>ul>li>a {
+      height: 100%;
+    }
+
+    &>ul>li>a {
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+    }
+
+    &>ul>li:last-of-type a {
+      font-weight: normal;
+    }
+
+    &--open-submenu {
+      &:hover {
+
+        &>a {
+          text-decoration: underline;
+        }
+
+        &>div {
+          opacity: 1;
+          pointer-events: all;
+        }
+      }
+    }
+
+    @include down(lg) {
+      display: none;
+    }
+  }
+
+  &__submenu {
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    text-transform: none;
+    padding: 10px 0 30px;
+
+    &:hover {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &__img {
+      width: 120px;
+      margin-left: 15px;
+      overflow: hidden;
+
+      .lazy-img {
+        transition: transform $transition-1;
+      }
+
+      &:hover .lazy-img {
+        transform: scale(1.05);
+      }
+
+      &:first-of-type {
+        margin-left: 40px;
+      }
+    }
+
+    ul a {
+      display: block;
+      padding: 5px 0;
+      font-size: 1.4rem;
+      position: relative;
+      width: fit-content;
+
+      &:hover::before {
+        transform: scale(1, 1);
+      }
+
+      span {
+        position: relative;
+        z-index: 2;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        width: calc(100% + 10px);
+        position: absolute;
+        left: -5px;
+        top: 3px;
+        height: calc(100% - 6px);
+        background-color: $yellow;
+        transform: scale(0, 1);
+        transform-origin: left;
+        transition: transform $transition-1;
+      }
+    }
+
+    p {
+      font-family: $font-title;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    &__inner {
+      display: flex;
+      justify-content: center;
+
+      div:first-of-type {
+        margin-right: 40px;
+      }
+    }
+  }
+}

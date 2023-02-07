@@ -1,0 +1,288 @@
+.rdv {
+  margin-bottom: 150px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include down(lg) {
+    max-width: 700px;
+  }
+
+  .field {
+    border-color: #ccc;
+    margin: 24px 0;
+
+    select, input {
+      padding: 5px 0;
+      font-size: 1.3rem;
+    }
+
+    & > span:first-of-type {
+      font-weight: 400;
+      display: block;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      text-transform: none;
+      font-family: $font-text;
+      letter-spacing: .4px;
+      color: #000;
+    }
+  }
+
+  .rdv__header {
+    text-align: center;
+
+    h1 {
+      margin-bottom: 70px;
+    }
+
+    .page__content {
+      font-size: 1.6rem;
+      margin-bottom: 50px;
+    }
+  }
+
+  &__container {
+    position: relative;
+
+    @include up(lg) {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    @include down(lg) {
+      margin-bottom: 400px;
+    }
+
+    @include down(sm) {
+      margin-bottom: 560px;
+    }
+  }
+
+  &__col {
+
+    @include up(lg) {
+      position: sticky;
+      top: 100px;
+      width: 45%;
+
+      &:last-of-type {
+        min-width: 480px;
+      }
+    }
+  }
+
+  h2 {
+    border-bottom: $border-1;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+    text-align: left;
+
+    &:not(:first-of-type) {
+      margin-top: 45px;
+    }
+
+    @include down(lg) {
+      &:first-of-type {
+        margin-top: 45px;
+      }
+    }
+  }
+
+  &__textarea {
+    border: none;
+
+    & > span:first-of-type {
+      font-size: 1.4rem;
+      color: #ccc;
+      font-family: SackersGothicStd,Arial,sans-serif;
+      margin: 30px 0 10px;
+      display: block;
+    }
+
+    textarea {
+      width: 100%;
+      border: solid 1px #ccc;
+      outline: 0;
+      border-radius: 0;
+      min-height: 100px;
+      padding: 15px;
+
+      & + span {
+        color: #c2c2c2;
+      }
+    }
+  }
+
+
+  &__store {
+    margin-bottom: 20px;
+    position: relative;
+
+    label {
+      display: block;
+    }
+
+    label > span {
+      border: solid 1px #ccc;
+      padding: 20px 15px;
+      transition: border-color $transition-1;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      width: 100%;
+      align-items: center;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 15px;
+        height: 15px;
+        margin-left: 0;
+        margin-right: 15px;
+        border-radius: 50%;
+        border: $border-1;
+        flex-shrink: 0;
+        transition: background-color $transition-1;
+      }
+
+      &:hover {
+        border-color: #aaa;
+      }
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+
+    input:checked + span {
+
+      &:before {
+        background-color: #000;
+      }
+    }
+
+    &--select {
+      margin-bottom: 50px;
+
+      label {
+        & > span {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          border: 0;
+          padding: 0;
+          justify-content: flex-end;
+
+          &:before {
+            display: none;
+          }
+
+          &:after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background-image: url("https://cdn.shopify.com/s/files/1/0567/4244/5113/files/facade-tournon-2_32024900-aebf-4f8e-bf08-62f3de071c20.png?v=1645721101");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  select {
+    width: 100%;
+  }
+
+  &__reassurance {
+    @include down(lg) {
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
+
+  .btn {
+    margin: 40px auto 0 0;
+    line-height: 1;
+
+    @include down(lg) {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    @include down(sm) {
+      width: 100%;
+      text-align: center;
+    }
+
+    &.rdv__back {
+      margin: 40px auto 0;
+    }
+  }
+
+  .js-error-msg {
+    color: $red;
+    &:not(.visible) {
+      display: none;
+    }
+  }
+
+  .js-error-msg,
+  .js-success {
+    text-align: center;
+    margin: 40px auto;
+    font-weight: 400;
+  }
+
+  &__banner {
+    display: flex;
+    background-color: #F0EFEB;
+    margin-top: 78px;
+    width: 100%;
+
+    @include down(lg) {
+      position: absolute;
+      top: 100%;
+    }
+
+    @include down(sm) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 0;
+    }
+
+    .lazy-img {
+      width: 220px;
+      height: 220px;
+      padding-bottom: 0;
+      flex-shrink: 0;
+      background-color: transparent;
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      flex-grow: 1;
+
+      img {
+        height: 80px;
+        width: auto;
+      }
+    }
+
+    .btn {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}

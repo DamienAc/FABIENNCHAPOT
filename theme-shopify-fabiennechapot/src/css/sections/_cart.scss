@@ -1,0 +1,149 @@
+.cart {
+  padding: 50px var(--page-margin) var(--section-margin);
+  --cart-margin: 36px;
+
+  @include down(lg) {
+    --cart-margin: 20px;
+  }
+
+  @include down(md) {
+    padding-top: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__subtitle {
+    margin-bottom: 40px;
+    text-align: center;
+
+    & + .btn {
+      margin: 40px auto 0;
+    }
+  }
+
+  &__container {
+    @include up(md) {
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
+  &__inner {
+    padding: 0 var(--page-margin);
+    background-color: #fff;
+
+    @include up(md) {
+      padding: 20px 40px;
+      box-shadow: -1px 0 12px 5px rgba(0, 0, 0, .1);
+    }
+  }
+
+  &__left {
+    flex-grow: 1;
+
+    @include up(lg) {
+      .lazy-img {
+        margin-right: 30px;
+      }
+    }
+
+    .cart-item {
+      align-items: flex-start;
+    }
+  }
+
+  &__right {
+
+    & > div {
+      padding: 20px 0;
+      background-color: $light-grey;
+    }
+
+    @include up(md) {
+      min-width: 385px;
+      width: 33%;
+      flex-shrink: 0;
+      margin-left: 40px;
+      position: sticky;
+      top: calc(var(--announcement-height) + var(--header-menu-height) + var(--header-height));
+    }
+
+    .btn {
+      width: calc(100% - var(--cart-margin) - var(--cart-margin));
+      margin: 20px var(--cart-margin) 0;
+    }
+
+    @include down(md) {
+      margin-top: 20px;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: baseline;
+    padding-bottom: 20px;
+
+    p {
+      font-weight: 100;
+      margin-left: 10px;
+    }
+  }
+
+
+  th, td {
+    text-align: right;
+    padding-bottom: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+
+    &:first-child {
+      padding-left: var(--cart-margin);
+      text-align: left;
+    }
+
+    &:nth-child(2) {
+      padding-right: var(--cart-margin);
+    }
+
+    &[colspan="2"] {
+      font-size: 1.3rem;
+      padding-bottom: 20px;
+      padding-top: 5px;
+      color: #5e7993;
+      font-weight: 400;
+    }
+  }
+
+  th {
+    font-size: 1.8rem;
+  }
+
+  tr:last-of-type {
+    border-top: solid 10px #fff;
+
+    td, th {
+      padding-top: 20px;
+    }
+  }
+
+  table {
+    width: 100%;
+  }
+
+  &__empty {
+    padding: 70px 0;
+    text-align: center;
+
+    .btn {
+      width: fit-content;
+      margin: 30px auto 0;
+
+      @include down(sm) {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{% for tag in product.tags %}
+    {% if tag contains 'Taille_' or tag contains 'Pointure_' %}
+        {% assign size = tag %}
+    {% elsif tag contains 'Couleur_' %}
+        {% assign color = tag %}
+    {% elsif tag contains 'Reference_' %}
+        {% assign reference = tag %}
+    {% elsif tag contains 'Type_' %}
+        {% assign category = tag %}
+    {% endif %}
+{% endfor %}
+
+{% assign list = product.type | split: '#' %}
+
+<section class="carousel wrapper">
+    <div class="carousel__header">
+        <h2 class="carousel__title h3">{{ section.settings.title}}</h2>
+    </div>
+    <div class="carousel__products">
+
+        {% assign count = 0 %}
+
+        {% for col in product.collections %}
+            {% for item in col.products %}
+                {% if count > 20 %}{% break %}{% endif %}
+                {% unless list contains item.type %}
+                    {% if item.price > 0 and item.available and item.tags contains size and item.tags contains color and item.tags contains category %}
+                        {% assign count = count | plus: 1 %}
+                        {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                        <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                    {% endif %}
+                {% endunless %}
+            {% endfor %}
+        {% endfor %}
+
+        {% if count < 20 %}
+            {% for col in product.collections %}
+                {% if count > 20 %}{% break %}{% endif %}
+                {% for item in col.products %}
+                    {% if count > 20 %}{% break %}{% endif %}
+                    {% unless list contains item.type %}
+                        {% if item.price > 0 and item.available and item.tags contains size %}
+                            {% if item.tags contains color and item.tags contains category %}
+                                {% assign count = count | plus: 1 %}
+                                {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                                <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                            {% endif %}
+                        {% endif %}
+                    {% endunless %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count < 20 %}
+            {% for col in product.collections %}
+                {% if count > 20 %}{% break %}{% endif %}
+                {% for item in col.products %}
+                    {% if count > 20 %}{% break %}{% endif %}
+                    {% unless list contains item.type %}
+                        {% if item.price > 0 and item.available and item.tags contains size %}
+                            {% if item.tags contains category %}
+                                {% assign count = count | plus: 1 %}
+                                {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                                <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                            {% endif %}
+                        {% endif %}
+                    {% endunless %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count < 20 %}
+            {% for col in product.collections %}
+                {% if count > 20 %}{% break %}{% endif %}
+                {% for item in col.products %}
+                    {% if count > 20 %}{% break %}{% endif %}
+                    {% unless list contains item.type %}
+                        {% if item.price > 0 and item.available and item.tags contains size %}
+                            {% if item.tags contains color %}
+                                {% assign count = count | plus: 1 %}
+                                {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                                <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                            {% endif %}
+                        {% endif %}
+                    {% endunless %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count < 20 %}
+            {% for col in product.collections %}
+                {% if count > 20 %}{% break %}{% endif %}
+                {% for item in col.products %}
+                    {% if count > 20 %}{% break %}{% endif %}
+                    {% unless list contains item.type %}
+                        {% if item.price > 0 and item.available and item.tags contains size %}
+                            {% assign count = count | plus: 1 %}
+                            {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                            <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                        {% endif %}
+                    {% endunless %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count < 20 %}
+            {% for col in product.collections %}
+                {% if count > 20 %}{% break %}{% endif %}
+                {% for item in col.products %}
+                    {% if count > 20 %}{% break %}{% endif %}
+                    {% unless list contains item.type %}
+                        {% if item.price > 0 and item.available %}
+                            {% assign count = count | plus: 1 %}
+                            {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                            <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                        {% endif %}
+                    {% endunless %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count < 20 %}
+            {% for item in collections['nouveautes'].products %}
+                {% if item.available and item.price > 0 and item.tags contains size %}
+                    {% assign count = count | plus: 1 %}
+                    {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                    <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if count < 20 %}
+            {% for item in collections['nouveautes'].products %}
+                {% if item.available and item.price > 0 %}
+                    {% assign count = count | plus: 1 %}
+                    {% assign list = list | join: '#' | append: '#' | append: item.type | split: '#' %}
+                    <div class="carousel__product">{% render 'product-card' with product: item %}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+</section>
+{% schema %}
+    {
+    "name": "Produits suggestions",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Vous pourriez aimer"
+    }
+    ]
+    }
+{% endschema %}

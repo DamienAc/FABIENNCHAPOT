@@ -1,0 +1,41 @@
+<script>
+    window.theme = window.theme || {};
+    window.theme = {
+        ...window.theme,
+        repriseReassurance: {
+            reassurances: [
+                {% for block in section.blocks %}
+                {   
+                    img: `{{ block.settings.icon | img_url }}`,
+                    title: `{{ block.settings.text }}`
+                },
+                {% endfor %}
+            ]
+        }
+    }
+</script>
+
+{% schema %}
+{
+  "name": "Réassurances",
+  "blocks": [
+    {
+      "name": "Réassurance",
+      "type": "text",
+      "settings": [
+        {
+          "id": "icon",
+          "type": "image_picker",
+          "label": "Icon"
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Text réassurance",
+          "default": "<p>Text réassurance</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

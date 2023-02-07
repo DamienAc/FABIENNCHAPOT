@@ -1,0 +1,19 @@
+<div class="lazy-img {{ class }}{% if placeholder %} has-placeholder{% endif %}">
+    {% if origin == 'file' %}
+        {% assign final_image = src | file_img_url: 'master' %}
+    {% elsif origin == 'asset' %}
+        {% assign final_image = src | asset_img_url: 'master' %}
+    {% else %}
+        {% assign final_image = src | img_url: 'master' %}
+    {% endif %}
+    <img
+            src="{% if placeholder %}{{ placeholder }}{% else %}data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=={% endif %}"
+            data-src="{{ final_image }}"
+            alt="{{ alt }} Dada sport preloved - seconde main"
+            width="1"
+            height="1"
+            {% if nocrop == true %}data-nocrop="true"{% endif %}
+            {% if crop %}data-crop="{{ crop }}"{% endif %}
+    >
+</div>
+

@@ -1,0 +1,60 @@
+<section class="wrapper">
+    <div class="home-links">
+        <a href="{{ section.settings.buy_url }}">
+            {% render 'lazy-img' with src: section.settings.buy_img %}
+            <p class="h2">{{ section.settings.buy_title }}</p>
+        </a>
+        <a href="{{ section.settings.sell_url }}">
+            {% render 'lazy-img' with src: section.settings.sell_img %}
+            <p class="h2">{{ section.settings.sell_title }}</p>
+        </a>
+    </div>
+</section>
+
+{% schema %}
+    {
+    "name": "Liens",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Acheter"
+    },
+    {
+    "id": "buy_title",
+    "label": "Titre",
+    "type": "text",
+    "default": "J'achète"
+    },
+    {
+    "id": "buy_url",
+    "label": "Lien",
+    "type": "url"
+    },
+    {
+    "id": "buy_img",
+    "label": "Image",
+    "type": "image_picker"
+    },
+    {
+    "type": "header",
+    "content": "Vendre"
+    },
+    {
+    "id": "sell_title",
+    "label": "Titre",
+    "type": "text",
+    "default": "Je vends"
+    },
+    {
+    "id": "sell_url",
+    "label": "Lien",
+    "type": "url"
+    },
+    {
+    "id": "sell_img",
+    "label": "Image",
+    "type": "image_picker"
+    }
+    ]
+    }
+{% endschema %}

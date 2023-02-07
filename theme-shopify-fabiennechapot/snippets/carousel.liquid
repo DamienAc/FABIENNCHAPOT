@@ -1,0 +1,48 @@
+{% unless limit %}
+    {% assign limit = 20 %}
+{% endunless %}
+
+{% assign types = '' | split: '#' %}
+{% assign count = 0 %}
+
+<section class="carousel wrapper">
+    {% if title %}
+        <div class="carousel__header">
+            <h2 class="carousel__title h3">{{ title }}</h2>
+        </div>
+    {% endif %}
+    <div class="carousel__products">
+        {% if collection %}
+            {% for item in collection.products limit: 40 %}
+
+                {% if count < limit %}
+                    {% assign type = "" %}
+                    {% assign sizeVariant = item.options_by_name['Taille'].values | first %}
+                    {% unless sizeVariant %}
+                        {% assign sizeVariant = item.options_by_name['Pointure'].values | first %}
+                    {% endunless %}
+                    {% for tag in item.tags %}
+                        {% if tag contains 'Reference_' or tag contains 'Référence_' %}
+                            {% assign type = tag | append: '+' | append: sizeVariant %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% unless types contains type %}
+                        <div class="carousel__product">
+                            {% render 'product-card' with product: item, h3: true %}
+                        </div>
+                        {% assign types = types | join: '#' | append: '#' | append: type | split: '#' | uniq %}
+                        {% assign count = count | plus: 1 %}
+                    {% endunless %}
+
+                {% else %}
+                    {% break %}
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% if btn %}
+        <a class="btn" href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/collections/{{ collection.handle }}"><span>{{ btn }}</span></a>
+    {% endif %}
+</section>

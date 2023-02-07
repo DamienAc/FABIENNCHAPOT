@@ -1,0 +1,79 @@
+.sell-faq {
+  margin: var(--section-margin) 0;
+  padding: 0 var(--page-margin);
+
+  @include up(lg) {
+    margin: 100px 0 150px;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    p {
+      margin-top: 20px;
+    }
+  }
+
+  h3 {
+    padding: 25px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+
+    @include down(md) {
+      font-size: 1.8rem;
+      padding: 20px 0;
+    }
+
+    &:after {
+      content: '';
+      flex-shrink: 0;
+      display: block;
+      width: 13px;
+      height: 13px;
+      transform: rotate(45deg);
+      transform-origin: center;
+      border-right: solid 1px #000;
+      border-top: solid 1px #000;
+      margin-left: 15px;
+      margin-right: 10px;
+      transition: transform ease .2s;
+    }
+
+    &.open:after {
+      transform: rotate(135deg);
+    }
+  }
+
+  &__answer {
+    transition: max-height linear .5s;
+    max-height: 0;
+    overflow: hidden;
+
+    & > div {
+      padding: 15px 0;
+    }
+
+    p, ul {
+      margin-bottom: 10px;
+    }
+  }
+
+  .btn {
+    width: fit-content;
+    margin: 40px auto 0;
+    text-align: center;
+
+    @include down(md) {
+      margin-top: 50px;
+    }
+  }
+
+  &.page-faq {
+    margin: 0 auto;
+  }
+}
+

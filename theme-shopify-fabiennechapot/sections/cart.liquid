@@ -1,0 +1,200 @@
+{% assign shipping_price = section.settings.shipping_price | plus: 0 | times: 100 %}
+
+<section class="cart">
+
+    <div class="wrapper medium">
+
+        <h1 class="h3">{{ section.settings.cart_title}}</h1>
+
+        {% if cart.item_count == 0 %}
+            <div class="cart__subtitle">{{ section.settings.cart_empty}}</div>
+            <a class="btn" href="{{ section.settings.continue }}"><span>{{ section.settings.cart_btn_continue }}</span></a>
+        {% else %}
+
+            <div class="cart__container">
+                <div class="cart__left">
+                    <ul>
+                        {% for item in cart.items %}
+                            <li>{% render 'cart-item' with item: item %}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="cart__right">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>{{ cart.item_count }} {{ section.settings.cart_article_count }}{% if cart.item_count > 1 %}s{% endif %}</td>
+                                <th>{{ cart.total_price | money }}</th>
+                            </tr>
+                            <tr>
+                                <td>{{ section.settings.cart_livraison }}</td>
+                                <th>{{ shipping_price | money }}</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{{ section.settings.code }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ section.settings.cart_total }}</td>
+                                <th>{{ cart.total_price | plus: shipping_price | money }}</th>
+                            </tr>
+                        </table>
+                        <a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/checkout" class="btn black"><span>{{ section.settings.cart_btn_commander }}</span></a>
+                    </div>
+                    <ul class="product__reassurance">
+                        {% for block in section.blocks %}
+                            <li>
+                                {% if block.settings.url %}<a>{% else %}<div>{% endif %}
+                                {% render 'lazy-img' with src: block.settings.icon, nocrop: true %}
+                                <p>{{ block.settings.text }}</p>
+                                {% unless block.settings.url %}</div>{% else %}</a>{% endunless %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+<div class="cart__suggestion__cta">
+    <h2 class="cart__suggestion__cta__btn is-active" id="is-suggestion-cta">{{ section.settings.cross_sell_like }}</h2>
+    <h2 class="cart__suggestion__cta__btn" id="is-recently-cta">{{ section.settings.cross_sell_recently }}</h2>
+</div>
+<section class="cart-suggestion">
+    <div class="wrapper">
+        <div class="cart-suggestion__products">
+            {% assign i = 0 %}
+            {% for item in cart.items %}
+                {% assign data_sizes = 'Unique' %}
+                {% assign univer = '' %}
+                {% for tag in item.product.tags %}
+                    {% if tag contains 'Univers_' %}
+                        {% assign univer = tag %}
+                    {% elsif tag contains 'Taille' %}
+                        {% assign data_sizes = tag %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            {% for item in cart.items %}
+                {% for collection in item.product.collections %}
+                    {% for product in collection.products %}
+                        {% if product.available and product.price > 0 and product.tags contains univer and product.tags contains data_sizes %}
+                            <div class="cart-suggestion__product">
+                                {% render 'product-card' with product: product %}
+                            </div>
+                        {% endif %} 
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% schema %}
+{
+  "name": "Panier",
+  "settings": [
+     {
+      "id": "cart_title",
+      "type": "text",
+      "label": "Tilte cart",
+      "default": "Mon panier"
+    },
+     {
+      "id": "cart_empty",
+      "type": "text",
+      "label": "Text panier vide",
+      "default": "Votre panier ne contient aucun article"
+    },
+    {
+      "id": "cart_btn_continue",
+      "type": "text",
+      "label": "Bouton continuer les achats",
+      "default": "Continuer les achats"
+    },
+    {
+      "id": "cart_article_count",
+      "type": "text",
+      "label": "Text nombre d'articles",
+      "default": "articles"
+    },
+    {
+      "id": "cart_livraison",
+      "type": "text",
+      "label": "Text livraison",
+      "default": "Livraison à partir de"
+    },
+    {
+      "id": "cart_total",
+      "type": "text",
+      "label": "Text total TTC",
+      "default": "Total TTC"
+    },
+    {
+      "id": "cart_btn_commander",
+      "type": "text",
+      "label": "Text bouton commander",
+      "default": "Commander"
+    },
+    {
+      "id": "code",
+      "type": "text",
+      "label": "Code promo",
+      "default": "Le code promotionnel s'applique à l'étape suivante."
+    },
+    {
+      "id": "shipping_price",
+      "type": "text",
+      "label": "Prix de la livraison",
+      "default": "4.90"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection en avant"
+    },
+    {
+      "id": "continue",
+      "type": "url",
+      "label": "Lien continuer mes achats"
+    },
+    {
+    "id": "cross_sell_recently",
+    "label": "Titre Cross-Sell Récement consultées",
+    "type": "text",
+    "default": "Vos pièces récement consultées"
+    },
+    {
+    "id": "cross_sell_like",
+    "label": "Titre Cross-Sell Vous aimerez aussi",
+    "type": "text",
+    "default": "Vous aimerez aussi"
+    }
+  ],
+    "blocks": [
+    {
+    "type": "text",
+    "name": "Réassurance",
+    "settings": [
+    {
+    "id": "text",
+    "label": "Texte",
+    "type": "text",
+    "default": "Article authentifié"
+    },
+    {
+    "id": "icon",
+    "type": "image_picker",
+    "label": "Icon"
+    },
+    {
+    "id": "url",
+    "type": "url",
+    "label": "Lien",
+    "info": "Optionnel"
+    }
+    ]
+    }
+    ]
+}
+{% endschema %}

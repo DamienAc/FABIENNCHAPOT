@@ -1,0 +1,32 @@
+<div class="snp-image-text">
+
+    {% capture block_image %}
+        <div class="snp-image-text__image">
+            {% render 'lazy-img' with src: image %}
+            {% render 'lazy-img' with src: image_mobile %}
+        </div>
+    {% endcapture %}
+
+    {% if position != 'right' %}
+        {{ block_image }}
+    {% endif %}
+
+    <div class="snp-image-text__text">
+        <div>
+            {% if title and title != blank %}
+                <h2 class="h3">{{ title }}</h2>
+            {% endif %}
+            {% if text and text != blank %}
+                {{ text }}
+            {% endif %}
+            {% if button and button != blank and link and link != blank %}
+                <a class="btn" href="{{ link }}"><span>{{ button }}</span></a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if position == 'right' %}
+        {{ block_image }}
+    {% endif %}
+
+</div>

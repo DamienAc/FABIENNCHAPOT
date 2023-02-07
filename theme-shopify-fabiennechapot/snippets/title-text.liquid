@@ -1,0 +1,22 @@
+{% unless btn_type %}{% assign btn_type = 'btn' %}{% endunless %}
+
+<section class="wrapper">
+    <div class="snp-title-text is-{{ color }}">
+        <div class="snp-title-text__inner">
+
+            {% if h1 and h1 != blank %}
+                <h1 class="h3">{{ h1 }}</h1>
+            {% endif %}
+            {% if h2 and h2 != blank %}
+                <h2 class="h3">{{ h2 }}</h2>
+            {% endif %}
+            {% if text and text != blank %}
+                {{ text }}
+            {% endif %}
+            {% if button and button != blank and url %}
+                <a class="{{ btn_type }} {{ button_color }}" href="{{ url }}"><span>{{ button }}</span></a>
+            {% endif %}
+
+        </div>
+    </div>
+</section>

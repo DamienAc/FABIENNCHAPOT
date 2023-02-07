@@ -1,0 +1,23 @@
+.snp-image {
+  border-top: solid 2px #fff;
+
+  .lazy-img {
+    padding-bottom: 0;
+    max-height: 650px;
+    height: 50vw;
+
+    @include down(md) {
+      height: 90vw;
+
+      &:first-of-type {
+        display: none;
+      }
+    }
+
+    @include up(md) {
+      &:nth-of-type(2) {
+        display: none;
+      }
+    }
+  }
+}

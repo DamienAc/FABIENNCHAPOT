@@ -1,0 +1,85 @@
+{% comment %}
+    Voir bonpoint pour le fonctionnement
+{% endcomment %}
+
+<section class="stores">
+    <h1 class="h2">{{ section.settings.title }}</h1>
+    <label class="field">
+        <input type="text" placeholder="Entrez un lieu" class="js-search-store">
+        <img alt="Rechercher" src="{{ 'icon-search.svg' | asset_url }}">
+    </label>
+    <div class="stores__links">
+        <button class="h4 active">{{ section.settings.btnList }}</button>
+        <button class="h4">{{ section.settings.btnMap}}</button>
+    </div>
+    <div class="stores__container">
+        <div class="stores__col active">
+            <div class="stores__list"></div>
+        </div>
+        <div class="stores__col">
+            <div class="js-stores-map"><div id="map"></div></div>
+        </div> 
+    </div>
+</section>
+
+<div class="stores-popin visible">
+    <div class="stores-popin__inner">
+        <div>
+            <h2 class="h2">{{ section.settings.titlePopin }}</h2>
+            <p>{{ section.settings.text1Popin }}</p>
+            <p>{{ section.settings.text2Popin }}</p>
+            <img src="https://cdn.shopify.com/s/files/1/0567/4244/5113/files/etiquette.png?v=1644599310" alt="Dada sport preloved - seconde main" loading="lazy">
+            <button class="btn"><span>{{ section.settings.btnPopin }}</span></button>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+    "name": "Store locator",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "BOUTIQUE BONPOINT : TOUTES NOS ADRESSES - BONPOINT"
+    },
+     {
+    "id": "btnList",
+    "type": "text",
+    "label": "Bouton liste",
+    "default": "Liste"
+    },
+     {
+    "id": "btnMap",
+    "type": "text",
+    "label": "Bouton carte",
+    "default": "Carte"
+    },
+    {
+    "id": "titlePopin",
+    "type": "text",
+    "label": "Titre Attention",
+    "default": "Attention"
+    },
+    {
+    "id": "text1Popin",
+    "type": "text",
+    "label": "Text 1",
+    "default": "Nous ne reprenons pas les articles qui ne comportent pas de numéro d’identification."
+    },
+    {
+    "id": "text2Popin",
+    "type": "text",
+    "label": "Text 1",
+    "default": "Le numéro d’identification est imprimé sur l'étiquette cousue à l'intérieur de votre article."
+    },
+    {
+    "id": "btnPopin",
+    "type": "text",
+    "label": "Bouton OK j'ai compris",
+    "default": "OK j'ai compris"
+    }
+    ]
+    }
+{% endschema %}

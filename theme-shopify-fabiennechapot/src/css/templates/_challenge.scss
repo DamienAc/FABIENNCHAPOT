@@ -1,0 +1,26 @@
+.shopify-challenge__container {
+  min-height: calc(100vh - 200px);
+  padding: 100px var(--page-margin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  & > * {
+    width: 100%;
+  }
+
+  .btn {
+    @extend .black;
+    margin: 20px auto !important;
+  }
+
+  .shopify-challenge__message {
+    margin-bottom: 20px;
+    @extend .h1;
+
+    @include down(lg) {
+      margin-bottom: 15px;
+    }
+  }
+}

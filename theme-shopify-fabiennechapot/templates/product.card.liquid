@@ -1,0 +1,4 @@
+{% layout none %}
+{% if product and product.available %}
+    {% render 'product-card' with product: product, h3: true %}
+{% endif %}

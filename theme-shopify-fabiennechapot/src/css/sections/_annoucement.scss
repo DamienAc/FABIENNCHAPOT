@@ -1,0 +1,25 @@
+.announcement {
+
+    &_infos {
+        min-height: var(--announcement-infos-height);
+        position: relative;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+
+        &>div {
+            text-align: center;
+            flex: 1;
+        }
+
+        p {
+            margin: 5px 10px;
+        }
+
+        span {
+            cursor: pointer;
+            font-family: sans-serif;
+        }
+    }
+}

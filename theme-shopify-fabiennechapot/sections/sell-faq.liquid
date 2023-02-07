@@ -1,0 +1,72 @@
+<section class="sell-faq">
+    <div class="wrapper medium">
+        <div class="sell-faq__header">
+            <h2 class="h3">{{ section.settings.title }}</h2>
+            {{ section.settings.subtitle }}
+        </div>
+        <ul>
+            {% for block in section.blocks %}
+                <li>
+                    <h3 class="h5">{{ block.settings.question }}</h3>
+                    <div class="sell-faq__answer">
+                        <div>
+                            {{ block.settings.answer }}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ section.settings.link }}" class="btn"><span>{{ section.settings.button }}</span></a>
+    </div>
+</section>
+
+{% schema %}
+    {
+    "name": "FAQ",
+    "settings": [
+    {
+    "id": "title",
+    "type": "text",
+    "label": "Titre",
+    "default": "Des questions on vous répond ici ! "
+    },
+    {
+    "id": "subtitle",
+    "type": "richtext",
+    "label": "Sous-titre",
+    "default": "<p>Veuillez lire attentivement ce qui suit avant de commencer. <br> Nous ne renverrons aucun article que ne respecte pas nos conditions de sell.</p>"
+    },
+    {
+    "id": "button",
+    "type": "text",
+    "label": "Nom du button",
+    "default": "Voir plus"
+    },
+    {
+    "id": "link",
+    "type": "url",
+    "label": "Lien du button"
+    }
+    ],
+    "blocks": [
+    {
+    "name": "Question",
+    "type": "question",
+    "settings": [
+    {
+    "id": "question",
+    "label": "Question",
+    "type": "text",
+    "default": "Quelles sont les conditions du programme de sell ?"
+    },
+    {
+    "id": "answer",
+    "label": "Réponse",
+    "type": "richtext",
+    "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam aperiam autem beatae consequuntur distinctio dolorem doloremque dolores eius harum in nemo nisi nostrum odio quam, quidem recusandae sequi sunt.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, nostrum, sapiente. Ab accusantium adipisci aperiam dolorum est fuga fugiat, impedit iusto maiores, mollitia pariatur quidem quod ratione recusandae sint soluta?<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias blanditiis cupiditate, doloribus, dolorum exercitationem impedit labore nam nemo nulla perferendis qui, quibusdam quo saepe temporibus velit vitae voluptate voluptates!</p>"
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

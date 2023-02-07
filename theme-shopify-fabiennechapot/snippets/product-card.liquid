@@ -1,0 +1,83 @@
+{% assign size = false %}
+{% assign state = false %}
+{% assign color = false %}
+{% assign ref = '' %}
+{% for tag in product.tags %}
+    {% if tag contains 'Taille' or tag contains 'Pointure' %}
+        {% assign size = tag | split: '_' | last %}
+        {% elsif tag contains 'Etat_' %}
+        {% assign state = tag | split: '_' | last %}
+        {% elsif tag contains 'Couleur_' %}
+        {% assign color = tag | split: '_' | last %}
+        {% elsif tag contains 'Reference_' %}
+        {% assign ref = tag | remove: 'Reference_' %}
+    {% endif %}
+{% endfor %}
+{% assign sizeVariant = product.options_by_name['Taille'].values | first %}
+{% unless sizeVariant %}
+{% assign sizeVariant = product.options_by_name['Pointure'].values | first %}
+{% endunless %}
+{% if sizeVariant %}
+    {% assign size = sizeVariant %}
+{% endif %}
+{% assign colorVariant = product.options_by_name['Couleur'].values | first %}
+{% if colorVariant %}
+    {% assign color = colorVariant %}
+{% endif %}
+
+<div class="product-card"  data-tags="Prix_{{ product.price | divided_by: 100 }}#{{ product.tags | join: '#' }}" data-type="{{ product.type }}" data-date="{{ product.created_at }}" data-ref="{{ ref }}" data-handle="{{ product.handle }}" data-color="{{ color }}">
+    <a href="{{ product.url }}" class="product-card__images">
+        <div class="product-card__slider" data-color="{{ color }}">
+            {% for image in product.images %}
+                <div class="product-card__image">
+                    {% render 'lazy-img' with
+                        src: image.src,
+                        alt: product.title
+                    %}
+                </div> 
+            {% endfor %}
+        </div>
+    </a>
+    <span class="product-card__states">
+        {% if state %}
+            <span>{{ state }}</span>
+        {% endif %}
+    </span>
+    <div class="product-card__infos">
+        <a href="{{ product.url }}">
+            <div>
+                {% assign title = product.title | split: ' - ' %}
+                <h3>{{ title[0] }}</h3>
+                {% if title[1] %}<p>{{ title[1] | capitalize }}</p>{% endif %}
+            </div>
+            {% assign old_price = product.compare_at_price %}
+            {% assign price = product.price %}
+            <p class="product-card__price-container">
+                <span class="product-card__price-percent">
+                    {% if old_price and old_price > price %}
+                        {% assign sale = price | times: 100 | divided_by: old_price | round %}
+                        <span>-{{ 100 | minus: sale }}%</span>
+                    {% endif %}
+                    <span class="product-card__price">{{ price | round | divided_by: 100 }} €</span>
+                </span>
+                {% if old_price and old_price > price %}
+                    <span class="product-card__price--old">{{ old_price | round | divided_by: 100 }} €</span>
+                {% endif %}
+            </p>
+        </a>
+        <span class="product-card__size">
+            {% if size != false and size != 'Taille unique' %}<a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/products/{{ product.handle }}">{{ size }}</a>{% endif %}
+        </span>
+        <span class="product-card__colors">
+            {% if color != false %}
+                <a href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/products/{{ product.handle }}" data-color="{{ color }}"><span></span></a>
+            {% endif %}
+        </span>
+        <button class="product-card__view" data-handle="{{ product.handle }}">
+            <svg viewBox="0 0 512 260"><use xlink:href="#svg-eye"/></svg>
+        </button>
+    </div>
+    <button class="product-card__wishlist" data-add-favorite="{{ product.id }}" data-ref="{{ ref }}">
+        <svg viewBox="-10 0 532.001 512.001"><use xlink:href="#svg-heart" /></svg>
+    </button>
+</div>

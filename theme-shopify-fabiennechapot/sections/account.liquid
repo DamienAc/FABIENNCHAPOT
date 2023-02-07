@@ -1,0 +1,1684 @@
+<script>
+    {% assign names = '
+        bienvenue_xxx,
+mon_compte,
+ma_derniere_commande,
+ma_derniere_reprise,
+mon_adresse_par_defaut,
+suivi,
+background,
+credit_disponible,
+generer_un_bon_dachat,
+comment_ca_marche,
+mes_credits,
+voir_tous_mes_bons,
+cliquez_sur_generer_un,
+selectionnez_le_bon_que,
+validez,
+choisissez_la_facon_dont,
+activez_vos_bons_dachat,
+les_bons_dachat_sont,
+date_de_la_commande,
+numero_de_commande,
+facture,
+delai_de_retour_depasse,
+telecharger,
+vendre_mon_article,
+demander_un_retour,
+bon_de_retour,
+detail,
+sous_total,
+livraison,
+offerte,
+total,
+rembourse,
+adresse_de_livraison,
+adresse_de_facturation,
+livree,
+article,
+retourne,
+retour_a_mes_commandes,
+commande,
+aucune_commande_ne_correspond,
+voir_mes_commandes,
+mes_commandes,
+vous_navez_passe_aucune,
+reference_du_colis,
+suivre_mon_colis,
+annulee,
+suivi_de_ma_commande,
+produit_achete,
+produits_achetes,
+code_promo,
+bientot_disponible,
+id_de_la_commande,
+id_commande,
+mes_retours,
+raison_du_retour,
+telecharger_le_bon_de,
+retours_rembourse,
+remboursement_en_cours,
+en_attente_de_reception,
+retours_demander_un_retour,
+aucune_commande_ne_correspond_a,
+selectionnez_les_articles_que,
+n_de_commande,
+vous_ne_pouvez_pas,
+votre_bon_de_retour,
+imprimer,
+selectionnez_une_raison,
+taille_trop_petite,
+taille_trop_grande,
+le_produit_ne_me,
+la_qualite_ne_me,
+article_defectueux,
+retard_de_livraison,
+jai_recu_le_mauvais,
+produit_non_conforme_a,
+autre,
+la_creation_du_retour,
+vous_avez_depasse_le,
+refuse,
+valide,
+en_cours,
+raison_du_refus,
+montant_gagne,
+utiliser_mon_credit,
+montant_propose,
+bons,
+bon_de_transport,
+reprise_telecharger,
+bon_de_cession,
+details_de_la_reprise,
+date_du_formulaire,
+date_de_la_verification,
+description,
+taille,
+taille_unique,
+etat_de_larticle,
+id_de_la_reprise,
+id,
+suivi_de_la_reprise,
+formulaire_de_reprise,
+article_receptionne,
+verification_par_nos_experts,
+retour_a_mes_articles,
+detail_de_larticle,
+aucune_article_ne_correspond,
+voir_mes_reprises,
+mes_articles_repris,
+vous_navez_effectue_aucune,
+jenvoie_mon_article,
+voir_toutes_mes_reprises,
+envoye,
+estime,
+recu,
+filtrer,
+deposer_en_boutique,
+reprise_acceptee,
+genre,
+collection,
+categorie,
+sous_categorie,
+matiere_principale,
+vintage,
+pret_a_porter,
+univers,
+condition_de_larticle,
+type,
+matiere,
+fermer,
+hors_date_de_validite,
+code_promo_deja_utilise,
+montant_rembourse,
+bon_desactive,
+utilisable_en_boutique,
+bon_inutilisable,
+utilisable_sur,
+vous_pouvez_retrouver_ce,
+de_votre_compte,
+bon_dachat_mes_credits,
+utiliser_maintenant,
+generer_un_nouveau_bon,
+bon_dachat_credit_disponible,
+mes_bons_dachat_deja,
+vous_navez_cree_aucun,
+retour_vers_mes_credits,
+bon_dachat_generer_un_bon_dachat,
+votre_soldes_de_credit,
+vous_navez_pas_de,
+pour_quel_site_souhaitez,
+pour_quels_articles_repris,
+quel_montant_souhaitez_vous,
+en_boutique,
+afficher_mon_code_promo,
+bon_dachat_bientot_disponible,
+vous_devez_saisir_obligatoirement,
+tooltip_message,
+le_montant_doit_etre,
+le_montant_ne_peut,
+un_bon_de_xxx,
+votre_bon_dachat_sera,
+votre_demande_de_bon,
+generer_un_bon,
+generer_un_bon_de,
+attention_le_code_ne,
+le_bon_dachat_na,
+mes_informations,
+enregistrer,
+modifier_mon_mot_de,
+retour_vers_mes_informations,
+nouveau_mot_de_passe,
+confirmation_du_mot_de,
+adresse_e_mail,
+prenom,
+nom,
+portable,
+mot_de_passe,
+vos_infomations_ont_bien,
+mes_adresses,
+vous_navez_cree_aucune,
+ajouter_une_adresse,
+supprimer,
+modifier,
+voir_mes_adresses,
+code_postal,
+ville,
+pays,
+mes_addresses_portable,
+retour_a_mes_adresses,
+adresse,
+modifier_mon_adresse,
+aucune_adresse_ne_correspond,
+complement_dadresse,
+valider,
+impossible_de_creer_ladresse,
+impossible_de_modifier_ladresse,
+france,
+allemagne,
+belgique,
+espagne,
+italie,
+luxembourg,
+monaco,
+portugal,
+suisse,
+pays_bas,
+ladresse_de_lutilisateur_a,
+livraisons_livree,
+en_preparation,
+en_cours_de_livraison,
+remboursee,
+partiellement_remboursee,
+commande_enregistree,
+apercu,
+mes_reprises,
+deconnexion,
+menu_mot_de_passe,
+ma_commande,
+nouveau_retour,
+mes_codes_promo,
+nouveau_code_promo,
+ma_reprise,
+wishlist,
+vous_ne_trouvez_pas,
+votre_wishlist_ne_contient,
+en_rupture,
+ajouter_au_panier,
+je_souhaite_recevoir_les,
+je_souhaite_recevoir_les_offres,
+programme_de_fidelite,
+dans_quelle_devise_souhaitez,
+choisir_cette_devise
+    '%}
+    {% assign names = names | strip_newlines | remove: ' ' | split: ',' %}
+
+    window.accountTranslation = {
+    {% for name in names %}{{ name | json }} : {{ section.settings[name] | json }}{% unless forloop.last %},{% endunless %}{% endfor %}}
+
+    window.customerToken = "{{ customer.id | append:customer.email | md5 }}"
+
+</script>
+
+{% schema %}
+{
+"name":"Compte",
+"settings":[
+{
+"type":"header",
+"content":"Aperçu"
+},
+{
+"id":"bienvenue_xxx",
+"type":"text",
+"label":"Bienvenue xxx !",
+"default":"Bienvenue xxx !"
+},
+{
+"id":"mon_compte",
+"type":"text",
+"label":"Mon compte",
+"default":"Mon compte"
+},
+{
+"id":"ma_derniere_commande",
+"type":"text",
+"label":"Ma dernière commande",
+"default":"Ma dernière commande"
+},
+{
+"id":"ma_derniere_reprise",
+"type":"text",
+"label":"Ma dernière reprise",
+"default":"Ma dernière reprise"
+},
+{
+"id":"mon_adresse_par_defaut",
+"type":"text",
+"label":"Mon adresse par défaut",
+"default":"Mon adresse par défaut"
+},
+{
+"id":"suivi",
+"type":"text",
+"label":"suivi",
+"default":"suivi"
+},
+{
+"id":"background",
+"type":"image_picker",
+"label":"Background"
+},
+{
+"type":"header",
+"content":"Crédit"
+},
+{
+"id":"credit_disponible",
+"type":"text",
+"label":"Crédit disponible",
+"default":"Crédit disponible"
+},
+{
+"id":"generer_un_bon_dachat",
+"type":"text",
+"label":"Générer un bon d'achat",
+"default":"Générer un bon d'achat"
+},
+{
+"id":"comment_ca_marche",
+"type":"text",
+"label":"Comment ça marche ?",
+"default":"Comment ça marche ?"
+},
+{
+"id":"mes_credits",
+"type":"text",
+"label":"Mes crédits",
+"default":"Mes crédits"
+},
+{
+"id":"voir_tous_mes_bons",
+"type":"text",
+"label":"Voir tous mes bons",
+"default":"Voir tous mes bons d'achats"
+},
+{
+"id":"cliquez_sur_generer_un",
+"type":"text",
+"label":"Cliquez sur Générer un",
+"default":"Cliquez sur Générer un bon d’achat."
+},
+{
+"id":"selectionnez_le_bon_que",
+"type":"text",
+"label":"Sélectionnez le bon que",
+"default":"Sélectionnez le bon que vous souhaitez activer."
+},
+{
+"id":"validez",
+"type":"text",
+"label":"Validez.",
+"default":"Validez."
+},
+{
+"id":"choisissez_la_facon_dont",
+"type":"richtext",
+"label":"Choisissez la façon dont",
+"default":"<p>Choisissez la façon dont vous souhaitez utiliser votre crédit : <br>• &nbsp;&nbsp;sur <a href='/'>isabelmarant-vintage.com</a>,<br>• &nbsp;&nbsp;dans une de nos boutiques Isabel Marant participantes en France<br> • &nbsp;&nbsp;ou bien en commande à distance depuis le site Internet <a href='isabelmarant.com' target='_blank'>isabelmarant.com</a>.</p>"
+},
+{
+"id":"activez_vos_bons_dachat",
+"type":"richtext",
+"label":"Activez vos bons d’achat,",
+"default":"<p>Activez vos bons d’achat, valables sur <a href='isabelmarant-vintage.com'>isabelmarant-vintage.com</a> ou dans nos boutiques participantes.</p>"
+},
+{
+"id":"les_bons_dachat_sont",
+"type":"richtext",
+"label":"Les bons d’achat sont",
+"default":"<p>Les bons d’achat sont non cumulables et ont une durée de validité de 12 mois.</p>"
+},
+{
+"type":"header",
+"content":"Commande"
+},
+{
+"id":"date_de_la_commande",
+"type":"text",
+"label":"Date de la commande",
+"default":"Date de la commande"
+},
+{
+"id":"numero_de_commande",
+"type":"text",
+"label":"Numéro de commande",
+"default":"Numéro de commande"
+},
+{
+"id":"facture",
+"type":"text",
+"label":"Facture",
+"default":"Facture"
+},
+{
+"id":"delai_de_retour_depasse",
+"type":"text",
+"label":"Délai de retour dépassé",
+"default":"Délai de retour dépassé"
+},
+{
+"id":"telecharger",
+"type":"text",
+"label":"Télécharger",
+"default":"Télécharger"
+},
+{
+"id":"vendre_mon_article",
+"type":"text",
+"label":"Vendre mon article",
+"default":"Vendre mon article"
+},
+{
+"id":"demander_un_retour",
+"type":"text",
+"label":"Demander un retour",
+"default":"Demander un retour"
+},
+{
+"id":"bon_de_retour",
+"type":"text",
+"label":"Bon de retour",
+"default":"Bon de retour"
+},
+{
+"id":"detail",
+"type":"text",
+"label":"Détail",
+"default":"Détail"
+},
+{
+"id":"sous_total",
+"type":"text",
+"label":"Sous-total",
+"default":"Sous-total"
+},
+{
+"id":"livraison",
+"type":"text",
+"label":"Livraison",
+"default":"Livraison"
+},
+{
+"id":"offerte",
+"type":"text",
+"label":"Offerte",
+"default":"Offerte"
+},
+{
+"id":"total",
+"type":"text",
+"label":"Total",
+"default":"Total"
+},
+{
+"id":"rembourse",
+"type":"text",
+"label":"Remboursé",
+"default":"Remboursé"
+},
+{
+"id":"adresse_de_livraison",
+"type":"text",
+"label":"Adresse de livraison",
+"default":"Adresse de livraison"
+},
+{
+"id":"adresse_de_facturation",
+"type":"text",
+"label":"Adresse de facturation",
+"default":"Adresse de facturation"
+},
+{
+"id":"livree",
+"type":"text",
+"label":"Livrée",
+"default":"Livrée"
+},
+{
+"id":"article",
+"type":"text",
+"label":"article",
+"default":"article"
+},
+{
+"id":"retourne",
+"type":"text",
+"label":"Retourné",
+"default":"Retourné"
+},
+{
+"id":"retour_a_mes_commandes",
+"type":"text",
+"label":"Retour à mes commandes",
+"default":"Retour à mes commandes"
+},
+{
+"id":"commande",
+"type":"text",
+"label":"Commande",
+"default":"Commande"
+},
+{
+"id":"aucune_commande_ne_correspond",
+"type":"text",
+"label":"Aucune commande ne correspond",
+"default":"Aucune commande ne correspond à cette url"
+},
+{
+"id":"voir_mes_commandes",
+"type":"text",
+"label":"Voir mes commandes",
+"default":"Voir mes commandes"
+},
+{
+"id":"mes_commandes",
+"type":"text",
+"label":"Mes commandes",
+"default":"Mes commandes"
+},
+{
+"id":"vous_navez_passe_aucune",
+"type":"text",
+"label":"Vous n'avez passé aucune",
+"default":"Vous n'avez passé aucune commande pour le moment"
+},
+{
+"id":"reference_du_colis",
+"type":"text",
+"label":"Référence du colis",
+"default":"Référence du colis"
+},
+{
+"id":"suivre_mon_colis",
+"type":"text",
+"label":"Suivre mon colis",
+"default":"Suivre mon colis"
+},
+{
+"id":"annulee",
+"type":"text",
+"label":"Annulée",
+"default":"Annulée"
+},
+{
+"id":"suivi_de_ma_commande",
+"type":"text",
+"label":"Suivi de ma commande",
+"default":"Suivi de ma commande"
+},
+{
+"id":"produit_achete",
+"type":"text",
+"label":"produit acheté",
+"default":"produit acheté"
+},
+{
+"id":"produits_achetes",
+"type":"text",
+"label":"produits achetés",
+"default":"produits achetés"
+},
+{
+"id":"code_promo",
+"type":"text",
+"label":"Code promo :",
+"default":"Code promo :"
+},
+{
+"id":"bientot_disponible",
+"type":"text",
+"label":"Bientôt disponible",
+"default":"Bientôt disponible"
+},
+{
+"id":"id_de_la_commande",
+"type":"text",
+"label":"Label détail ID de la commande",
+"default":"ID de la commande"
+},
+{
+"id":"id_commande",
+"type":"text",
+"label":"Label résumé ID de la commande",
+"default":"ID"
+},
+{
+"type":"header",
+"content":"Retours"
+},
+{
+"id":"mes_retours",
+"type":"text",
+"label":"Mes retours",
+"default":"Mes retours"
+},
+{
+"id":"raison_du_retour",
+"type":"text",
+"label":"Raison du retour",
+"default":"Raison du retour"
+},
+{
+"id":"telecharger_le_bon_de",
+"type":"text",
+"label":"Télécharger le bon de",
+"default":"Télécharger le bon de transport"
+},
+{
+"id":"retours_rembourse",
+"type":"text",
+"label":"Remboursé",
+"default":"Remboursé"
+},
+{
+"id":"remboursement_en_cours",
+"type":"text",
+"label":"Remboursement en cours",
+"default":"Remboursement en cours"
+},
+{
+"id":"en_attente_de_reception",
+"type":"text",
+"label":"En attente de réception",
+"default":"En attente de réception"
+},
+{
+"id":"retours_demander_un_retour",
+"type":"text",
+"label":"Demander un retour",
+"default":"Demander un retour"
+},
+{
+"id":"aucune_commande_ne_correspond_a",
+"type":"text",
+"label":"Aucune commande ne correspond",
+"default":"Aucune commande ne correspond à cette url."
+},
+{
+"id":"selectionnez_les_articles_que",
+"type":"text",
+"label":"Sélectionnez les articles que",
+"default":"Sélectionnez les articles que vous souhaitez retourner."
+},
+{
+"id":"n_de_commande",
+"type":"text",
+"label":"N° de commande",
+"default":"N° de commande"
+},
+{
+"id":"vous_ne_pouvez_pas",
+"type":"text",
+"label":"Vous ne pouvez pas",
+"default":"Vous ne pouvez pas retourner d'autres produits"
+},
+{
+"id":"votre_bon_de_retour",
+"type":"text",
+"label":"Votre bon de retour",
+"default":"Votre bon de retour"
+},
+{
+"id":"imprimer",
+"type":"text",
+"label":"Imprimer",
+"default":"Imprimer"
+},
+{
+"id":"selectionnez_une_raison",
+"type":"text",
+"label":"Sélectionnez une raison",
+"default":"Sélectionnez une raison"
+},
+{
+"id":"taille_trop_petite",
+"type":"text",
+"label":"Taille trop petite",
+"default":"Taille trop petite"
+},
+{
+"id":"taille_trop_grande",
+"type":"text",
+"label":"Taille trop grande",
+"default":"Taille trop grande"
+},
+{
+"id":"le_produit_ne_me",
+"type":"text",
+"label":"Le produit ne me",
+"default":"Le produit ne me plait pas"
+},
+{
+"id":"la_qualite_ne_me",
+"type":"text",
+"label":"La qualité ne me",
+"default":"La qualité ne me plait pas"
+},
+{
+"id":"article_defectueux",
+"type":"text",
+"label":"Article défectueux",
+"default":"Article défectueux"
+},
+{
+"id":"retard_de_livraison",
+"type":"text",
+"label":"Retard de livraison",
+"default":"Retard de livraison"
+},
+{
+"id":"jai_recu_le_mauvais",
+"type":"text",
+"label":"J'ai recu le mauvais",
+"default":"J'ai recu le mauvais produit"
+},
+{
+"id":"produit_non_conforme_a",
+"type":"text",
+"label":"Produit non conforme à",
+"default":"Produit non conforme à la photo"
+},
+{
+"id":"autre",
+"type":"text",
+"label":"Autre",
+"default":"Autre"
+},
+{
+"id":"la_creation_du_retour",
+"type":"text",
+"label":"La création du retour",
+"default":"La création du retour a échoué, merci d'essayer ultérieurement."
+},
+{
+"id":"vous_avez_depasse_le",
+"type":"richtext",
+"label":"Vous avez dépassé le",
+"default":"<p>Vous avez dépassé le délai pour effectuer un retour, mais vous pouvez toujours <a href='pages/module-reprise'>vendre votre article</a>.</p>"
+},
+{
+"type":"header",
+"content":"Reprise"
+},
+{
+"id":"refuse",
+"type":"text",
+"label":"Refusé",
+"default":"Refusé"
+},
+{
+"id":"valide",
+"type":"text",
+"label":"Validé",
+"default":"Validé"
+},
+{
+"id":"en_cours",
+"type":"text",
+"label":"En cours",
+"default":"En cours"
+},
+{
+"id":"raison_du_refus",
+"type":"text",
+"label":"Raison du refus",
+"default":"Raison du refus"
+},
+{
+"id":"montant_gagne",
+"type":"text",
+"label":"Montant gagné",
+"default":"Montant gagné"
+},
+{
+"id":"utiliser_mon_credit",
+"type":"text",
+"label":"Utiliser mon crédit",
+"default":"Utiliser mon crédit"
+},
+{
+"id":"montant_propose",
+"type":"text",
+"label":"Montant proposé",
+"default":"Montant proposé"
+},
+{
+"id":"bons",
+"type":"text",
+"label":"Bons",
+"default":"Bons"
+},
+{
+"id":"bon_de_transport",
+"type":"text",
+"label":"Bon de transport",
+"default":"Bon de transport"
+},
+{
+"id":"reprise_telecharger",
+"type":"text",
+"label":"Télécharger",
+"default":"Télécharger"
+},
+{
+"id":"bon_de_cession",
+"type":"text",
+"label":"Bon de cession",
+"default":"Bon de cession"
+},
+{
+"id":"details_de_la_reprise",
+"type":"text",
+"label":"Détails de la reprise",
+"default":"Détails de la reprise"
+},
+{
+"id":"date_du_formulaire",
+"type":"text",
+"label":"Date du formulaire",
+"default":"Date du formulaire"
+},
+{
+"id":"date_de_la_verification",
+"type":"text",
+"label":"Date de la vérification",
+"default":"Date de la vérification"
+},
+{
+"id":"description",
+"type":"text",
+"label":"Description",
+"default":"Description"
+},
+{
+"id":"taille",
+"type":"text",
+"label":"Taille",
+"default":"Taille"
+},
+{
+"id":"taille_unique",
+"type":"text",
+"label":"Taille unique",
+"default":"Taille unique"
+},
+{
+"id":"etat_de_larticle",
+"type":"text",
+"label":"État de l'article",
+"default":"État de l'article"
+},
+
+{
+"id":"id_de_la_reprise",
+"type":"text",
+"label":"Label Id Résumé",
+"default":"ID de la reprise"
+},
+{
+"id":"id",
+"type":"text",
+"label":"Label ID détail",
+"default":"ID"
+},
+
+{
+"id":"suivi_de_la_reprise",
+"type":"text",
+"label":"Suivi de la reprise",
+"default":"Suivi de la reprise"
+},
+{
+"id":"formulaire_de_reprise",
+"type":"text",
+"label":"Formulaire de reprise",
+"default":"Formulaire de reprise"
+},
+{
+"id":"article_receptionne",
+"type":"text",
+"label":"Article réceptionné",
+"default":"Article réceptionné"
+},
+{
+"id":"verification_par_nos_experts",
+"type":"text",
+"label":"Vérification par nos experts",
+"default":"Vérification par nos experts"
+},
+{
+"id":"retour_a_mes_articles",
+"type":"text",
+"label":"Retour à mes articles",
+"default":"Retour à mes articles repris"
+},
+{
+"id":"detail_de_larticle",
+"type":"text",
+"label":"Détail de l'article",
+"default":"Détail de l'article"
+},
+{
+"id":"aucune_article_ne_correspond",
+"type":"text",
+"label":"Aucune article ne correspond",
+"default":"Aucune article ne correspond à cette url"
+},
+{
+"id":"voir_mes_reprises",
+"type":"text",
+"label":"Voir mes reprises",
+"default":"Voir mes reprises"
+},
+{
+"id":"mes_articles_repris",
+"type":"text",
+"label":"Mes articles repris",
+"default":"Mes articles repris"
+},
+{
+"id":"vous_navez_effectue_aucune",
+"type":"text",
+"label":"Vous n'avez effectué aucune",
+"default":"Vous n'avez effectué aucune reprise pour le moment"
+},
+{
+"id":"jenvoie_mon_article",
+"type":"text",
+"label":"J'envoie mon article",
+"default":"J'envoie mon article"
+},
+{
+"id":"voir_toutes_mes_reprises",
+"type":"text",
+"label":"Voir toutes mes reprises",
+"default":"Voir toutes mes reprises"
+},
+{
+"id":"envoye",
+"type":"text",
+"label":"Envoyé",
+"default":"Envoyé"
+},
+{
+"id":"estime",
+"type":"text",
+"label":"Estimé",
+"default":"Estimé"
+},
+{
+"id":"recu",
+"type":"text",
+"label":"Reçu",
+"default":"Reçu"
+},
+{
+"id":"filtrer",
+"type":"text",
+"label":"Filtrer",
+"default":"Filtrer"
+},
+{
+"id":"deposer_en_boutique",
+"type":"text",
+"label":"Déposer en boutique",
+"default":"Déposer en boutique"
+},
+{
+"id":"reprise_acceptee",
+"type":"text",
+"label":"Reprise acceptée",
+"default":"Reprise acceptée"
+},
+{
+"id":"genre",
+"type":"text",
+"label":"Genre",
+"default":"Genre"
+},
+{
+"id":"collection",
+"type":"text",
+"label":"Collection",
+"default":"Collection"
+},
+{
+"id":"categorie",
+"type":"text",
+"label":"Catégorie",
+"default":"Catégorie"
+},
+{
+"id":"sous_categorie",
+"type":"text",
+"label":"Sous catégorie",
+"default":"Sous catégorie"
+},
+{
+"id":"matiere_principale",
+"type":"text",
+"label":"Matière Principale",
+"default":"Matière Principale"
+},
+{
+"id":"vintage",
+"type":"text",
+"label":"Vintage",
+"default":"Vintage"
+},
+{
+"id":"pret_a_porter",
+"type":"text",
+"label":"Prêt-à-porter",
+"default":"Prêt-à-porter"
+},
+{
+"id":"univers",
+"type":"text",
+"label":"Univers",
+"default":"Univers"
+},
+{
+"id":"condition_de_larticle",
+"type":"text",
+"label":"Condition de l'article",
+"default":"Condition de l'article"
+},
+{
+"id":"type",
+"type":"text",
+"label":"Type",
+"default":"Type"
+},
+{
+"id":"matiere",
+"type":"text",
+"label":"Matière",
+"default":"Matière"
+},
+{
+"type":"header",
+"content":"Popin"
+},
+{
+"id":"fermer",
+"type":"text",
+"label":"Fermer",
+"default":"Fermer"
+},
+{
+"type":"header",
+"content":"Bon d'achat"
+},
+{
+"id":"hors_date_de_validite",
+"type":"text",
+"label":"Hors date de validité",
+"default":"Hors date de validité"
+},
+{
+"id":"code_promo_deja_utilise",
+"type":"text",
+"label":"Code promo déjà utilisé",
+"default":"Code promo déjà utilisé"
+},
+{
+"id":"montant_rembourse",
+"type":"text",
+"label":"Montant remboursé",
+"default":"Montant remboursé"
+},
+{
+"id":"bon_desactive",
+"type":"text",
+"label":"Bon désactivé",
+"default":"Bon désactivé"
+},
+{
+"id":"utilisable_en_boutique",
+"type":"text",
+"label":"Utilisable en boutique",
+"default":"Utilisable en boutique"
+},
+{
+"id":"bon_inutilisable",
+"type":"text",
+"label":"Bon inutilisable",
+"default":"Bon inutilisable"
+},
+{
+"id":"utilisable_sur",
+"type":"text",
+"label":"Utilisable sur",
+"default":"Utilisable sur"
+},
+{
+"id":"vous_pouvez_retrouver_ce",
+"type":"text",
+"label":"Vous pouvez retrouver ce",
+"default":"Vous pouvez retrouver ce bon d'achat dans la rubrique"
+},
+{
+"id":"de_votre_compte",
+"type":"text",
+"label":"de votre compte.",
+"default":"de votre compte."
+},
+{
+"id":"bon_dachat_mes_credits",
+"type":"text",
+"label":"Mes crédits",
+"default":"Mes crédits"
+},
+{
+"id":"utiliser_maintenant",
+"type":"text",
+"label":"Utiliser maintenant",
+"default":"Utiliser maintenant"
+},
+{
+"id":"generer_un_nouveau_bon",
+"type":"text",
+"label":"Générer un nouveau bon",
+"default":"Générer un nouveau bon"
+},
+{
+"id":"bon_dachat_credit_disponible",
+"type":"text",
+"label":"Crédit disponible",
+"default":"Crédit disponible"
+},
+{
+"id":"mes_bons_dachat_deja",
+"type":"text",
+"label":"Mes bons d'achat déjà",
+"default":"Mes bons d'achat déjà créé"
+},
+{
+"id":"vous_navez_cree_aucun",
+"type":"text",
+"label":"Vous n'avez créé aucun",
+"default":"Vous n'avez créé aucun bon d'achat"
+},
+{
+"id":"retour_vers_mes_credits",
+"type":"text",
+"label":"Retour vers mes crédits",
+"default":"Retour vers mes crédits"
+},
+{
+"id":"bon_dachat_generer_un_bon_dachat",
+"type":"text",
+"label":"Générer un bon d'achat",
+"default":"Générer un bon d'achat"
+},
+{
+"id":"votre_soldes_de_credit",
+"type":"text",
+"label":"Votre soldes de credit",
+"default":"Votre soldes de credit est à 0, vous ne pouvez pas générer de bon d'achat."
+},
+{
+"id":"vous_navez_pas_de",
+"type":"text",
+"label":"Vous n'avez pas de",
+"default":"Vous n'avez pas de reprise pour générer un bon d'achat."
+},
+{
+"id":"pour_quel_site_souhaitez",
+"type":"text",
+"label":"1. Pour quel site",
+"default":"1. Pour quel site souhaitez-vous obtenir un code promotionnel ?"
+},
+{
+"id":"pour_quels_articles_repris",
+"type":"text",
+"label":"2. Pour quels articles",
+"default":"2. Pour quels articles repris souhaitez-vous générer un bon d'achat ?"
+},
+{
+"id":"quel_montant_souhaitez_vous",
+"type":"text",
+"label":"2. Quel montant souhaitez-vous",
+"default":"2. Quel montant souhaitez-vous générer ?"
+},
+{
+"id":"en_boutique",
+"type":"text",
+"label":"En boutique",
+"default":"En boutique"
+},
+{
+"id":"afficher_mon_code_promo",
+"type":"text",
+"label":"Afficher mon code promo",
+"default":"Afficher mon code promo"
+},
+{
+"id":"bon_dachat_bientot_disponible",
+"type":"text",
+"label":"Bientôt disponible",
+"default":"Bientôt disponible"
+},
+{
+"id":"vous_devez_saisir_obligatoirement",
+"type":"text",
+"label":"Vous devez saisir obligatoirement",
+"default":"Vous devez saisir obligatoirement un montant supérieur à XXX"
+},
+{
+"id":"tooltip_message",
+"type":"text",
+"label":"Tooltip Message"
+},
+{
+"id":"le_montant_doit_etre",
+"type":"text",
+"label":"Le montant doit être",
+"default":"Le montant doit être arrondi à XXX"
+},
+{
+"id":"le_montant_ne_peut",
+"type":"text",
+"label":"Le montant ne peut",
+"default":"Le montant ne peut pas excéder XXX"
+},
+{
+"id":"un_bon_de_xxx",
+"type":"text",
+"label":"Un bon de XXX",
+"default":"Un bon de XXX € a bien été créé"
+},
+{
+"id":"votre_bon_dachat_sera",
+"type":"text",
+"label":"Votre bon d’achat sera",
+"default":"Votre bon d’achat sera utilisable d’ici 72h."
+},
+{
+"id":"votre_demande_de_bon",
+"type":"text",
+"label":"Votre demande de bon",
+"default":"Votre demande de bon d’achat a bien été prise en compte."
+},
+{
+"id":"generer_un_bon",
+"type":"text",
+"label":"Générer un bon",
+"default":"Générer un bon"
+},
+{
+"id":"generer_un_bon_de",
+"type":"text",
+"label":"Générer un bon de",
+"default":"Générer un bon de XXX€"
+},
+{
+"id":"attention_le_code_ne",
+"type":"text",
+"label":"Attention, le code ne",
+"default":"Attention, le code ne peut être utilisé qu'une seule fois: pas de remboursement ou réutilisation possible du code même si son montant excède le montant de la commande."
+},
+{
+"id":"le_bon_dachat_na",
+"type":"text",
+"label":"Le bon d'achat n'a",
+"default":"Le bon d'achat n'a pas pu être créer, merci d'essayer ultérieurement."
+},
+{
+"id":"je_souhaite_recevoir_les_offres",
+"type":"text",
+"label":"Je souhaite recevoir les",
+"default":"Je souhaite recevoir les offres et toute l’actualité par sms"
+},
+{
+"id":"dans_quelle_devise_souhaitez",
+"type":"text",
+"label":"Dans quelle devise souhaitez-vous",
+"default":"Dans quelle devise souhaitez-vous générer le bon ?"
+},
+{
+"id":"choisir_cette_devise",
+"type":"text",
+"label":"Choisir cette devise",
+"default":"Choisir cette devise"
+},
+{
+"type":"header",
+"content":"Mes informations"
+},
+{
+"id":"mes_informations",
+"type":"text",
+"label":"Mes informations",
+"default":"Mes informations"
+},
+{
+"id":"enregistrer",
+"type":"text",
+"label":"Enregistrer",
+"default":"Enregistrer"
+},
+{
+"id":"modifier_mon_mot_de",
+"type":"text",
+"label":"Modifier mon mot de",
+"default":"Modifier mon mot de passe"
+},
+{
+"id":"retour_vers_mes_informations",
+"type":"text",
+"label":"Retour vers mes informations",
+"default":"Retour vers mes informations"
+},
+{
+"id":"nouveau_mot_de_passe",
+"type":"text",
+"label":"Nouveau mot de passe",
+"default":"Nouveau mot de passe *"
+},
+{
+"id":"confirmation_du_mot_de",
+"type":"text",
+"label":"Confirmation du mot de",
+"default":"Confirmation du mot de passe *"
+},
+{
+"id":"adresse_e_mail",
+"type":"text",
+"label":"Adresse e-mail *",
+"default":"Adresse e-mail *"
+},
+{
+"id":"prenom",
+"type":"text",
+"label":"Prénom *",
+"default":"Prénom *"
+},
+{
+"id":"nom",
+"type":"text",
+"label":"Nom *",
+"default":"Nom *"
+},
+{
+"id":"portable",
+"type":"text",
+"label":"Portable",
+"default":"Portable"
+},
+{
+"id":"mot_de_passe",
+"type":"text",
+"label":"Mot de passe *",
+"default":"Mot de passe *"
+},
+{
+"id":"vos_infomations_ont_bien",
+"type":"text",
+"label":"Vos infomations ont bien",
+"default":"Vos infomations ont bien étés mises à jour"
+},
+{
+"type":"header",
+"content":"Mes addresses"
+},
+{
+"id":"mes_adresses",
+"type":"text",
+"label":"Mes adresses",
+"default":"Mes adresses"
+},
+{
+"id":"vous_navez_cree_aucune",
+"type":"text",
+"label":"Vous n'avez créé aucune",
+"default":"Vous n'avez créé aucune adresse pour le moment"
+},
+{
+"id":"ajouter_une_adresse",
+"type":"text",
+"label":"Ajouter une adresse",
+"default":"Ajouter une adresse"
+},
+{
+"id":"supprimer",
+"type":"text",
+"label":"Supprimer",
+"default":"Supprimer"
+},
+{
+"id":"modifier",
+"type":"text",
+"label":"Modifier",
+"default":"Modifier"
+},
+{
+"id":"voir_mes_adresses",
+"type":"text",
+"label":"Voir mes adresses",
+"default":"Voir mes adresses"
+},
+{
+"id":"code_postal",
+"type":"text",
+"label":"Code postal *",
+"default":"Code postal *"
+},
+{
+"id":"ville",
+"type":"text",
+"label":"Ville *",
+"default":"Ville *"
+},
+{
+"id":"pays",
+"type":"text",
+"label":"Pays *",
+"default":"Pays *"
+},
+{
+"id":"mes_addresses_portable",
+"type":"text",
+"label":"Portable",
+"default":"Portable"
+},
+{
+"id":"retour_a_mes_adresses",
+"type":"text",
+"label":"Retour à mes adresses",
+"default":"Retour à mes adresses"
+},
+{
+"id":"adresse",
+"type":"text",
+"label":"Adresse *",
+"default":"Adresse *"
+},
+{
+"id":"modifier_mon_adresse",
+"type":"text",
+"label":"Modifier mon adresse",
+"default":"Modifier mon adresse"
+},
+{
+"id":"aucune_adresse_ne_correspond",
+"type":"text",
+"label":"Aucune adresse ne correspond",
+"default":"Aucune adresse ne correspond à cette url"
+},
+{
+"id":"complement_dadresse",
+"type":"text",
+"label":"Complément d'adresse",
+"default":"Complément d'adresse"
+},
+{
+"id":"valider",
+"type":"text",
+"label":"Valider",
+"default":"Valider"
+},
+{
+"id":"impossible_de_creer_ladresse",
+"type":"text",
+"label":"Impossible de créer l'adresse,",
+"default":"Impossible de créer l'adresse, merci d'essayer ultérieurement."
+},
+{
+"id":"impossible_de_modifier_ladresse",
+"type":"text",
+"label":"Impossible de modifier l'adresse,",
+"default":"Impossible de modifier l'adresse, merci d'essayer ultérieurement."
+},
+{
+"id":"france",
+"type":"text",
+"label":"France",
+"default":"France"
+},
+{
+"id":"allemagne",
+"type":"text",
+"label":"Allemagne",
+"default":"Allemagne"
+},
+{
+"id":"belgique",
+"type":"text",
+"label":"Belgique",
+"default":"Belgique"
+},
+{
+"id":"espagne",
+"type":"text",
+"label":"Espagne",
+"default":"Espagne"
+},
+{
+"id":"italie",
+"type":"text",
+"label":"Italie",
+"default":"Italie"
+},
+{
+"id":"luxembourg",
+"type":"text",
+"label":"Luxembourg",
+"default":"Luxembourg"
+},
+{
+"id":"monaco",
+"type":"text",
+"label":"Monaco",
+"default":"Monaco"
+},
+{
+"id":"portugal",
+"type":"text",
+"label":"Portugal",
+"default":"Portugal"
+},
+{
+"id":"suisse",
+"type":"text",
+"label":"Suisse",
+"default":"Suisse"
+},
+{
+"id":"pays_bas",
+"type":"text",
+"label":"Pays-Bas",
+"default":"Pays-Bas"
+},
+{
+"id":"ladresse_de_lutilisateur_a",
+"type":"text",
+"label":"l’adresse de l’utilisateur a",
+"default":"l’adresse de l’utilisateur a bien été créer"
+},
+{
+"type":"header",
+"content":"Livraisons"
+},
+{
+"id":"livraisons_livree",
+"type":"text",
+"label":"Livrée",
+"default":"Livrée"
+},
+{
+"id":"en_preparation",
+"type":"text",
+"label":"En préparation",
+"default":"En préparation"
+},
+{
+"id":"en_cours_de_livraison",
+"type":"text",
+"label":"En cours de livraison",
+"default":"En cours de livraison"
+},
+{
+"id":"remboursee",
+"type":"text",
+"label":"Remboursée",
+"default":"Remboursée"
+},
+{
+"id":"partiellement_remboursee",
+"type":"text",
+"label":"Partiellement remboursée",
+"default":"Partiellement remboursée"
+},
+{
+"id":"commande_enregistree",
+"type":"text",
+"label":"Commande enregistrée",
+"default":"Commande enregistrée"
+},
+{
+"type":"header",
+"content":"Menu"
+},
+{
+"id":"apercu",
+"type":"text",
+"label":"Aperçu",
+"default":"Aperçu"
+},
+{
+"id":"mes_reprises",
+"type":"text",
+"label":"Mes reprises",
+"default":"Mes reprises"
+},
+{
+"id":"deconnexion",
+"type":"text",
+"label":"Déconnexion",
+"default":"Déconnexion"
+},
+{
+"id":"menu_mot_de_passe",
+"type":"text",
+"label":"Mot de passe",
+"default":"Mot de passe"
+},
+{
+"id":"ma_commande",
+"type":"text",
+"label":"Ma commande",
+"default":"Ma commande"
+},
+{
+"id":"nouveau_retour",
+"type":"text",
+"label":"Nouveau retour",
+"default":"Nouveau retour"
+},
+{
+"id":"mes_codes_promo",
+"type":"text",
+"label":"Mes codes promo",
+"default":"Mes codes promo"
+},
+{
+"id":"nouveau_code_promo",
+"type":"text",
+"label":"Nouveau code promo",
+"default":"Nouveau code promo"
+},
+{
+"id":"ma_reprise",
+"type":"text",
+"label":"Ma reprise",
+"default":"Ma reprise"
+},
+{
+"type":"header",
+"content":"Wishlist"
+},
+{
+"id":"wishlist",
+"type":"text",
+"label":"Wishlist",
+"default":"Wishlist"
+},
+{
+"id":"vous_ne_trouvez_pas",
+"type":"text",
+"label":"Vous ne trouvez pas",
+"default":"Vous ne trouvez pas votre taille ? Nos équipes ajoutent tous les jours de nouveaux produits, consultez régulièrement votre wishlist pour être le premier à shopper votre pièce favorite quand elle sera à nouveau disponible !"
+},
+{
+"id":"votre_wishlist_ne_contient",
+"type":"text",
+"label":"Votre wishlist ne contient",
+"default":"Votre wishlist ne contient aucun article pour le moment"
+},
+{
+"id":"en_rupture",
+"type":"text",
+"label":"En rupture",
+"default":"En rupture"
+},
+{
+"id":"ajouter_au_panier",
+"type":"text",
+"label":"Ajouter au panier",
+"default":"Ajouter au panier"
+},
+{
+"type":"header",
+"content":"Inscription"
+},
+{
+"id":"je_souhaite_recevoir_les",
+"type":"text",
+"label":"Je souhaite recevoir les",
+"default":"Je souhaite recevoir les offres et toute l’actualité par email"
+},
+{
+"type":"header",
+"content":"Programme de fidélité"
+},
+{
+"id":"programme_de_fidelite",
+"type":"text",
+"label":"Programme de fidélité",
+"default":"Programme de fidélité"}
+]
+}
+{% endschema %}

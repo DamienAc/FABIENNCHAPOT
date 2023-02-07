@@ -1,0 +1,23 @@
+<a href="{{ section.settings.site_url }}" target="_blank" class="announcement">
+    <p>{{ section.settings.site_text }}</p> 
+</a>
+
+
+{% schema %}
+{
+  "name": "Top bar",
+  "settings": [
+    {
+      "id": "site_text",
+      "type": "text",
+      "label": "Text annoucement",
+      "default": "retour au site.com"
+    },
+    {
+      "id": "site_url",
+      "type": "url",
+      "label": "Lien"
+    }
+  ]
+}
+{% endschema %}

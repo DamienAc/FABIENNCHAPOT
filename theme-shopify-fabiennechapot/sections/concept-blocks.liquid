@@ -1,0 +1,204 @@
+<section class="sell-blocks wrapper">
+    {% for block in section.blocks %}
+
+        {% if block.type == 'image' %}
+
+            {% render 'image' with
+                image: block.settings.image,
+                image_mobile: block.settings.image_mobile %}
+
+            {% elsif block.type == 'text' %}
+
+            {% render 'title-text' with
+                h2: block.settings.title,
+                text: block.settings.text,
+                color: block.settings.color,
+                button: block.settings.button
+                button_color: block.settings.button_color
+                button_color: block.settings.button_color
+                url: block.settings.url,
+                btn_type: block.settings.btn_type
+            %}
+
+        {% else %}
+
+            {% render 'image-text' with
+                position: block.settings.position
+                image: block.settings.image,
+                image_mobile: block.settings.image_mobile,
+                title: block.settings.title,
+                button: block.settings.button,
+                link: block.settings.link,
+                text: block.settings.text %}
+
+        {% endif %}
+
+    {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Damier",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image pleine largeur",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+        {
+          "id": "image_mobile",
+          "type": "image_picker",
+          "label": "Image mobile"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte",
+      "settings": [
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Titre",
+          "default": "Une démarche simple"
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Description",
+          "default": "<p>Chaque geste compte, les plus grands comme les plus simples. En tant que maison de Mode, nous nous devons d’avoir un rôle moteur sur la protection de la planète. C’est pourquoi nous souhaitons partager nos engagements pour contribuer à diminuer notre impact environnemental et améliorer notre impact sociétal.</p>"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Couleur du fond",
+          "options": [
+            {
+              "value": "black",
+              "label": "Noir"
+            },
+            {
+              "value": "white",
+              "label": "Blanc"
+            },
+            {
+              "value": "yellow",
+              "label": "Jaune"
+            }
+          ],
+          "default": "yellow"
+        },
+        {
+          "type": "header",
+          "content": "Lien"
+        },
+        {
+          "id": "button",
+          "type": "text",
+          "label": "Nom du lien",
+          "default": "Découvrir le fonctionnement"
+        },
+        {
+          "id": "url",
+          "type": "url",
+          "label": "Url du lien"
+        },
+        {
+          "type": "select",
+          "id": "btn_type",
+          "label": "Apparence du lien",
+          "options": [
+            {
+              "value": "link",
+              "label": "Lien souligné"
+            },
+            {
+              "value": "btn",
+              "label": "Bouton"
+            }
+          ],
+          "default": "link"
+        },
+        {
+          "type": "select",
+          "id": "button_color",
+          "label": "Couleur du bouton",
+          "options": [
+            {
+              "value": "black",
+              "label": "Noir"
+            },
+            {
+              "value": "white",
+              "label": "Blanc"
+            },
+            {
+              "value": "yellow",
+              "label": "Jaune"
+            }
+          ],
+          "default": "black"
+        }
+      ]
+    },
+    {
+      "type": "article",
+      "name": "Image & texte",
+      "settings": [
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Titre",
+          "default": "Lorem ipsum"
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Texte",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>"
+        },
+        {
+          "id": "button",
+          "type": "text",
+          "label": "Nom du bouton"
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "label": "Lien du bouton"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+        {
+          "id": "image_mobile",
+          "type": "image_picker",
+          "label": "Image mobile"
+        },
+        {
+          "type": "radio",
+          "id": "position",
+          "label": "Emplacement de l'image",
+          "options": [
+            {
+              "value": "left",
+              "label": "Gauche"
+            },
+            {
+              "value": "right",
+              "label": "Droite"
+            }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

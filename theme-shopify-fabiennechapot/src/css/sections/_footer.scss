@@ -1,0 +1,108 @@
+.footer {
+  padding: var(--section-margin) var(--page-margin);
+  background-color: $blue;
+  color: #fff;
+  //background-color: #000;
+
+  &__top {
+    @include up(md) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__left {
+    flex-shrink: 0;
+    width: 250px;
+
+    @include down(md) {
+      margin: auto;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__logo {
+
+    svg {
+      width: 100%;
+      height: auto;
+      fill: #fff;
+      max-width: 150px;
+      margin: auto;
+      display: block;
+    }
+  }
+
+  &__social {
+    filter: invert(1);
+    margin-top: 40px;
+
+    ul {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    svg {
+      height: 17px;
+      width: auto;
+    }
+
+    a {
+      display: block;
+      padding: 5px;
+    }
+  }
+
+  nav {
+    flex-grow: 1;
+    font-size: 1.4rem;
+    text-align: center;
+
+    @include up(md) {
+      max-width: 75%;
+    }
+
+    & > ul {
+
+      @include up(sm) {
+        display: flex;
+
+        & > li {
+          width: 50%;
+        }
+      }
+
+      @include down(sm) {
+        & > li {
+          margin-bottom: 40px;
+        }
+      }
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    a {
+      padding: 2px 0;
+      display: block;
+
+      @include hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__bottom {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #606f7f;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+
+    a {
+      font-weight: 600;
+    }
+  }
+}

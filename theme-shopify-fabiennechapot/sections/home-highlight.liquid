@@ -1,0 +1,68 @@
+<section class="wrapper">
+    <div class="home-highlight">
+        <div class="home-highlight__left">
+
+            {% for block in section.blocks %}
+            <div class="home-highlight__text">
+                <div>
+                    <div>
+                        <h2 class="h3">{{ block.settings.title }}</h2>
+                        {% if block.settings.text %}<p>{{ block.settings.text | strip_html }}</p>{% endif %}
+                        {% if block.settings.button %}<a class="btn white" href="{{ block.settings.collection.url }}"><span>{{ block.settings.button }}</span></a>{% endif %}
+                    </div>
+                    {% render 'lazy-img' with src: block.settings.image %}
+                </div>
+             </div>
+            {% endfor %}
+        </div>
+
+        <div class="home-highlight__right">
+            {% for block in section.blocks %}
+            <div class="home-highlight__products {% if forloop.first %}is-visible{% endif %}">
+                {% render 'carousel' with collection: block.settings.collection, limit: 10 %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections avec produits",
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "title",
+          "label": "Titre",
+          "type": "text",
+          "default": "Nouveautés"
+        },
+        {
+          "id": "text",
+          "label": "Texte",
+          "type": "richtext"
+        },
+        {
+          "id": "collection",
+          "label": "Collection",
+          "type": "collection"
+        },
+        {
+          "id": "button",
+          "label": "Bouton",
+          "type": "text",
+          "default": "Découvrir"
+        },
+        {
+          "id": "image",
+          "label": "Image",
+          "type": "image_picker"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

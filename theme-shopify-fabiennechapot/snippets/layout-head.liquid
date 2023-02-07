@@ -1,0 +1,140 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}">
+
+{% if canonical_url != blank %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% endif %}
+
+{% assign seo_title = page_title %}
+{% if if request.page_type == 'search' %}
+    {% assign seo_title = shop.name | append: ' - Recherche : ' | append: searh.terms %}
+{% endif %}
+{% unless seo_title %}
+    {% if product %}
+        {% assign seo_title = product.title %}
+        {% elsif collection %}
+        {% assign seo_title = collection.title %}
+        {% elsif page %}
+        {% assign seo_title = page.title %}
+    {% else %}
+        {% assign seo_title = shop.name %}
+    {% endif %}
+{% endunless %}
+<title>{{ seo_title | strip_html | strip | truncate: 70 }}</title>
+
+{% unless page_description %}
+    {% if product %}
+        {% assign seo_title = product.description %}
+        {% elsif collection %}
+        {% assign seo_title = collection.description %}
+        {% elsif page %}
+        {% assign seo_title = page.content %}
+    {% endif %}
+{% endunless %}
+{% if page_description %}
+    <meta name="description" content="{{ page_description | strip_html | strip | truncate: 160 }}">
+{% endif %}
+
+{% assign pagesToNoIndex = 'search,cart,account/login,account/register,account,customer' | split: '' %}
+{% if pagesToNoIndex contains template %}
+    <meta name="robots" content="noindex, nofollow">
+{% endif %}
+
+<style>
+    @font-face {
+        font-family: "Avenir";
+        src: url("{{ 'font-avenir-medium.woff2' |  asset_url }}");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Avenir";
+        src: url("{{ 'font-avenir-medium-oblique.woff2' |  asset_url }}");
+        font-weight: normal;
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Avenir";
+        src: url("{{ 'font-avenir-light.woff2' |  asset_url }}");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Avenir";
+        src: url("{{ 'font-avenir-light-oblique.woff2' |  asset_url }}");
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Avenir";
+        src: url("{{ 'font-avenir-black.woff2' |  asset_url }}");
+        font-weight: bold;
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Playfair";
+        src: url({{ 'font-playfair-regular.woff2' |  asset_url }}) format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Playfair";
+        src: url({{ 'font-playfair-bold.woff2' | asset_url }}) format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Playfair";
+        src: url({{ 'font-playfair-black.woff2' |  asset_url }}) format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "PlayfairDisplay";
+        src: url({{ 'PlayfairDisplay-Black.woff2' |  asset_url }}) format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+</style>
+
+<script>
+    window.theme = window.theme || {};
+    window.theme = {
+        ...window.theme,
+        items: [{% if cart.items %}{% for item in cart.items %}"{{ item.product.handle }}",{% endfor %}{% endif %}],
+        {% if customer %}
+        customer: {
+            firstname: "{{ customer.first_name }}",
+            lastname: "{{ customer.last_name }}",
+            email: "{{ customer.email }}",
+            token: "{{ customer.id | append:customer.email | md5 }}"
+        },
+        {% endif %}
+        items_handle: [{% for item in cart.items %}"{{ item.product.handle }}",{% endfor %}],
+        {% if product %}handle: "{{ product.handle }}"{% endif %}
+    }
+</script>
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ "theme.js" | asset_url | script_tag }}
+
+{% if template.name == 'account' or template.suffix == "account" %}
+    {{ "account.js" | asset_url | script_tag }}
+{% endif %}
+
+{% if template.name == 'reprise' or template.suffix == "reprise" %}
+    {{ "vue.js" | asset_url | script_tag }}
+{% endif %}
+
+{% render 'analyzify-gtm-body' %}

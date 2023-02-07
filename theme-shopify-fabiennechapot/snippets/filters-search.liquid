@@ -1,0 +1,141 @@
+{% paginate search.results by 1000 %}
+
+{% assign products = search.results | where: 'object_type', 'product' %}
+{% assign products = products | where: 'available' %}
+
+{% assign filters = '' %}
+    {% for block in section.blocks %}
+        {% assign item = '' %}
+        {% for product in products %}
+            {% if product.available and product and product.price > 0 %}
+                {% for tag in product.tags %}
+                    {% if tag contains block.settings.tag %}
+                        {% unless tag contains 'MISMATCH' %}
+                            {% if item != '' %}
+                                {% assign item = item | append: '#' %}
+                            {% endif %}
+                        {% assign item = item | append: tag %}
+                        {% endunless %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        {% assign item = item | split: '#' | sort | uniq | compact %}
+        {% if item.first contains 'Taille_' %}
+            {% assign sizes = 'XXS#XS#S#M#L#XL#XXL#2XL#XXXL#3XL#4XL' | split: '#' | reverse %}
+            {% for size in sizes %}
+                {% assign full_size = 'Taille_' | append: size %}
+                {% if item contains full_size %}
+                    {% assign item = item | join: '#' | remove: full_size | prepend: '#' | prepend: full_size | replace: '##', '#' | split: '#' %}
+                {% endif %}
+            {% endfor %}
+            {% elsif item.first contains 'Etat_' %}
+            {% assign etats = 'Bon état#Très bon état#Excellent état#Etat neuf' | split: '#' | reverse %}
+            {% for etat in etats %}
+                {% assign full_etat = 'Etat_' | append: etat %}
+                {% if item contains full_etat %}
+                    {% assign item = item | join: '#' | remove: full_etat | prepend: '#' | prepend: full_etat | replace: '##', '#' | split: '#' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% assign item = item | join: '#' %}
+        {% if filters != '' %}
+            {% assign filters = filters | append: '###' %}
+        {% endif %}
+        {% assign filters = filters | append: item %}
+    {% endfor %}
+{% assign filters = filters | split: '###' %}
+{% assign has_filters = false %}
+    {% for filter in filters %}
+        {% assign item = filter | split: '#' %}
+        {% if item.size > 1 %}
+            {% assign has_filters = true %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="collection__filters is-loading">
+        <div class="filters">
+            <div class="filters__content">
+                <p class="filters__header">{{ filterBy }}</p>
+                <div class="filters__list">
+                    {% for filter in filters %}
+                        {% assign items = filter | split: '#' %}
+                        {% assign prefix = items | first | split: '_' | first | append: '_' %}
+                        {% for block in section.blocks %}
+                            {% if block.settings.tag == prefix %}
+                                {% assign allowed_collection = block.settings.collection %}
+                                {% assign title = block.settings.title %}
+                            {% endif %}
+                        {% endfor %}
+                        {% assign allowed_collections = block.settings.collections | split: ',' %}
+                        {% if allowed_collections.size < 1 %}
+                            {% assign allowed_collection = true %}
+                        {% else if allowed_collections contains collection.handle %}
+                            {% assign allowed_collection = true %}
+                            {% else %}
+                                {% assign allowed_collection = false %}
+                        {% endif %}
+                        {% if items.size > 1 and allowed_collection == true %}
+                            <div class="filters__item" data-title="{{ prefix }}">
+                                <p class="filters__subtitle">{{ title }}</p>
+                                <ul class="filters__scrollable">
+                                    {% for item in items %}
+                                        {% assign value = item | split: '_' | last %}
+                                        <li data-value="{{ value }}">
+                                            <label>
+                                                <input type="checkbox" value="{{ item }}" name="{{ title }}">
+                                                {% if is_color %}
+                                                    <span data-color="{{ value }}">{{ value }}</span>
+                                                {% else %}
+                                                    <span>{{ value | replace: 'Etat', 'État' }}</span>
+                                                {% endif %}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="filters__item open" data-title="Prix_">
+                        <p class="filters__subtitle">{{ price }}</p>
+                        <ul class="is_color--false"> 
+                            <li class="range_container">
+                                <label>
+                                    <div class="form_control">
+                                        <div class="form_control_container">
+                                            <input class="form_control_container__time__input not-hide" readonly type="number" id="fromInput" value="10" min="0" max="100"/><span>€</span>
+                                        </div>
+                                        <span class="price-filter-separator"> - </span>
+                                        <div class="form_control_container">
+                                            <input class="form_control_container__time__input not-hide" readonly type="number" id="toInput" value="1000" min="0" max="100"/><span>€</span>
+                                        </div>
+                                    </div>
+                                    <label class="sliders_control">
+                                        <input id="fromSlider" class="not-hide" type="range" name="Prix_min" value="10" min="0" max="100"/>
+                                        <input id="toSlider" class="not-hide"  type="range" name="Prix_max" value="1000" min="0" max="1000"/>
+                                    </label>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filters__resume hide">
+                    <ul></ul>
+                    <button class="js-filter-remove">{{ btnRemove }}</button>
+                </div>
+                <button class="js-filter-close">
+                    <span class="js-see-articles">{{ BtnResult1 }} {{ products.size }} {{ BtnResult2 }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {% if paginate and paginate.pages and paginate.pages.size > 1 %}
+        <script>
+            window.theme = window.theme || {};
+            window.theme.pagination = {{ paginate.pages | json }};
+        </script>
+    {% endif %}
+
+{% endpaginate %}
+

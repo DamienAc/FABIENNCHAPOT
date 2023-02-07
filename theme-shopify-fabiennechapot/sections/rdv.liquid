@@ -1,0 +1,252 @@
+{% comment %}
+    Voir bonpoint pour le fonctionnement
+{% endcomment %}
+
+<a href="{{ section.settings.button_link }}" style="display: none" class="rdv__back btn"><span>{{ section.settings.button_text }}</span></a>
+
+<section>
+    <p class="js-error-msg text-3">{{ section.settings.error }}</p>
+    <form class="js-form-rdv">
+        <div class="rdv__container">
+            <div class="rdv__col">
+                <h2 class="h2">{{ section.settings.title_1 }}</h2>
+                <ul class="rdv__stores">
+
+                </ul>
+                <label class="field">
+                    <select required name="schedule_date">
+                        <option selected value="">{{ section.settings.placeholderDate }}</option>
+                        {% assign forbid_days = section.settings.days | split: ',' %}
+                        {% for i in (1..30) %}
+                            {% assign seconds = i | times: 24 | times: 60 | times: 60 %}
+                            {% assign date = 'now' | date: "%s" | plus: seconds %}
+                            {% assign dy = date | date: "%a" %}
+                            {% assign full_date = date | date: "%d/%m/%Y" %}
+                            <option value="{{ date | date: "%Y-%m-%d" }}"
+                                    {% if dy == 'Sun' or dy == 'Sat' or forbid_days contains full_date %}disabled{% endif %}>{{ full_date }}
+                                , {% case dy %}{% when "Mon" %}{{ section.settings.monday }}{% when "Tue" %}{{ section.settings.tuesday }}{% when "Wed" %}{{ section.settings.Wednesday }}{% when "Thu" %}{{ section.settings.thursday }}{% when "Fri" %}{{ section.settings.friday }}{% when "Sat" %}{{ section.settings.saturday }}{% when "Sun" %}{{ section.settings.sunday }}{% else %}{{ dy }}{% endcase %}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label class="field">
+                    <select required name="schedule_time">
+                        <option disabled selected value="">{{ section.settings.placeholderHour }}</option>
+                        {% assign hours = section.settings.hours | split: ',' %}
+                        {% for h in hours %}
+                            <option value="{{ h | split: ' - ' | first | append: ':00' }}">{{ h }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <div class="rdv__banner">
+                    {% render 'lazy-img' with src: section.settings.img %}
+                    <div class="rdv__banner__text">
+                        <img src="{{ 'logo.svg' | asset_url }}" alt="Dada sport preloved - seconde main">
+                        <a href="{{ section.settings.url }}" class="btn"><span>{{ section.settings.btn }}</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="rdv__col">
+                <div>
+                    <h2 class="h2">{{ section.settings.title_2 }}</h2>
+                    <label class="field">
+                        <input type="text" required name="firstname" placeholder="Prénom *" {% if customer %}value="{{ customer.first_name }}"{% endif %}>
+                    </label>
+                    <label class="field">
+                        <input type="text" required name="lastname" placeholder="Nom de famille *" {% if customer %}value="{{ customer.last_name }}"{% endif %}>
+                    </label>
+                    <label class="field">
+                        <input type="email" required name="email" placeholder="Adresse email *" {% if customer %}value="{{ customer.email }}"{% endif %}>
+                    </label>
+                    <label class="field js-input-phone">
+                        <input type="text" required name="phone" placeholder="Téléphone *" {% if customer %}value="{{ customer.phone }}"{% endif %}>
+                    </label>
+                    <label class="field">
+                        <select required name="products">
+                            <option disabled selected value="">{{ section.settings.placeholderArticle }}</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                    <label class="field rdv__textarea js-textarea">
+                        <span>{{ section.settings.textArea1 }}</span>
+                        <textarea maxlength="1000" name="message"></textarea>
+                        <span>{{ section.settings.textArea2 }} <span class="js-count">1000</span></span>
+                    </label>
+                    <div class="rdv__reassurance">{{ section.settings.reassurance }}</div>
+                    <button type="submit" class="btn"><span>{{ section.settings.btnValider }}</span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+{% schema %}
+{
+  "name": "RDV",
+  "blocks": [
+    {
+      "type": "text",
+      "name": "boutique",
+      "settings": [
+        {
+          "id": "id",
+          "type": "text",
+          "label": "Id de la boutique",
+          "placeholder": "106"
+        },
+        {
+          "id": "token",
+          "type": "text",
+          "label": "Token de la boutique"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "id": "title_1",
+      "type": "text",
+      "label": "Etape 1",
+      "default": "Indiquez votre préférence"
+    },
+    {
+      "id": "title_2",
+      "type": "text",
+      "label": "Etape 2",
+      "default": "Vos informations personnelles"
+    },
+    {
+      "id": "reassurance",
+      "type": "richtext",
+      "label": "Texte de reassurance",
+      "default": "<p>Vos données personnelles seront utilisées par Bonpoint aux fins associées au service dont vous souhaitez bénéficier. Bonpoint n'utilisera en aucun cas les données personnelles recueillies à des fins autres que celles nécessaires à la fourniture du service spécifié. Nous vous rappelons que vous êtes responsable des données de tierces personnes que vous transmettez à Bonpoint. <br>Consultez la Politique de confidentialité pour plus d'informations.</p>"
+    },
+    {
+      "id": "error",
+      "type": "text",
+      "label": "Message en cas d'erreur",
+      "default": "Une erreur est survenue lors de l'envoi, merci d'essayer à nouveau."
+    },
+    {
+        "id": "hours",
+        "type": "text",
+        "label": "Liste des horraires",
+        "info": "Attention a bien les séparer par une virgule sans espace",
+        "default": "11:00 - 12:00,12:00 - 13:00,13:00 - 14:00,14:00 - 15:00,15:00 - 16:00,16:00 - 17:00"
+    },
+    {
+        "id": "days",
+        "type": "text",
+        "label": "Liste des jours fermés (pas besoin de marquer les dimanches)",
+        "info": "Attention a bien les séparer par une virgule sans espace",
+        "default": "30/06/2021,01/07/2021,02/07/2021,03/07/2021"
+    },
+     {
+        "id": "placeholderDate",
+        "type": "text",
+        "label": "Placeholder date",
+        "default": "Date *"
+    },
+     {
+        "id": "placeholderHour",
+        "type": "text",
+        "label": "Placeholder horaire",
+        "default": "Horaire *"
+    },
+    {
+        "id": "placeholderArticle",
+        "type": "text",
+        "label": "Placeholder nombre d'article",
+        "default": "Aticles à déposer *"
+    },
+    {
+        "id": "textArea1",
+        "type": "text",
+        "label": "Text précision",
+        "default": "Souhaitez-vous nous préciser autre chose ?"
+    },
+    {
+        "id": "textArea2",
+        "type": "text",
+        "label": "Text nombre de cractères",
+        "default": "Nombre de caractères restants :"
+    },
+    {
+        "id": "btnValider",
+        "type": "text",
+        "label": "Bouton valider",
+        "default": "Valider"
+    },
+    {
+        "id": "monday",
+        "type": "text",
+        "label": "Lundi",
+        "default": "Lundi"
+    },
+    {
+        "id": "tuesday",
+        "type": "text",
+        "label": "Mardi",
+        "default": "Mardi"
+    },
+    {
+        "id": "Wednesday",
+        "type": "text",
+        "label": "Mercredi",
+        "default": "Mercredi"
+    },
+    {
+        "id": "thursday",
+        "type": "text",
+        "label": "Jeudi",
+        "default": "Jeudi"
+    },
+    {
+        "id": "friday",
+        "type": "text",
+        "label": "Vendredi",
+        "default": "Vendredi"
+    },
+    {
+        "id": "saturday",
+        "type": "text",
+        "label": "Samedi",
+        "default": "Samedi"
+    },
+    {
+        "id": "sunday",
+        "type": "text",
+        "label": "Dimanche",
+        "default": "Dimanche"
+    },
+    {
+        "type": "header",
+        "content": "Bannière"
+    },
+    {
+        "id": "img",
+        "type": "image_picker",
+        "label": "Image"
+    },
+    {
+        "id": "btn",
+        "type": "text",
+        "label": "Bouton",
+        "default": "Découvrir"
+    },
+    {
+        "id": "url",
+        "type": "url",
+        "label": "Lien"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+    window.theme = window.theme || {};
+    window.theme.rdv = "{% for block in section.blocks %}{{ block.settings.id }}bghvttdret{{ block.settings.token }}{% unless forloop.last %}ARGHJLGVFRTC{% endunless %}{% endfor %}";
+</script>

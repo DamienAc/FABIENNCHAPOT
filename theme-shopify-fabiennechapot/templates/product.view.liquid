@@ -1,0 +1,85 @@
+{% layout none %}
+{% for tag in product.tags %}
+    {% if tag contains 'Etat_' %}
+        {% assign etat = tag | remove: 'Etat_' %}
+    {% elsif tag contains 'Taille_' %}
+        {% assign taille = tag | remove: 'Taille_' %}
+        {% assign size = tag | remove: 'Taille_' %}
+    {% elsif tag contains 'Couleur_' %}
+        {% assign color = tag | remove: 'Couleur_' %}
+    {% elsif tag contains 'Pointure_' %}
+        {% assign is_shoes = true %}
+        {% assign size = tag | remove: 'Pointure_' %}
+    {% elsif tag contains 'Reference_' %}
+        {% assign ref = tag | remove: 'Reference_' %}
+    {% endif %}
+{% endfor %}
+{% assign colorVariant = product.options_by_name['Couleur'].values | first %}
+{% if colorVariant %}
+    {% assign color = colorVariant %}
+{% endif %}
+{% assign sizeVariant = product.options_by_name['Taille'].values | first %}
+{% unless sizeVariant %}
+{% assign sizeVariant = product.options_by_name['Pointure'].values | first %}
+{% endunless %}
+{% if sizeVariant %}
+    {% assign size = sizeVariant %}
+{% endif %}
+
+{% assign old_price = product.compare_at_price %}
+{% assign price = product.price %}
+{% assign sale = price | times: 100 | divided_by: old_price | round %}
+
+<div class="quickview__images" data-ref="{{ ref }}" data-size="{{ size }}" data-condition="{{ etat }}" data-color="{{ color }}">
+    {% for image in product.images %}
+        <div class="quickview__image">
+            {% render 'lazy-img' with src: image %}
+        </div>
+    {% endfor %}
+</div>
+<div class="quickview__text">
+    <a href="{{ product.url }}">
+        {% assign titles = product.title | split: ' - ' %}
+        <h2 class="h3">
+            <span>{{ titles | first }}</span>
+            {% if titles.size > 1 %}
+                <span>{{ titles[1] | capitalize }}</span>
+            {% endif %}
+        </h2>
+    </a>
+    <div class="quickview__price">
+        <span class="quickview__price--final">{{ price | money | remove: ',00' }}</span>
+        {% if old_price and old_price > price %}
+            <span class="quickview__price--original" ><span data-text="originprice">Prix d'origine :</span> {{ old_price | money | remove: ',00' }}</span>
+            <span class="quickview__sale "><span data-text="economie">Vous économisez</span> <em data-original="{{ old_price | divided_by: 100 }}">{{ 100 | minus: sale }}%</em></span>
+        {% endif %}
+    </div>
+    <div>
+        <label data-text="color"></label>
+        <ul class="quickview__colors">
+            <li class="is-selected" data-color="{{ color }}">
+                <a href="{{ product.url }}"></a>
+                <span>{{ color }}</span>
+            </li>
+        </ul>
+    </div>
+    {% form "product", product %}
+        <input class="quickview__input" type="hidden" name="id" value="{{ product.variants[0].id  }}">
+        <div class="quickview__selects">
+            <div>
+                <label for="quickiew-size" data-text="size"></label>
+                <select id="quickiew-size" name="taille" class="quickview__sizes" required>
+                    <option selected value="{{ size }}">{{ size }}</option>
+                </select>
+            </div>
+            <div>
+                <label for="quickiew-condition" data-text="state" ></label>
+                <select id="quickiew-condition" name="taille" class="quickview__conditions" required>
+                    <option selected value="{{ etat }}">{{ etat }}</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn " type="submit"><span  data-text="addcart"></span></button>
+        <a href="{{ product.url }}" class="link " data-text="moreproduct"></a>
+    {% endform %}
+</div>

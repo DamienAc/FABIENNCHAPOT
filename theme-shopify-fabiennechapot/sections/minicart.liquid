@@ -1,0 +1,148 @@
+{% assign shipping_price = section.settings.shipping_price | times: 100 %}
+
+<section class="minicart" data-count="{{ cart.item_count }}">
+    <div class="minicart__inner">
+        <div class="minicart__header">
+            <div class="h4">
+                <h2>{{ section.settings.title_minicart}},</h2>
+                <span class="js-cart-count">{{ cart.item_count }} {{ section.settings.article_count }}{% if cart.item_count > 1 %}s{% endif %}</span>
+            </div>
+            <button class="js-close">
+                {% render 'icon' with icon: 'cross', box: '0 0 22.6 22.6' %}
+            </button>
+        </div>
+        <div class="minicart__items">
+            {% for item in cart.items %}
+                {% render 'cart-item' with item: item %}
+            {% endfor %}
+            <ul class="product__reassurance">
+                {% for block in section.blocks %}
+                    <li>
+                        {% if block.settings.url %}<a>{% else %}<div>{% endif %}
+                        {% render 'lazy-img' with src: block.settings.icon, nocrop: true %}
+                        <p>{{ block.settings.text }}</p>
+                        {% unless block.settings.url %}</div>{% else %}</a>{% endunless %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="minicart__empty">{{ section.settings.empty_minicart }}</div>
+        <div class="minicart__bottom">
+            <table>
+                <tr>
+                    <th>{{ section.settings.subtotal }}</th>
+                    <th class="js-cart-subtotal">{{ cart.total_price | minus: shipping_price | money }}</th>
+                </tr>
+                <tr>
+                    <td>{{ section.settings.shipping_title }}<br><span>{{ section.settings.shipping_desc }}</span></td>
+                    <td>{{ shipping_price | money }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ section.settings.code }}</td>
+                </tr>
+                <tr>
+                    <th>{{ section.settings.total }}</th>
+                    <th class="js-cart-total">{{ cart.total_price | money }}</th>
+                </tr>
+            </table>
+            <a class="btn black medium" href="{{ shop.locale | prepend: '/' | remove: '/fr' }}/cart"><span>{{ section.settings.btn_minicart }}</span></a>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Minicart",
+  "settings": [
+    {
+      "id": "title_minicart",
+      "type": "text",
+      "label": "Votre panier",
+      "default": "Votre panier"
+    },
+    {
+      "id": "empty_minicart",
+      "type": "text",
+      "label": "Panier vide",
+      "default": "Votre panier ne contient pas encore d'articles."
+    },
+    {
+      "id": "article_count",
+      "type": "text",
+      "label": "Nombre d'articles",
+      "default": "Articles"
+    },
+    {
+      "id": "subtotal",
+      "type": "text",
+      "label": "Sous total",
+      "default": "Sous total"
+    },
+    {
+      "id": "total",
+      "type": "text",
+      "label": "Total",
+      "default": "Total"
+    },
+     {
+      "id": "btn_minicart",
+      "type": "text",
+      "label": "Bouton voir mon panier",
+      "default": " Voir mon panier"
+    },
+    {
+      "id": "code",
+      "type": "text",
+      "label": "Code promo",
+      "default": "Le code promotionnel s'applique à l'étape suivante."
+    },
+    {
+      "type": "header",
+      "content": "Livraison"
+    },
+    {
+      "id": "shipping_title",
+      "label": "Mode de livraison",
+      "type": "text",
+      "default": "Livraison standard"
+    },
+    {
+      "id": "shipping_desc",
+      "type": "text",
+      "label": "Description de la livraison",
+      "default": "En 3 à 4 jours ouvrés"
+    },
+    {
+      "id": "shipping_price",
+      "type": "text",
+      "label": "Prix de la livraison",
+      "default": "4.90"
+    }
+  ],
+    "blocks": [
+    {
+    "type": "text",
+    "name": "Réassurance",
+    "settings": [
+    {
+    "id": "text",
+    "label": "Texte",
+    "type": "text",
+    "default": "Article authentifié"
+    },
+    {
+    "id": "icon",
+    "type": "image_picker",
+    "label": "Icon"
+    },
+    {
+    "id": "url",
+    "type": "url",
+    "label": "Lien",
+    "info": "Optionnel"
+    }
+    ]
+    }
+    ]
+}
+{% endschema %}

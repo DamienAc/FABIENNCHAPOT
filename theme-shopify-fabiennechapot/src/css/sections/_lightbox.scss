@@ -1,0 +1,179 @@
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 999;
+  background-color: lightgray;
+  transition: opacity $transition-1;
+
+  &:not(.visible) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__images {
+    display: flex;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__image {
+    width: 100%;
+    flex-shrink: 0;
+    height: 100%;
+    overflow-y: scroll;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #e6e5e4;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    &[data-zoom="1"] img {
+      transition: none;
+    }
+
+    &[data-zoom="1"],
+    &[data-zoom="2"],
+    &[data-zoom="3"] {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='none'%3E%3Cpath fill='%23fff' fill-opacity='.8' d='M50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25Z'/%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M34.5 25h-19v-1h19v1Z' clip-rule='evenodd'/%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M25.5 15v19h-1V15h1Z' clip-rule='evenodd'/%3E%3C/svg%3E") 16 16, pointer;
+    }
+
+    &[data-zoom="2"] {
+      img {
+        @include down(lg) {
+          height: 250%;
+          transform: translateX(32.5%); 
+        }
+        height: 200%;
+        width: auto;
+      }
+    }
+
+    &[data-zoom="3"] {
+      img {
+        height: 300%;
+        width: auto;
+      }
+    }
+
+    &[data-zoom="4"] {
+      img {
+        height: 400%;
+        width: auto;
+      }
+    }
+
+    &[data-zoom="4"] {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='none' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' fill-opacity='.8' d='M50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25Z'/%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M34.5 25h-19v-1h19v1Z' clip-rule='evenodd'/%3E%3C/svg%3E%0A") 16 16, pointer;
+    }
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+    @include up(lg) {
+      transition: height cubic-bezier(0.29, 0.97, 0.99, 1) .6s;
+    }
+  }
+
+  .lazy-img-2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .js-close {
+    position: fixed;
+    z-index: 2;
+    right: 25px;
+    top: 15px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      fill: #000;
+      width: 20px;
+      height: auto;
+    }
+  }
+
+  .flickity-prev-next-button {
+    box-shadow: none !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.next {
+      right: 10px;
+    }
+
+    &.previous {
+      left: 10px;
+    }
+
+    svg {
+      width: 20px;
+      height: auto;
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .flickity-page-dots {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .dot {
+      cursor: pointer;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #a4a4a4;
+      &.is-selected {
+        background-color: #000;
+      }
+      &:not(:first-of-type) {
+        margin-left: 10px;
+      }
+    }
+  }
+} 
